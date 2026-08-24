@@ -49,7 +49,7 @@ $unitsList = $units ?? app_config('units', []);
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                     </div>
                     <span class="text-sm font-bold text-slate-900 block">Sokongan Mesyuarat</span>
-                    <span class="text-xs text-slate-500 mt-1 leading-relaxed">Penyediaan link Zoom/Webex & bantuan teknikal bilik</span>
+                    <span class="text-xs text-slate-500 mt-1 leading-relaxed">Penyediaan link Cisco Webex/Zoom & bantuan teknikal bilik</span>
                 </label>
 
                 <!-- Media & Jurukamera -->
@@ -76,7 +76,7 @@ $unitsList = $units ?? app_config('units', []);
 
         <!-- STEP 2: Butiran Khusus Kategori (Dynamic Display) -->
 
-        <!-- Section: Peminjaman Aset (Checklist Rasmi Peralatan ICT) -->
+        <!-- Section: Peminjaman Aset (Checklist Rasmi Peralatan ICT Tanpa Projektor) -->
         <div id="section-equipment" class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-sm space-y-4 <?= in_array($selectedCategory, ['PEMINJAMAN_ASET', 'LAIN_LAIN']) ? '' : 'hidden' ?>">
             <div class="border-b border-slate-100 pb-3">
                 <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Langkah 2</span>
@@ -107,11 +107,11 @@ $unitsList = $units ?? app_config('units', []);
             </div>
         </div>
 
-        <!-- Section: Sokongan Mesyuarat -->
+        <!-- Section: Sokongan Mesyuarat (Cisco Webex Meetings Teratas) -->
         <div id="section-meeting" class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-sm space-y-5 <?= ($selectedCategory === 'SOKONGAN_MESYUARAT') ? '' : 'hidden' ?>">
             <div class="border-b border-slate-100 pb-3">
                 <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Langkah 2</span>
-                <h2 class="text-base font-bold text-slate-900">Konfigurasi Sokongan Mesyuarat</h2>
+                <h2 class="text-base font-bold text-slate-900">Senarai Konfigurasi Sokongan Mesyuarat</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -130,7 +130,7 @@ $unitsList = $units ?? app_config('units', []);
                     <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
                         Platform Mesyuarat Online
                     </label>
-                    <select name="meeting_platform" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none">
+                    <select name="meeting_platform" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none font-medium">
                         <?php foreach ($meetingPlatforms as $pKey => $p): ?>
                         <option value="<?= $pKey ?>"><?= e($p) ?></option>
                         <?php endforeach; ?>
@@ -143,7 +143,7 @@ $unitsList = $units ?? app_config('units', []);
                     <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
                         Pautan Mesyuarat (Jika sudah ada)
                     </label>
-                    <input type="url" name="meeting_link" placeholder="https://zoom.us/j/..." 
+                    <input type="url" name="meeting_link" placeholder="https://johor.webex.com/..." 
                            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none">
                 </div>
 
@@ -154,14 +154,6 @@ $unitsList = $units ?? app_config('units', []);
                     <input type="text" name="meeting_passcode" placeholder="Cth: BKP2026" 
                            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none">
                 </div>
-            </div>
-
-            <div>
-                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Kehadiran Tetamu Kenamaan / VIP
-                </label>
-                <input type="text" name="vip_attendees" placeholder="Cth: YB Setiausaha Kerajaan Negeri, Timbalan SUK..." 
-                       class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none">
             </div>
         </div>
 
@@ -192,7 +184,7 @@ $unitsList = $units ?? app_config('units', []);
             </div>
         </div>
 
-        <!-- STEP 3: Maklumat Program & Jadual Acara -->
+        <!-- STEP 3: Maklumat Program & Jadual Acara (Dengan Ruangan Pengerusi) -->
         <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-sm space-y-5">
             <div class="border-b border-slate-100 pb-3">
                 <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Langkah 3</span>
@@ -208,6 +200,26 @@ $unitsList = $units ?? app_config('units', []);
                        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 focus:bg-white focus:border-blue-500 rounded-xl text-sm font-medium outline-none">
             </div>
 
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Pengerusi Mesyuarat / Majlis
+                    </label>
+                    <input type="text" name="vip_attendees" 
+                           placeholder="Cth: YB Setiausaha Kerajaan Negeri / Timbalan SUK / Ketua Bahagian..." 
+                           class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+                        Lokasi / Bilik Mesyuarat / Tempat Acara <span class="text-rose-500">*</span>
+                    </label>
+                    <input type="text" name="location" required 
+                           placeholder="Cth: Bilik Mesyuarat Utama BKP (Aras 3)" 
+                           class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none">
+                </div>
+            </div>
+
             <div>
                 <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
                     Tujuan Permohonan & Justifikasi Rasmi <span class="text-rose-500">*</span>
@@ -217,24 +229,13 @@ $unitsList = $units ?? app_config('units', []);
                           class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 focus:bg-white focus:border-blue-500 rounded-xl text-xs outline-none"></textarea>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
-                        Lokasi / Bilik Mesyuarat / Tempat Acara <span class="text-rose-500">*</span>
-                    </label>
-                    <input type="text" name="location" required 
-                           placeholder="Cth: Bilik Mesyuarat Utama BKP (Aras 3)" 
-                           class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
-                        No. Telefon Pemohon untuk Dihubungi <span class="text-rose-500">*</span>
-                    </label>
-                    <input type="text" name="applicant_phone" required value="<?= e($isLoggedIn ? ($user['phone'] ?? '') : '') ?>" 
-                           placeholder="01X-XXXXXXX atau VoIP" 
-                           class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none">
-                </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+                    No. Telefon Pemohon untuk Dihubungi <span class="text-rose-500">*</span>
+                </label>
+                <input type="text" name="applicant_phone" required value="<?= e($isLoggedIn ? ($user['phone'] ?? '') : '') ?>" 
+                       placeholder="01X-XXXXXXX atau VoIP" 
+                       class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none">
             </div>
 
             <!-- Date & Time Range -->

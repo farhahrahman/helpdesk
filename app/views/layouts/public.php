@@ -63,7 +63,6 @@ $currentUser = Auth::user();
             <!-- Navigation Links -->
             <nav class="hidden md:flex items-center gap-8 text-xs font-semibold text-slate-600">
                 <a href="<?= url('/tickets/create') ?>" class="text-blue-600 font-bold hover:text-blue-700 transition-colors">Borang Permohonan</a>
-                <a href="<?= url('/#kategori-servis') ?>" class="hover:text-blue-600 transition-colors">Katalog Perkhidmatan</a>
                 <a href="<?= url('/#semak-status') ?>" class="hover:text-blue-600 transition-colors">Semak Status Tiket</a>
             </nav>
 

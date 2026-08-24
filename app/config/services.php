@@ -20,7 +20,7 @@ return [
         'SOKONGAN_MESYUARAT' => [
             'id' => 'SOKONGAN_MESYUARAT',
             'name' => 'Khidmat Sokongan & Mesyuarat Online',
-            'description' => 'Pengendalian pautan mesyuarat online (Zoom/Webex/Teams/GMeet) & bantuan teknikal bilik mesyuarat.',
+            'description' => 'Pengendalian pautan mesyuarat online (Cisco Webex/Zoom/Teams/GMeet) & bantuan teknikal bilik mesyuarat.',
             'icon' => 'video',
             'badge' => 'indigo',
             'lead_time_days' => 2,
@@ -107,13 +107,6 @@ return [
             'icon' => 'hard-drive',
             'description' => 'Cakera keras luaran (External Hard Disk) untuk sandaran & pemindahan fail',
         ],
-        'PROJEKTOR_SKRIN' => [
-            'id' => 'PROJEKTOR_SKRIN',
-            'name' => 'Projektor & Skrin Mudah Alih',
-            'category' => 'PEMINJAMAN_ASET',
-            'icon' => 'monitor',
-            'description' => 'Projektor LCD/HDMI dan layar tayangan mudah alih',
-        ],
         'MIKROFON_AUDIO' => [
             'id' => 'MIKROFON_AUDIO',
             'name' => 'Set Mikrofon / PA Kit',
@@ -134,13 +127,13 @@ return [
     'meeting_support_types' => [
         'MESYUARAT_ONLINE_SAHAJA' => [
             'id' => 'MESYUARAT_ONLINE_SAHAJA',
-            'name' => 'Penyediaan Link Mesyuarat Online (Zoom / Webex / Teams / GMeet)',
+            'name' => 'Penyediaan Link Mesyuarat Online (Cisco Webex / Zoom / Teams / GMeet)',
             'description' => 'Penyediaan akaun hos rasmi & pautan jemputan mesyuarat dalam talian',
         ],
         'TEKNIKAL_BILIK_MESYUARAT' => [
             'id' => 'TEKNIKAL_BILIK_MESYUARAT',
             'name' => 'Bantuan Teknikal Semasa Mesyuarat Fizikal',
-            'description' => 'Persediaan sistem audio visual, projektor & pengujian peranti dalam bilik mesyuarat',
+            'description' => 'Persediaan sistem audio visual & pengujian peranti dalam bilik mesyuarat',
         ],
         'HYBRID_ONLINE_DAN_FIZIKAL' => [
             'id' => 'HYBRID_ONLINE_DAN_FIZIKAL',
@@ -149,12 +142,12 @@ return [
         ],
     ],
 
-    // Platform Mesyuarat
+    // Platform Mesyuarat Online (Cisco Webex Meetings Teratas)
     'meeting_platforms' => [
-        'ZOOM' => 'Zoom Meeting Pro / Enterprise',
         'CISCO_WEBEX' => 'Cisco Webex Meetings',
-        'GOOGLE_MEET' => 'Google Meet Enterprise',
+        'ZOOM' => 'Zoom Meeting Pro / Enterprise',
         'MS_TEAMS' => 'Microsoft Teams',
+        'GOOGLE_MEET' => 'Google Meet Enterprise',
     ],
 
     // Lokasi / Bilik Mesyuarat Lazim BKP
