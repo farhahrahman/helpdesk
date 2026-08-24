@@ -8,6 +8,7 @@ use App\Core\Request;
 use App\Core\Session;
 use App\Repositories\AssetRepository;
 use App\Repositories\TicketRepository;
+use App\Repositories\UserRepository;
 use App\Services\AssetService;
 use App\Services\AuditService;
 use App\Services\TicketService;
@@ -23,6 +24,7 @@ class TicketController extends BaseController
     private TicketRepository $ticketRepo;
     private AssetService $assetService;
     private AssetRepository $assetRepo;
+    private UserRepository $userRepo;
     private AuditService $auditService;
 
     public function __construct(
@@ -30,17 +32,19 @@ class TicketController extends BaseController
         ?TicketRepository $ticketRepo = null,
         ?AssetService $assetService = null,
         ?AssetRepository $assetRepo = null,
+        ?UserRepository $userRepo = null,
         ?AuditService $auditService = null
     ) {
         $this->ticketService = $ticketService ?? new TicketService();
         $this->ticketRepo = $ticketRepo ?? new TicketRepository();
         $this->assetService = $assetService ?? new AssetService();
         $this->assetRepo = $assetRepo ?? new AssetRepository();
+        $this->userRepo = $userRepo ?? new UserRepository();
         $this->auditService = $auditService ?? new AuditService();
     }
 
     /**
-     * Ticket Listing with Search & Filters
+     * Ticket Listing with Search & Filters (Requires Login to View History)
      */
     public function index(Request $request): void
     {
@@ -66,7 +70,7 @@ class TicketController extends BaseController
         $paginated['data'] = TicketViewModel::presentCollection($paginated['data']);
 
         $this->render('tickets/index', [
-            'pageTitle' => 'Senarai Permohonan ICT - ' . app_config('app.short_name'),
+            'pageTitle' => 'Sejarah Permohonan ICT - ' . app_config('app.short_name'),
             'paginated' => $paginated,
             'filters' => $filters,
             'statuses' => app_config('roles.statuses', []),
@@ -98,7 +102,7 @@ class TicketController extends BaseController
     }
 
     /**
-     * Store New Request (With Smart Login Gateway for Guests)
+     * Store New Request (Boleh Hantar Terus Tanpa Login)
      */
     public function store(Request $request): void
     {
@@ -110,28 +114,58 @@ class TicketController extends BaseController
             $this->redirect('/tickets/create', 'error', 'Sila lengkapkan tajuk program dan tarikh permohonan.');
         }
 
-        // Check if user is logged in
+        // Tentukan identiti pengguna (Staf log masuk ATAU Pemohon Terbuka)
         if (Auth::check()) {
             $user = Auth::user();
-            try {
-                $ticket = $this->ticketService->createTicket($data, $user);
-                Session::clearOldInput();
+        } else {
+            // Pengguna awam / tetamu: semak maklumat wajib
+            if (empty($data['applicant_name']) || empty($data['applicant_email'])) {
+                Session::flashInput($data);
+                $this->redirect('/tickets/create', 'error', 'Sila lengkapkan nama penuh dan emel rasmi pemohon.');
+            }
+
+            $email = strtolower(trim((string)$data['applicant_email']));
+            $existingUser = $this->userRepo->findByEmail($email);
+
+            if ($existingUser) {
+                $user = $existingUser;
+            } else {
+                // Daftar automatik akaun staf dengan kata laluan asas '123456'
+                $user = $this->userRepo->create([
+                    'email' => $email,
+                    'name' => trim((string)$data['applicant_name']),
+                    'password' => password_hash('123456', PASSWORD_DEFAULT),
+                    'role' => 'STAF',
+                    'unit' => $data['unit'] ?? 'PENTADBIRAN',
+                    'position' => trim((string)($data['applicant_position'] ?? 'Pegawai')),
+                    'phone' => trim((string)($data['applicant_phone'] ?? '')),
+                    'is_active' => true,
+                ]);
+            }
+        }
+
+        try {
+            $ticket = $this->ticketService->createTicket($data, $user);
+            Session::clearOldInput();
+
+            if (Auth::check()) {
                 $this->redirect(
                     "/tickets/{$ticket['id']}",
                     'success',
                     "Permohonan berjaya dihantar dengan No. Rujukan: {$ticket['reference_no']}"
                 );
-            } catch (\Exception $e) {
-                Session::flashInput($data);
-                $this->redirect('/tickets/create', 'error', 'Ralat semasa memproses permohonan: ' . $e->getMessage());
+            } else {
+                // Tetamu: Arahkan ke laman penjejakan status tiket awam bersama mesej rujukan
+                $this->redirect(
+                    "/track?ref=" . urlencode($ticket['reference_no']),
+                    'success',
+                    "Permohonan anda telah berjaya dihantar dengan No. Rujukan: {$ticket['reference_no']}! Sila simpan no. rujukan ini untuk semakan status, atau log masuk (kata laluan asas: 123456) untuk melihat sejarah permohonan."
+                );
             }
-            return;
+        } catch (\Exception $e) {
+            Session::flashInput($data);
+            $this->redirect('/tickets/create', 'error', 'Ralat semasa memproses permohonan: ' . $e->getMessage());
         }
-
-        // If NOT logged in: Save form draft into session and direct to login
-        Session::set('_pending_ticket', $data);
-        Session::flash('info', 'Borang permohonan telah disimpan! Sila log masuk ke akaun anda untuk menjana No. Tiket rasmi secara automatik.');
-        $this->redirect('/login');
     }
 
     /**

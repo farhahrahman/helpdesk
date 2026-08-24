@@ -42,7 +42,7 @@ $standardPositions = app_config('positions.standard_positions', []);
                     </label>
                     <input type="email" name="email" required 
                            value="<?= e($user['email'] ?? old('email')) ?>"
-                           placeholder="nama@bkp.gov.my" 
+                           placeholder="nama@johor.gov.my" 
                            class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none text-xs focus:bg-white focus:border-blue-500">
                 </div>
 
@@ -51,8 +51,8 @@ $standardPositions = app_config('positions.standard_positions', []);
                         Kata Laluan <?= $isEdit ? '(Biarkan kosong jika tidak tukar)' : '<span class="text-rose-500">*</span>' ?>
                     </label>
                     <input type="text" name="password" 
-                           placeholder="<?= $isEdit ? 'Kekalkan kata laluan semasa' : 'Cth: password123' ?>"
-                           value="<?= !$isEdit ? 'password123' : '' ?>"
+                           placeholder="<?= $isEdit ? 'Kekalkan kata laluan semasa' : 'Cth: 123456' ?>"
+                           value="<?= !$isEdit ? '123456' : '' ?>"
                            class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none font-mono text-xs focus:bg-white focus:border-blue-500">
                 </div>
             </div>

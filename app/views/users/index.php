@@ -218,7 +218,7 @@ $standardPositions = app_config('positions.standard_positions', []);
                 </div>
                 <div>
                     <label class="block font-bold text-slate-700 uppercase mb-1">Kata Laluan Awal</label>
-                    <input type="text" name="password" value="password123" 
+                    <input type="text" name="password" value="123456" 
                            class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none font-mono text-xs focus:bg-white focus:border-blue-500">
                 </div>
             </div>
@@ -247,7 +247,7 @@ $standardPositions = app_config('positions.standard_positions', []);
                 <div>
                     <label class="block font-bold text-slate-700 uppercase mb-1">Gelaran Jawatan & Gred <span class="text-rose-500">*</span></label>
                     <input type="text" name="position" required list="standard-positions" placeholder="Pilih atau taip jawatan..." 
-                           class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none text-xs focus:bg-white focus:border-blue-500 font-medium">
+                            class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none text-xs focus:bg-white focus:border-blue-500 font-medium">
                     <datalist id="standard-positions">
                         <?php foreach ($standardPositions as $pos): ?>
                         <option value="<?= e($pos) ?>"></option>
@@ -257,7 +257,7 @@ $standardPositions = app_config('positions.standard_positions', []);
                 <div>
                     <label class="block font-bold text-slate-700 uppercase mb-1">No. Telefon Bimbit / VoIP</label>
                     <input type="text" name="phone" placeholder="01X-XXXXXXX atau VoIP" 
-                           class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none text-xs focus:bg-white focus:border-blue-500">
+                            class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none text-xs focus:bg-white focus:border-blue-500">
                 </div>
             </div>
 
@@ -278,7 +278,7 @@ $standardPositions = app_config('positions.standard_positions', []);
             <?= csrf_field() ?>
             <div>
                 <label class="block font-bold text-slate-700 uppercase mb-1">Kata Laluan Baru</label>
-                <input type="text" name="new_password" value="password123" required 
+                <input type="text" name="new_password" value="123456" required 
                        class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none font-mono text-xs">
             </div>
             <div class="flex justify-end gap-2 pt-2">

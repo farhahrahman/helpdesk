@@ -88,7 +88,6 @@ $unitsList = $units ?? app_config('units', []);
                 <?php foreach ($equipmentTypes as $eqKey => $eq): ?>
                 <label class="flex items-start gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-blue-50/40 hover:border-blue-300 cursor-pointer transition-colors">
                     <input type="checkbox" name="requested_equipment_types[]" value="<?= $eqKey ?>" 
-                           <?= ($eqKey === 'OTHER') ? 'id="chk-other-equip" onchange="toggleOtherInput()"' : '' ?>
                            class="mt-1 w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500">
                     <div class="min-w-0">
                         <span class="text-xs font-bold text-slate-900 block"><?= e($eq['name']) ?></span>
@@ -281,7 +280,7 @@ $unitsList = $units ?? app_config('units', []);
                         <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
                             Unit / Bahagian BKP <span class="text-rose-500">*</span>
                         </label>
-                        <select name="unit" required class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs outline-none">
+                        <select name="unit" required class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs outline-none font-medium">
                             <?php foreach ($unitsList as $uKey => $u): ?>
                             <option value="<?= $uKey ?>"><?= e($u['name']) ?></option>
                             <?php endforeach; ?>
@@ -292,7 +291,7 @@ $unitsList = $units ?? app_config('units', []);
                             Nama Penuh Pegawai <span class="text-rose-500">*</span>
                         </label>
                         <input type="text" name="applicant_name" required placeholder="Cth: Ahmad Faiz bin Khairuddin"
-                               class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs outline-none">
+                               class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs outline-none font-medium">
                     </div>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -301,14 +300,14 @@ $unitsList = $units ?? app_config('units', []);
                             Emel Rasmi Kerajaan <span class="text-rose-500">*</span>
                         </label>
                         <input type="email" name="applicant_email" required placeholder="nama@johor.gov.my"
-                               class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs outline-none">
+                               class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs outline-none font-medium">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
                             Jawatan & Gred
                         </label>
                         <input type="text" name="applicant_position" placeholder="Cth: Penolong Pegawai Tadbir (N29)"
-                               class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs outline-none">
+                               class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs outline-none font-medium">
                     </div>
                 </div>
             </div>
@@ -331,17 +330,13 @@ $unitsList = $units ?? app_config('units', []);
                     Pematuhan Aliran Kerja Rasmi BKP
                 </p>
                 <p class="text-blue-800">
-                    <?php if ($isLoggedIn): ?>
-                    Permohonan ini akan disalurkan secara automatik kepada <strong>Ketua Unit</strong> anda untuk perakuan sebelum dinilai dan diluluskan oleh <strong>Unit ICT BKP</strong>.
-                    <?php else: ?>
-                    Selepas menekan butang hantar, anda akan diminta log masuk sekali sahaja bagi mengesahkan permohonan dan menjana No. Tiket rasmi.
-                    <?php endif; ?>
+                    Permohonan ini akan disalurkan secara automatik kepada <strong>Ketua Unit</strong> anda untuk perakuan sebelum dinilai dan diluluskan oleh <strong>Unit ICT BKP</strong>. Anda boleh menyemak status permohonan dengan No. Tiket, atau log masuk (kata laluan asas: 123456) untuk melihat sejarah penuh.
                 </p>
             </div>
 
             <button type="submit" 
-                    class="px-6 py-3.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md hover:shadow-lg transition-all shrink-0 focus:ring-4 focus:ring-blue-300 flex items-center gap-2">
-                <span><?= $isLoggedIn ? 'Hantar Permohonan Rasmi' : 'Hantar Permohonan & Log Masuk' ?></span>
+                    class="px-7 py-3.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md hover:shadow-lg transition-all shrink-0 focus:ring-4 focus:ring-blue-300 flex items-center gap-2">
+                <span>Hantar Permohonan Rasmi</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </button>
         </div>

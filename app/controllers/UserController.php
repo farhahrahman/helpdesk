@@ -11,60 +11,41 @@ use App\Services\AuditService;
 use App\Services\AuthService;
 
 /**
- * User & Staff Management Controller (Full CRUD)
+ * User Management Controller (Admin Only CRUD & User Directory)
  */
 class UserController extends BaseController
 {
     private UserRepository $userRepo;
-    private AuthService $authService;
     private AuditService $auditService;
+    private AuthService $authService;
 
     public function __construct(
         ?UserRepository $userRepo = null,
-        ?AuthService $authService = null,
-        ?AuditService $auditService = null
+        ?AuditService $auditService = null,
+        ?AuthService $authService = null
     ) {
         $this->userRepo = $userRepo ?? new UserRepository();
-        $this->authService = $authService ?? new AuthService();
         $this->auditService = $auditService ?? new AuditService();
+        $this->authService = $authService ?? new AuthService();
     }
 
     /**
-     * User Management Listing with Search & Filter
+     * User Directory Listing with Search & Unit Filter
      */
     public function index(Request $request): void
     {
+        $search = (string) $request->input('search', '');
         $unitFilter = (string) $request->input('unit', '');
-        $roleFilter = (string) $request->input('role', '');
-        $search = strtolower(trim((string) $request->input('search', '')));
 
-        $allUsers = $this->userRepo->all();
-
-        // Apply filters
-        $filtered = array_filter($allUsers, function ($u) use ($unitFilter, $roleFilter, $search) {
-            if (!empty($unitFilter) && ($u['unit'] ?? '') !== $unitFilter) {
-                return false;
-            }
-            if (!empty($roleFilter) && ($u['role'] ?? '') !== $roleFilter) {
-                return false;
-            }
-            if (!empty($search)) {
-                $haystack = strtolower(($u['name'] ?? '') . ' ' . ($u['email'] ?? '') . ' ' . ($u['position'] ?? ''));
-                if (!str_contains($haystack, $search)) {
-                    return false;
-                }
-            }
-            return true;
-        });
+        $users = $this->userRepo->searchUsers($search, $unitFilter ?: null);
 
         $this->render('users/index', [
-            'pageTitle' => 'Senarai Pengguna - ' . app_config('app.short_name'),
-            'users' => array_values($filtered),
+            'pageTitle' => 'SENARAI PENGGUNA - ' . app_config('app.short_name'),
+            'users' => $users,
+            'search' => $search,
+            'unitFilter' => $unitFilter,
             'units' => app_config('units', []),
             'roles' => app_config('roles.roles', []),
-            'unitFilter' => $unitFilter,
-            'roleFilter' => $roleFilter,
-            'search' => $search,
         ]);
     }
 
@@ -74,7 +55,7 @@ class UserController extends BaseController
     public function create(Request $request): void
     {
         $this->render('users/form', [
-            'pageTitle' => 'Tambah Pengguna Baru - ' . app_config('app.short_name'),
+            'pageTitle' => 'Daftar Pengguna Baru - ' . app_config('app.short_name'),
             'user' => null,
             'units' => app_config('units', []),
             'roles' => app_config('roles.roles', []),
@@ -89,7 +70,7 @@ class UserController extends BaseController
         $data = $request->all();
         $name = trim((string)($data['name'] ?? ''));
         $email = strtolower(trim((string)($data['email'] ?? '')));
-        $password = (string)($data['password'] ?? 'password123');
+        $password = (string)($data['password'] ?? '123456');
         $unit = (string)($data['unit'] ?? 'PENTADBIRAN');
         $role = (string)($data['role'] ?? 'STAF');
         $position = trim((string)($data['position'] ?? 'Pegawai'));
@@ -115,7 +96,7 @@ class UserController extends BaseController
         $newUser = [
             'name' => $name,
             'email' => $email,
-            'password' => password_hash($password ?: 'password123', PASSWORD_DEFAULT),
+            'password' => password_hash($password ?: '123456', PASSWORD_DEFAULT),
             'role' => $role,
             'unit' => $unit,
             'position' => $position,
@@ -257,7 +238,7 @@ class UserController extends BaseController
     }
 
     /**
-     * Reset User Password to Default
+     * Reset User Password to Default (123456)
      */
     public function resetPassword(Request $request, string $id): void
     {
@@ -266,7 +247,7 @@ class UserController extends BaseController
             $this->redirect('/users', 'error', 'Pengguna tidak dijumpai.');
         }
 
-        $newPass = (string) $request->input('new_password', 'password123');
+        $newPass = (string) $request->input('new_password', '123456');
         $this->userRepo->update($id, [
             'password' => password_hash($newPass, PASSWORD_DEFAULT),
         ]);
