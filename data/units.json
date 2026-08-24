@@ -1,0 +1,92 @@
+[
+    {
+        "id": "TSUK",
+        "code": "TSUK",
+        "name": "Pejabat Timbalan Setiausaha Kerajaan (Pengurusan)",
+        "short_name": "Pejabat TSUK Pengurusan",
+        "badge_color": "indigo",
+        "description": "Pejabat Eksekutif Pengurusan Tertinggi",
+        "created_at": "2026-08-23T14:24:45+00:00",
+        "updated_at": "2026-08-23T14:24:45+00:00"
+    },
+    {
+        "id": "PENTADBIRAN",
+        "code": "PENTADBIRAN",
+        "name": "Unit Pentadbiran",
+        "short_name": "Unit Pentadbiran",
+        "badge_color": "blue",
+        "description": "Urus tadbir pentadbiran am, surat-menyurat dan operasi BKP",
+        "created_at": "2026-08-23T14:24:45+00:00",
+        "updated_at": "2026-08-23T14:24:45+00:00"
+    },
+    {
+        "id": "BANGUNAN_ASET",
+        "code": "BANGUNAN_ASET",
+        "name": "Unit Pengurusan Bangunan dan Aset",
+        "short_name": "Unit Bangunan & Aset",
+        "badge_color": "emerald",
+        "description": "Pengurusan fasiliti bangunan, penyelenggaraan dan rekod aset",
+        "created_at": "2026-08-23T14:24:45+00:00",
+        "updated_at": "2026-08-23T14:24:45+00:00"
+    },
+    {
+        "id": "KESELAMATAN_BENCANA",
+        "code": "KESELAMATAN_BENCANA",
+        "name": "Unit Keselamatan Dan Bencana Alam",
+        "short_name": "Unit Keselamatan & Bencana",
+        "badge_color": "rose",
+        "description": "Kawalan keselamatan premis dan pengurusan kesiapsiagaan bencana",
+        "created_at": "2026-08-23T14:24:45+00:00",
+        "updated_at": "2026-08-23T14:24:45+00:00"
+    },
+    {
+        "id": "KEWANGAN",
+        "code": "KEWANGAN",
+        "name": "Unit Kewangan",
+        "short_name": "Unit Kewangan",
+        "badge_color": "amber",
+        "description": "Urusan perakaunan, bajet dan perbelanjaan BKP",
+        "created_at": "2026-08-23T14:24:45+00:00",
+        "updated_at": "2026-08-23T14:24:45+00:00"
+    },
+    {
+        "id": "ISTIADAT_PROTOKOL",
+        "code": "ISTIADAT_PROTOKOL",
+        "name": "Unit Istiadat dan Protokol",
+        "short_name": "Unit Istiadat & Protokol",
+        "badge_color": "purple",
+        "description": "Penyelarasan majlis rasmi negeri, protokol dan sambutan kenamaan",
+        "created_at": "2026-08-23T14:24:45+00:00",
+        "updated_at": "2026-08-23T14:24:45+00:00"
+    },
+    {
+        "id": "DASAR_PEROLEHAN",
+        "code": "DASAR_PEROLEHAN",
+        "name": "Unit Dasar, Keurussetiaan dan Perolehan",
+        "short_name": "Unit Dasar & Perolehan",
+        "badge_color": "cyan",
+        "description": "Penggubalan dasar dalaman, keurussetiaan mesyuarat utama dan tender/perolehan",
+        "created_at": "2026-08-23T14:24:45+00:00",
+        "updated_at": "2026-08-23T14:24:45+00:00"
+    },
+    {
+        "id": "ICT_BKP",
+        "code": "ICT_BKP",
+        "name": "Seksyen ICT",
+        "short_name": "ICTKBKP",
+        "badge_color": "sky",
+        "description": "Penyediaan perkhidmatan teknikal, peralatan ICT dan sokongan digital",
+        "created_at": "2026-08-23T14:24:45+00:00",
+        "updated_at": "2026-08-23T14:27:52+00:00"
+    },
+    {
+        "id": "BKP",
+        "code": "BKP",
+        "name": "Pejabat Bahagian Khidmat Pengurusan",
+        "short_name": "BKP",
+        "description": "",
+        "badge_color": "blue",
+        "created_at": "2026-08-23T14:28:42+00:00",
+        "updated_at": "2026-08-23T14:28:42+00:00"
+    }
+]

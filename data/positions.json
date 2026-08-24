@@ -1,0 +1,191 @@
+[
+    {
+        "id": "POS-001",
+        "title": "Pemandu Kenderaan (H11)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-002",
+        "title": "Pembantu Tadbir (P/O) (N19)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-003",
+        "title": "Pembantu Tadbir (P/O) (N22)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-004",
+        "title": "Pembantu Tadbir (Kewangan) (W19)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-005",
+        "title": "Pegawai Tadbir (Pegawai Khas) (N41)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-006",
+        "title": "Pembantu Tadbir (P/O) - N26 (Jawatan Kumpulan)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-007",
+        "title": "Pembantu Operasi (N11)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-008",
+        "title": "Pembantu Awam (H11)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-009",
+        "title": "Pembantu Operasi (N14)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-010",
+        "title": "Penolong Pegawai Tadbir (N29)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:47:46+00:00"
+    },
+    {
+        "id": "POS-011",
+        "title": "Setiausaha Pejabat (N29)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-012",
+        "title": "Penolong Setiausaha, PTNJ (N41)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-013",
+        "title": "Penolong Jurutera (JA29)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-014",
+        "title": "Pembantu Awam (R3)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-015",
+        "title": "Pembantu Tadbir (P/O) TBK (N22)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-016",
+        "title": "Pembantu Tadbir (N19)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-017",
+        "title": "Penolong Pegawai Tadbir (N36)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-018",
+        "title": "Pembantu Awam (N11)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-019",
+        "title": "Pen. Juruukur Bahan (JA29)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-020",
+        "title": "Pembantu Tadbir (N22)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-021",
+        "title": "PINJAM (W19)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-022",
+        "title": "Penolong Akauntan (N11)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-023",
+        "title": "Setiausaha Pejabat - N19/N22/N29/30",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-024",
+        "title": "Akauntan (W41)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-025",
+        "title": "Penolong Akauntan (W29)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "id": "POS-026",
+        "title": "Pemandu Kenderaan (H14)",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:18+00:00",
+        "updated_at": "2026-08-23T14:41:18+00:00"
+    },
+    {
+        "title": "Penolong Setiausaha",
+        "is_active": true,
+        "id": "e71d4102-99d2-4988-983b-8a234c49025f",
+        "created_at": "2026-08-23T14:48:27+00:00",
+        "updated_at": "2026-08-23T14:48:27+00:00"
+    }
+]

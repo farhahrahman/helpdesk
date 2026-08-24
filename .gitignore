@@ -1,0 +1,22 @@
+# Vendor & Dependencies
+/vendor/
+composer.phar
+
+# Environment & Local Server
+.env
+.env.local
+.env.*.local
+*.log
+*.stackdump
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temp inspection scripts
+read_inventory_excel.php
+parse_sheets.php
+list_sheets.php
+inspect_sheet2.php
+inspect_headers.php
+import_assets.php
