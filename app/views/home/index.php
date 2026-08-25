@@ -31,27 +31,13 @@ $currentUser = Auth::user();
                         Sistem pengurusan permohonan peminjaman aset (Laptop Dell, iPhone 15, Lenovo Tab, Kamera DSLR), sokongan teknikal mesyuarat dalam talian (Cisco Webex / Zoom / Teams), dan liputan media rasmi Bahagian Khidmat Pengurusan.
                     </p>
                     
-                    <!-- Action Buttons -->
-                    <div class="flex flex-wrap items-center gap-3.5 pt-2">
+                    <!-- Action Button (Hanya Butang Utama Permohonan Baru) -->
+                    <div class="pt-2">
                         <a href="<?= url('/tickets/create') ?>" 
-                           class="px-6 py-3.5 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold text-sm rounded-xl shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2">
-                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                           class="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold text-sm sm:text-base rounded-xl shadow-lg shadow-blue-600/30 hover:shadow-blue-500/40 hover:-translate-y-0.5 transition-all">
+                            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                             <span>+ Buat Permohonan Baru</span>
                         </a>
-
-                        <?php if (!$isLoggedIn): ?>
-                        <a href="<?= url('/login') ?>" 
-                           class="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-sm rounded-xl backdrop-blur-sm transition-all flex items-center justify-center gap-2">
-                            <svg class="w-4 h-4 text-blue-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
-                            <span>Log Masuk Staf / Admin</span>
-                        </a>
-                        <?php else: ?>
-                        <a href="<?= url('/dashboard') ?>" 
-                           class="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-sm rounded-xl backdrop-blur-sm transition-all flex items-center justify-center gap-2">
-                            <svg class="w-4 h-4 text-blue-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                            <span>Papan Pemuka Utama</span>
-                        </a>
-                        <?php endif; ?>
                     </div>
                 </div>
 
