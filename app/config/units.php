@@ -58,8 +58,8 @@ return [
     ],
     'ICT_BKP' => [
         'code' => 'ICT_BKP',
-        'name' => 'Unit Teknologi Maklumat & Komunikasi (ICT BKP)',
-        'short_name' => 'Unit ICT BKP',
+        'name' => 'Seksyen Teknologi Maklumat & Komunikasi (Seksyen ICT)',
+        'short_name' => 'Seksyen ICT',
         'badge_color' => 'sky',
         'description' => 'Penyediaan perkhidmatan teknikal, peralatan ICT dan sokongan digital',
     ],

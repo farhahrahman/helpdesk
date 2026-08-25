@@ -54,7 +54,7 @@ $statusKey = $ticket['status'] ?? '';
         $steps = [
             ['id' => 'SUBMITTED', 'title' => 'Permohonan Dihantar', 'desc' => 'Staf / Pemohon'],
             ['id' => 'UNIT_REVIEW', 'title' => 'Perakuan Unit', 'desc' => 'Ketua Unit'],
-            ['id' => 'ICT_REVIEW', 'title' => 'Kelulusan ICT', 'desc' => 'Unit ICT BKP'],
+            ['id' => 'ICT_REVIEW', 'title' => 'Kelulusan ICT', 'desc' => 'Seksyen ICT BKP'],
             ['id' => 'EXECUTION', 'title' => 'Penyerahan / Acara', 'desc' => 'Aset Digunakan'],
             ['id' => 'COMPLETED', 'title' => 'Selesai', 'desc' => 'Tamat & Dipulangkan'],
         ];
@@ -308,7 +308,7 @@ $statusKey = $ticket['status'] ?? '';
                 <!-- ICT Level -->
                 <div class="p-3.5 rounded-xl border <?= ($ticket['ict_approval']['status'] === 'APPROVED') ? 'border-emerald-200 bg-emerald-50/50' : (($ticket['ict_approval']['status'] === 'REJECTED') ? 'border-rose-200 bg-rose-50/50' : 'border-blue-200 bg-blue-50/50') ?>">
                     <div class="flex items-center justify-between mb-1">
-                        <span class="font-bold text-slate-800">2. Kelulusan ICT BKP</span>
+                        <span class="font-bold text-slate-800">2. Kelulusan Seksyen ICT BKP</span>
                         <span class="font-bold <?= ($ticket['ict_approval']['status'] === 'APPROVED') ? 'text-emerald-700' : (($ticket['ict_approval']['status'] === 'REJECTED') ? 'text-rose-700' : 'text-blue-700') ?>">
                             <?= e($ticket['ict_approval']['status']) ?>
                         </span>
@@ -323,7 +323,7 @@ $statusKey = $ticket['status'] ?? '';
                     <p class="mt-1 text-slate-700 italic bg-white/70 p-1.5 rounded">"<?= e($ticket['ict_approval']['notes']) ?>"</p>
                     <?php endif; ?>
                     <?php else: ?>
-                    <p class="text-slate-500 text-[11px]">Menunggu kelulusan Unit ICT BKP.</p>
+                    <p class="text-slate-500 text-[11px]">Menunggu kelulusan Seksyen ICT BKP.</p>
                     <?php endif; ?>
                 </div>
             </div>
@@ -336,7 +336,7 @@ $statusKey = $ticket['status'] ?? '';
                     <h3 class="text-sm font-bold">Tindakan Ketua Unit / Penyelia</h3>
                 </div>
                 <p class="text-xs text-amber-800">
-                    Sila buat semakan dan berikan sokongan sebelum permohonan dimajukan ke Unit ICT BKP.
+                    Sila buat semakan dan berikan sokongan sebelum permohonan dimajukan ke Seksyen ICT BKP.
                 </p>
 
                 <!-- Approve Unit Form -->
@@ -503,8 +503,8 @@ $statusKey = $ticket['status'] ?? '';
 <!-- Modal: Reject ICT -->
 <div id="reject-ict-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
     <div class="bg-white max-w-md w-full rounded-2xl p-6 shadow-xl border border-slate-200">
-        <h3 class="text-base font-bold text-slate-900 mb-2">Tolak Permohonan (Unit ICT BKP)</h3>
-        <p class="text-xs text-slate-600 mb-4">Sila nyatakan justifikasi rasmi penolakan oleh Unit ICT.</p>
+        <h3 class="text-base font-bold text-slate-900 mb-2">Tolak Permohonan (Seksyen ICT BKP)</h3>
+        <p class="text-xs text-slate-600 mb-4">Sila nyatakan justifikasi rasmi penolakan oleh Seksyen ICT.</p>
         <form action="<?= url("/approvals/{$ticket['id']}/ict-reject") ?>" method="POST" class="space-y-4">
             <?= csrf_field() ?>
             <textarea name="notes" required rows="3" placeholder="Sebab penolakan..." 

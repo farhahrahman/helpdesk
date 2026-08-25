@@ -13,7 +13,7 @@ $unitsList = $units ?? app_config('units', []);
     <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
         <div>
             <h1 class="text-xl font-bold text-slate-900 tracking-tight">Borang Permohonan Perkhidmatan ICT</h1>
-            <p class="text-xs text-slate-500 mt-1">Sila lengkapkan butiran permohonan di bawah untuk semakan Ketua Unit dan Unit ICT BKP</p>
+            <p class="text-xs text-slate-500 mt-1">Sila lengkapkan butiran permohonan di bawah untuk semakan Ketua Unit dan Seksyen ICT BKP</p>
         </div>
         <a href="<?= $isLoggedIn ? url('/tickets') : url('/') ?>" class="text-xs font-semibold text-slate-600 hover:text-slate-900 px-3.5 py-2 bg-slate-100 rounded-xl transition-colors">
             &larr; Kembali
@@ -316,7 +316,7 @@ $unitsList = $units ?? app_config('units', []);
                     Pematuhan Aliran Kerja Rasmi BKP
                 </p>
                 <p class="text-blue-800">
-                    Permohonan ini akan disalurkan secara automatik kepada <strong>Ketua Unit</strong> anda untuk perakuan sebelum dinilai dan diluluskan oleh <strong>Unit ICT BKP</strong>. Anda boleh menyemak status permohonan dengan No. Tiket, atau log masuk (kata laluan asas: 123456) untuk melihat sejarah penuh.
+                    Permohonan ini akan disalurkan secara automatik kepada <strong>Ketua Unit</strong> anda untuk perakuan sebelum dinilai dan diluluskan oleh <strong>Seksyen ICT BKP</strong>. Anda boleh menyemak status permohonan dengan No. Tiket, atau log masuk (kata laluan asas: 123456) untuk melihat sejarah penuh.
                 </p>
             </div>
 

@@ -85,7 +85,7 @@ class ApprovalController extends BaseController
         $success = $this->approvalService->reviewByUnit($id, true, $notes, $user);
 
         if ($success) {
-            $this->redirect("/tickets/{$id}", 'success', 'Permohonan telah disokong dan dihantar ke Unit ICT BKP untuk kelulusan.');
+            $this->redirect("/tickets/{$id}", 'success', 'Permohonan telah disokong dan dihantar ke Seksyen ICT BKP untuk kelulusan.');
         } else {
             $this->redirect("/tickets/{$id}", 'error', 'Gagal memproses sokongan permohonan.');
         }
@@ -118,7 +118,7 @@ class ApprovalController extends BaseController
     public function approveICT(Request $request, string $id): void
     {
         $user = Auth::user();
-        $notes = (string) $request->input('notes', 'Permohonan diluluskan oleh Unit ICT BKP.');
+        $notes = (string) $request->input('notes', 'Permohonan diluluskan oleh Seksyen ICT BKP.');
         $assignedAssetIds = (array) $request->input('assigned_asset_ids', []);
         $technicianId = (string) $request->input('assigned_technician_id', '');
 
@@ -139,7 +139,7 @@ class ApprovalController extends BaseController
         );
 
         if ($success) {
-            $this->redirect("/tickets/{$id}", 'success', 'Permohonan telah berjaya diluluskan rasmi oleh ICT BKP.');
+            $this->redirect("/tickets/{$id}", 'success', 'Permohonan telah berjaya diluluskan rasmi oleh Seksyen ICT BKP.');
         } else {
             $this->redirect("/tickets/{$id}", 'error', 'Gagal meluluskan permohonan.');
         }
@@ -160,7 +160,7 @@ class ApprovalController extends BaseController
         $success = $this->approvalService->reviewByICT($id, false, $notes, $user);
 
         if ($success) {
-            $this->redirect("/tickets/{$id}", 'info', 'Permohonan telah ditolak oleh Unit ICT BKP.');
+            $this->redirect("/tickets/{$id}", 'info', 'Permohonan telah ditolak oleh Seksyen ICT BKP.');
         } else {
             $this->redirect("/tickets/{$id}", 'error', 'Gagal menolak permohonan.');
         }

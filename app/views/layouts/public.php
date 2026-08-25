@@ -59,7 +59,7 @@ $currentUser = Auth::user();
                         <span class="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight uppercase whitespace-nowrap">Helpdesk ICT</span>
                         <span class="px-1.5 py-0.5 text-[9px] sm:text-[10px] font-bold bg-blue-100 text-blue-800 border border-blue-200 rounded-full font-mono shrink-0">BKP</span>
                     </div>
-                    <p class="text-[10px] sm:text-xs text-slate-500 font-medium tracking-wide leading-tight truncate hidden xs:block">Bahagian Khidmat Pengurusan</p>
+                    <p class="text-[10px] sm:text-xs text-slate-500 font-medium tracking-wide leading-none mt-0.5 truncate hidden xs:block">Bahagian Khidmat Pengurusan</p>
                 </div>
             </a>
 
@@ -124,7 +124,7 @@ $currentUser = Auth::user();
                         ICT
                     </div>
                     <div>
-                        <p class="text-white font-bold text-sm uppercase tracking-wider">Unit Teknologi Maklumat & Komunikasi (ICT BKP)</p>
+                        <p class="text-white font-bold text-sm uppercase tracking-wider">Seksyen Teknologi Maklumat & Komunikasi (Seksyen ICT BKP)</p>
                         <p class="text-xs text-slate-400">Bahagian Khidmat Pengurusan, Pejabat Setiausaha Kerajaan Negeri Johor</p>
                     </div>
                 </div>
@@ -132,7 +132,7 @@ $currentUser = Auth::user();
                 <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-slate-300">
                     <span class="flex items-center gap-1.5">
                         <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                        Talian ICT: <strong>010-5528875</strong>
+                        Talian Seksyen ICT: <strong>010-5528875</strong>
                     </span>
                     <span class="flex items-center gap-1.5">
                         <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>

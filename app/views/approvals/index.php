@@ -81,7 +81,7 @@ $role = $user['role'] ?? 'STAF';
                     2
                 </div>
                 <div>
-                    <h2 class="text-sm font-bold text-blue-950">Menunggu Kelulusan Rasmi & Peruntukan Unit ICT BKP</h2>
+                    <h2 class="text-sm font-bold text-blue-950">Menunggu Kelulusan Rasmi & Peruntukan Seksyen ICT BKP</h2>
                     <p class="text-xs text-blue-800">Telah diperakukan Ketua Unit & sedia untuk diagihkan peralatan / juruteknik</p>
                 </div>
             </div>

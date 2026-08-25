@@ -111,6 +111,6 @@ try {
         echo "<b>Stack Trace:</b>\n" . e($e->getTraceAsString());
         echo "</pre>";
     } else {
-        Response::abort(500, 'Berlaku ralat dalaman sistem. Sila hubungi Unit ICT BKP.');
+        Response::abort(500, 'Berlaku ralat dalaman sistem. Sila hubungi Seksyen ICT BKP.');
     }
 }

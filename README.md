@@ -10,7 +10,7 @@ Sistem Pengurusan Permohonan & Khidmat Sokongan ICT Rasmi berpusat bagi menyelar
 1. **Aliran Kerja Perakuan & Kelulusan Berlapis (Multi-Tier Approval):**
    * Menghalang isu staf membuat pesanan secara terus/lisan (*main order*).
    * **Peringkat 1:** Perakuan & Sokongan oleh **Ketua Unit** pemohon masing-masing.
-   * **Peringkat 2:** Penilaian ketersediaan, peruntukan aset fizikal & kelulusan rasmi oleh **Unit ICT BKP**.
+   * **Peringkat 2:** Penilaian ketersediaan, peruntukan aset fizikal & kelulusan rasmi oleh **Seksyen ICT BKP**.
 2. **Katalog Perkhidmatan Komprehensif:**
    * **Peminjaman Peralatan / Aset ICT:** iPhone 15 Pro, iPhone 14 Pro, Kamera DSLR Canon/Sony, Mikrofon Wireless RODE/Shure PA Kit, Laptop Dell/Lenovo/MacBook, Projektor & Presenter.
    * **Khidmat Sokongan Mesyuarat:** Penyediaan pautan rasmi Zoom / Webex / Teams / Google Meet, sokongan teknikal bilik mesyuarat, dan persidangan video hibrid.
@@ -38,7 +38,7 @@ Sistem Pengurusan Permohonan & Khidmat Sokongan ICT Rasmi berpusat bagi menyelar
 | **KEWANGAN** | Unit Kewangan | Perakaunan & Bajet |
 | **ISTIADAT_PROTOKOL** | Unit Istiadat dan Protokol | Acara Rasmi & Sambutan Negeri |
 | **DASAR_PEROLEHAN** | Unit Dasar, Keurussetiaan dan Perolehan | Dasar, Mesyuarat & Perolehan |
-| **ICT_BKP** | Unit ICT BKP | Pentadbiran Sistem & Khidmat Teknikal |
+| **ICT_BKP** | Seksyen ICT BKP | Pentadbiran Sistem & Khidmat Teknikal |
 
 ---
 

@@ -133,10 +133,10 @@
                 </div>
             </div>
 
-            <!-- Box 3: Unit ICT BKP -->
+            <!-- Box 3: Seksyen ICT BKP -->
             <div class="border border-slate-300 p-3 flex flex-col justify-between h-40">
                 <div>
-                    <p class="font-bold text-[11px] uppercase">3. Kelulusan Unit ICT BKP</p>
+                    <p class="font-bold text-[11px] uppercase">3. Kelulusan Seksyen ICT BKP</p>
                     <p class="text-[10px] text-slate-600 mt-1">Status: <strong><?= e($ticket['ict_approval']['status'] ?? 'MENUNGGU') ?></strong></p>
                     <?php if (!empty($ticket['ict_approval']['assigned_technician_name'])): ?>
                     <p class="text-[10px] font-semibold text-slate-800">Petugas: <?= e($ticket['ict_approval']['assigned_technician_name']) ?></p>
