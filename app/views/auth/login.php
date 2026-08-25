@@ -68,5 +68,18 @@ $info = Session::getFlash('info');
                 Log Masuk ke Sistem
             </button>
         </form>
+
+        <!-- Pemakluman Catatan Password Default 123456 -->
+        <div class="mt-6 p-4 rounded-xl bg-blue-50/80 border border-blue-200 text-xs text-blue-900 flex items-start gap-3">
+            <div class="w-6 h-6 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+            <div>
+                <p class="font-bold text-blue-950 text-xs">Pemakluman Log Masuk Staf & Pegawai</p>
+                <p class="text-blue-800 text-[11px] mt-1 leading-relaxed">
+                    Sila gunakan <strong>Emel Rasmi Kerajaan</strong> anda (<span class="font-mono text-slate-700">@johor.gov.my</span>) dan kata laluan asas (<span class="font-mono font-bold bg-blue-100 px-1.5 py-0.5 rounded text-blue-900 border border-blue-200">123456</span>) untuk log masuk melihat sejarah permohonan.
+                </p>
+            </div>
+        </div>
     </div>
 </div>

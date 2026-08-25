@@ -184,7 +184,7 @@ $unitsList = $units ?? app_config('units', []);
             </div>
         </div>
 
-        <!-- STEP 3: Maklumat Program & Jadual Acara (Dengan Ruangan Pengerusi) -->
+        <!-- STEP 3: Maklumat Program & Jadual Acara (Dengan Ruangan Pengerusi & Masa Mula Sahaja) -->
         <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-sm space-y-5">
             <div class="border-b border-slate-100 pb-3">
                 <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Langkah 3</span>
@@ -238,8 +238,8 @@ $unitsList = $units ?? app_config('units', []);
                        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none">
             </div>
 
-            <!-- Date & Time Range -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <!-- Date & Time Range (Masa Mula Sahaja) -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                         Tarikh Mula <span class="text-rose-500">*</span>
@@ -256,16 +256,9 @@ $unitsList = $units ?? app_config('units', []);
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                        Masa Mula
+                        Masa Mula <span class="text-rose-500">*</span>
                     </label>
-                    <input type="time" name="start_time" value="09:00" 
-                            class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs font-medium outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                        Masa Tamat
-                    </label>
-                    <input type="time" name="end_time" value="17:00" 
+                    <input type="time" name="start_time" required value="09:00" 
                             class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs font-medium outline-none">
                 </div>
             </div>
@@ -313,14 +306,6 @@ $unitsList = $units ?? app_config('units', []);
                 </div>
             </div>
             <?php endif; ?>
-
-            <div>
-                <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Catatan Tambahan (Pilihan)
-                </label>
-                <input type="text" name="remarks" placeholder="Sebarang keperluan khas atau maklumat tambahan..." 
-                       class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none">
-            </div>
         </div>
 
         <!-- Compliance & Submission Box -->
