@@ -65,11 +65,17 @@ $router->post('/approvals/{id}/handover', 'ApprovalController@handover', ['auth'
 $router->post('/approvals/{id}/return', 'ApprovalController@returnAsset', ['auth', 'csrf']);
 
 // Asset Inventory Management
+$router->get('/inventory', 'AssetController@index', ['auth']);
 $router->get('/assets', 'AssetController@index', ['auth']);
+$router->get('/inventory/create', 'AssetController@create', ['auth', 'admin']);
 $router->get('/assets/create', 'AssetController@create', ['auth', 'admin']);
+$router->post('/inventory', 'AssetController@store', ['auth', 'admin', 'csrf']);
 $router->post('/assets', 'AssetController@store', ['auth', 'admin', 'csrf']);
+$router->get('/inventory/{id}/edit', 'AssetController@edit', ['auth', 'admin']);
 $router->get('/assets/{id}/edit', 'AssetController@edit', ['auth', 'admin']);
+$router->post('/inventory/{id}/update', 'AssetController@update', ['auth', 'admin', 'csrf']);
 $router->post('/assets/{id}/update', 'AssetController@update', ['auth', 'admin', 'csrf']);
+$router->post('/inventory/{id}/delete', 'AssetController@delete', ['auth', 'admin', 'csrf']);
 $router->post('/assets/{id}/delete', 'AssetController@delete', ['auth', 'admin', 'csrf']);
 
 // Reports & Executive Analytics

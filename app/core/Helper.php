@@ -115,7 +115,7 @@ if (!function_exists('asset')) {
      */
     function asset(string $path): string
     {
-        return url('assets/' . ltrim($path, '/'));
+        return url('static/' . ltrim($path, '/'));
     }
 }
 
