@@ -108,10 +108,62 @@ class TicketController extends BaseController
     {
         $data = $request->all();
 
+        // Merge loan specific fields if provided
+        if (($data['category'] ?? '') === 'PEMINJAMAN_ASET') {
+            if (!empty($data['purpose_loan'])) {
+                $data['purpose'] = $data['purpose_loan'];
+            }
+            if (!empty($data['location_loan'])) {
+                $data['location'] = $data['location_loan'];
+            }
+            if (!empty($data['start_date_loan'])) {
+                $data['start_date'] = $data['start_date_loan'];
+            }
+            if (!empty($data['end_date_loan'])) {
+                $data['end_date'] = $data['end_date_loan'];
+            }
+            if (!empty($data['applicant_phone_loan'])) {
+                $data['applicant_phone'] = $data['applicant_phone_loan'];
+            }
+            if (!empty($data['unit_loan'])) {
+                $data['unit'] = $data['unit_loan'];
+            }
+            if (!empty($data['applicant_name_loan'])) {
+                $data['applicant_name'] = $data['applicant_name_loan'];
+            }
+            if (!empty($data['applicant_email_loan'])) {
+                $data['applicant_email'] = $data['applicant_email_loan'];
+            }
+            if (!empty($data['applicant_position_loan'])) {
+                $data['applicant_position'] = $data['applicant_position_loan'];
+            }
+        }
+
+        // Auto-generate title for PEMINJAMAN_ASET if empty or not provided
+        if (empty($data['title'])) {
+            if (($data['category'] ?? '') === 'PEMINJAMAN_ASET') {
+                $eqList = (array)($data['requested_equipment_types'] ?? []);
+                $eqConfigs = app_config('services.equipment_types', []);
+                $names = [];
+                foreach ($eqList as $k) {
+                    if (isset($eqConfigs[$k]['name'])) {
+                        $names[] = $eqConfigs[$k]['name'];
+                    }
+                }
+                if (!empty($names)) {
+                    $data['title'] = 'Pinjaman Aset: ' . implode(', ', array_slice($names, 0, 2)) . (count($names) > 2 ? ' & lain-lain' : '');
+                } else {
+                    $data['title'] = 'Permohonan Pinjaman Aset ICT (KEW.PA-9)';
+                }
+            } else {
+                $data['title'] = 'Permohonan Perkhidmatan ICT';
+            }
+        }
+
         // Basic validation
-        if (empty($data['title']) || empty($data['start_date'])) {
+        if (empty($data['start_date']) || empty($data['purpose'])) {
             Session::flashInput($data);
-            $this->redirect('/tickets/create', 'error', 'Sila lengkapkan tajuk program dan tarikh permohonan.');
+            $this->redirect('/tickets/create', 'error', 'Sila lengkapkan tujuan permohonan dan tarikh yang diperlukan.');
         }
 
         // Tentukan identiti pengguna (Staf log masuk ATAU Pemohon Terbuka)

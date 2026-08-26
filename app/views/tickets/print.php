@@ -1,10 +1,165 @@
 <!-- Official Printable Slip: Helpdesk ICT BKP -->
+<?php if ($ticket['category'] === 'PEMINJAMAN_ASET'): ?>
+<!-- ========================================================================= -->
+<!-- FORMAT RASMI KEW.PA-9 (Pekeliling Perbendaharaan Malaysia AM 2.4 Lampiran A) -->
+<!-- ========================================================================= -->
+<div class="text-slate-900 space-y-4 font-sans text-xs">
+    <!-- Header Kew.PA-9 -->
+    <div class="flex justify-between items-start text-[11px]">
+        <div class="font-normal text-slate-700">
+            Pekeliling Perbendaharaan Malaysia
+        </div>
+        <div class="text-right">
+            <span>AM 2.4 Lampiran A</span>
+            <strong class="text-sm font-bold block mt-0.5 text-slate-900">KEW.PA-9</strong>
+        </div>
+    </div>
+
+    <div class="text-right text-[11px] pt-1">
+        No. Permohonan: <span class="font-mono font-bold text-slate-900"><?= e($ticket['reference_no']) ?></span>
+    </div>
+
+    <!-- Title -->
+    <div class="text-center py-1">
+        <h1 class="text-sm font-black uppercase tracking-wide text-slate-900">BORANG PERMOHONAN PERGERAKAN/ PINJAMAN ASET ALIH</h1>
+    </div>
+
+    <!-- Header Table: Nama Pemohon, Tujuan, Tempat Digunakan, dsb. -->
+    <table class="w-full border-collapse border border-slate-900 text-xs">
+        <tr>
+            <td class="border border-slate-900 p-2.5 w-32 font-semibold bg-slate-50">Nama Pemohon:</td>
+            <td class="border border-slate-900 p-2.5 font-bold w-[35%]"><?= e($ticket['applicant_name']) ?></td>
+            <td class="border border-slate-900 p-2.5 w-32 font-semibold bg-slate-50">Tujuan:</td>
+            <td class="border border-slate-900 p-2.5"><?= nl2br(e($ticket['purpose'])) ?></td>
+        </tr>
+        <tr>
+            <td class="border border-slate-900 p-2.5 font-semibold bg-slate-50">Jawatan:</td>
+            <td class="border border-slate-900 p-2.5"><?= e($ticket['applicant_position'] ?? 'Pegawai') ?></td>
+            <td class="border border-slate-900 p-2.5 font-semibold bg-slate-50">Tempat Digunakan:</td>
+            <td class="border border-slate-900 p-2.5 font-bold"><?= e($ticket['location']) ?></td>
+        </tr>
+        <tr>
+            <td class="border border-slate-900 p-2.5 font-semibold bg-slate-50">Bahagian:</td>
+            <td class="border border-slate-900 p-2.5"><?= e($ticket['unit_name']) ?></td>
+            <td class="border border-slate-900 p-2.5 font-semibold bg-slate-50">Nama Pengeluar:</td>
+            <td class="border border-slate-900 p-2.5"><?= e($ticket['ict_approval']['approver_name'] ?? 'Seksyen ICT BKP') ?></td>
+        </tr>
+    </table>
+
+    <!-- Table of Assets (Format KEW.PA-9) -->
+    <table class="w-full border-collapse border border-slate-900 text-[11px] text-center mt-2">
+        <thead class="bg-slate-100 font-bold">
+            <tr>
+                <th rowspan="2" class="border border-slate-900 p-1.5 w-8">Bil</th>
+                <th rowspan="2" class="border border-slate-900 p-1.5 w-36">No. Siri Pendaftaran</th>
+                <th rowspan="2" class="border border-slate-900 p-1.5">Keterangan Aset</th>
+                <th colspan="2" class="border border-slate-900 p-1">Tarikh</th>
+                <th rowspan="2" class="border border-slate-900 p-1 w-20">(Lulus / Tidak Lulus)</th>
+                <th colspan="2" class="border border-slate-900 p-1">Tarikh</th>
+                <th rowspan="2" class="border border-slate-900 p-1.5 w-24">Catatan</th>
+            </tr>
+            <tr>
+                <th class="border border-slate-900 p-1 w-20 font-medium">Peminjam</th>
+                <th class="border border-slate-900 p-1 w-20 font-medium">Dijangka Pulang</th>
+                <th class="border border-slate-900 p-1 w-20 font-medium">Dipulangkan</th>
+                <th class="border border-slate-900 p-1 w-20 font-medium">Diterima</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (!empty($assignedAssets)): ?>
+                <?php foreach ($assignedAssets as $idx => $ast): ?>
+                <tr>
+                    <td class="border border-slate-900 p-2 font-bold"><?= $idx + 1 ?></td>
+                    <td class="border border-slate-900 p-2 font-mono text-[10px] text-left">
+                        <strong><?= e($ast['asset_code']) ?></strong><br>
+                        <span class="text-slate-600 font-normal">S/N: <?= e($ast['serial_no'] ?: '-') ?></span>
+                    </td>
+                    <td class="border border-slate-900 p-2 text-left">
+                        <strong class="text-xs"><?= e($ast['name']) ?></strong>
+                        <span class="block text-[10px] text-slate-600"><?= e($ast['notes'] ?? '') ?></span>
+                    </td>
+                    <td class="border border-slate-900 p-2"><?= e($ticket['formatted_start_date']) ?></td>
+                    <td class="border border-slate-900 p-2 font-semibold"><?= e($ticket['formatted_end_date']) ?></td>
+                    <td class="border border-slate-900 p-2 font-bold <?= ($ticket['status'] === 'DITOLAK') ? 'text-rose-600' : 'text-emerald-700' ?>">
+                        <?= in_array($ticket['status'], ['DILULUSKAN', 'SEDANG_BERLANGSUNG', 'SELESAI']) ? 'LULUS' : (in_array($ticket['status'], ['DITOLAK']) ? 'TIDAK LULUS' : 'MENUNGGU') ?>
+                    </td>
+                    <td class="border border-slate-900 p-2"><?= ($ticket['status'] === 'SELESAI') ? e($ticket['formatted_end_date']) : '-' ?></td>
+                    <td class="border border-slate-900 p-2"><?= ($ticket['status'] === 'SELESAI') ? e($ticket['formatted_end_date']) : '-' ?></td>
+                    <td class="border border-slate-900 p-2 text-[10px] text-left"><?= e($ast['condition'] ?? 'BAIK') ?></td>
+                </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <?php foreach ($ticket['equipment_names'] ?: ['Peralatan ICT'] as $idx => $eqName): ?>
+                <tr>
+                    <td class="border border-slate-900 p-2.5 font-bold"><?= $idx + 1 ?></td>
+                    <td class="border border-slate-900 p-2.5 font-mono text-[10px]">-</td>
+                    <td class="border border-slate-900 p-2.5 text-left font-bold"><?= e($eqName) ?></td>
+                    <td class="border border-slate-900 p-2.5"><?= e($ticket['formatted_start_date']) ?></td>
+                    <td class="border border-slate-900 p-2.5 font-semibold"><?= e($ticket['formatted_end_date']) ?></td>
+                    <td class="border border-slate-900 p-2.5 font-bold text-slate-600">MENUNGGU</td>
+                    <td class="border border-slate-900 p-2.5">-</td>
+                    <td class="border border-slate-900 p-2.5">-</td>
+                    <td class="border border-slate-900 p-2.5 text-[10px] text-left">Permohonan Pinjaman</td>
+                </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            
+            <!-- Blank Rows to match authentic standard document height -->
+            <?php for ($r = count($assignedAssets ?: $ticket['equipment_names'] ?: [1]); $r < 4; $r++): ?>
+            <tr>
+                <td class="border border-slate-900 p-2 text-slate-400"><?= $r + 1 ?></td>
+                <td class="border border-slate-900 p-2"></td>
+                <td class="border border-slate-900 p-2"></td>
+                <td class="border border-slate-900 p-2"></td>
+                <td class="border border-slate-900 p-2"></td>
+                <td class="border border-slate-900 p-2"></td>
+                <td class="border border-slate-900 p-2"></td>
+                <td class="border border-slate-900 p-2"></td>
+                <td class="border border-slate-900 p-2"></td>
+            </tr>
+            <?php endfor; ?>
+        </tbody>
+    </table>
+
+    <!-- Signature Boxes (KEW.PA-9 Format) -->
+    <div class="grid grid-cols-2 gap-12 pt-6">
+        <!-- Peminjam -->
+        <div class="space-y-1">
+            <p class="font-bold text-xs">..................................................</p>
+            <p class="text-xs font-bold">(Tandatangan Peminjam)</p>
+            <p class="text-xs mt-3"><span class="w-16 inline-block font-medium">Nama:</span> <strong class="uppercase"><?= e($ticket['applicant_name']) ?></strong></p>
+            <p class="text-xs"><span class="w-16 inline-block font-medium">Jawatan:</span> <?= e($ticket['applicant_position'] ?? 'Pegawai') ?></p>
+            <p class="text-xs"><span class="w-16 inline-block font-medium">Tarikh:</span> <?= e($ticket['formatted_created_at']) ?></p>
+        </div>
+
+        <!-- Pelulus -->
+        <div class="space-y-1">
+            <p class="font-bold text-xs">..................................................</p>
+            <p class="text-xs font-bold">(Tandatangan Pelulus)</p>
+            <p class="text-xs mt-3"><span class="w-16 inline-block font-medium">Nama:</span> <strong class="uppercase"><?= e($ticket['ict_approval']['approver_name'] ?? $ticket['unit_approval']['approver_name'] ?? 'Pegawai Pelulus Seksyen ICT') ?></strong></p>
+            <p class="text-xs"><span class="w-16 inline-block font-medium">Jawatan:</span> Seksyen ICT BKP</p>
+            <p class="text-xs"><span class="w-16 inline-block font-medium">Tarikh:</span> <?= format_date($ticket['ict_approval']['action_at'] ?? $ticket['unit_approval']['action_at'] ?? '') ?></p>
+        </div>
+    </div>
+
+    <!-- Footer Notice -->
+    <div class="text-[10px] text-slate-500 border-t border-slate-300 pt-3 flex justify-between mt-8">
+        <span>Cetakan Komputer Sistem Helpdesk ICT BKP mengikut standard Pekeliling Perbendaharaan Malaysia KEW.PA-9.</span>
+        <span class="font-mono">Muka Surat 1/1</span>
+    </div>
+</div>
+
+<?php else: ?>
+
+<!-- ========================================================================= -->
+<!-- FORMAT BORANG PERMOHONAN & SERAHAN PERKHIDMATAN ICT UMUM / MESYUARAT / MEDIA -->
+<!-- ========================================================================= -->
 <div class="text-slate-900 space-y-6">
     <!-- Letterhead -->
     <div class="text-center border-b-2 border-slate-900 pb-4">
         <h1 class="text-base font-extrabold uppercase tracking-wider">BAHAGIAN KHIDMAT PENGURUSAN</h1>
-        <h2 class="text-sm font-bold uppercase tracking-wide">PEJABAT SETIAUSAHA KERAJAAN NEGERI</h2>
-        <h3 class="text-xs font-semibold text-slate-700 uppercase mt-0.5">BORANG PERMOHONAN & SERAHAN PERKHIDMATAN ICT (ICTBKP/AM/2026)</h3>
+        <h2 class="text-sm font-bold uppercase tracking-wide">PEJABAT SETIAUSAHA KERAJAAN NEGERI JOHOR</h2>
+        <h3 class="text-xs font-semibold text-slate-700 uppercase mt-0.5">BORANG PERMOHONAN & SERAHAN PERKHIDMATAN ICT</h3>
     </div>
 
     <!-- Metadata Grid -->
@@ -44,10 +199,10 @@
             <tr>
                 <td class="p-2 font-bold bg-slate-50 border border-slate-300">Lokasi / Bilik</td>
                 <td class="p-2 border border-slate-300"><?= e($ticket['location']) ?></td>
-                <td class="p-2 font-bold bg-slate-50 border border-slate-300">Tempoh Tarikh & Masa</td>
+                <td class="p-2 font-bold bg-slate-50 border border-slate-300">Tarikh & Masa Acara</td>
                 <td class="p-2 border border-slate-300 font-medium">
-                    <?= e($ticket['formatted_start_date']) ?> hingga <?= e($ticket['formatted_end_date']) ?><br>
-                    (<?= e($ticket['start_time']) ?> - <?= e($ticket['end_time']) ?>)
+                    <?= e($ticket['formatted_start_date']) ?><br>
+                    (Masa Mula: <?= e($ticket['start_time']) ?>)
                 </td>
             </tr>
         </table>
@@ -110,7 +265,7 @@
             <div class="border border-slate-300 p-3 flex flex-col justify-between h-40">
                 <div>
                     <p class="font-bold text-[11px] uppercase">1. Pengesahan Pemohon</p>
-                    <p class="text-[10px] text-slate-600 mt-1">Saya berjanji menjaga peralatan ini dengan selamat dan memulangkannya tepat pada masa.</p>
+                    <p class="text-[10px] text-slate-600 mt-1">Saya berjanji mematuhi syarat perkhidmatan yang ditetapkan.</p>
                 </div>
                 <div class="border-t border-slate-300 pt-1 text-[11px]">
                     <p class="font-bold"><?= e($ticket['applicant_name']) ?></p>
@@ -156,3 +311,4 @@
         <span class="font-mono">Muka Surat 1/1</span>
     </div>
 </div>
+<?php endif; ?>
