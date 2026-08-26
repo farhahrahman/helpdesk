@@ -277,19 +277,12 @@ $colorThemes = [
                 <span class="text-xs font-black text-cyan-950 uppercase tracking-wider block">
                     Jadual Tarikh & Masa Mula Acara
                 </span>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="p-3 bg-white rounded-xl border border-cyan-200">
                         <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
-                            Tarikh Mula <span class="text-rose-500">*</span>
+                            Tarikh Acara / Program <span class="text-rose-500">*</span>
                         </label>
                         <input type="date" name="start_date" required value="<?= $today ?>" min="<?= $today ?>"
-                               class="w-full px-2 py-1.5 bg-transparent border-0 text-xs font-bold text-slate-900 outline-none">
-                    </div>
-                    <div class="p-3 bg-white rounded-xl border border-cyan-200">
-                        <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
-                            Tarikh Tamat <span class="text-rose-500">*</span>
-                        </label>
-                        <input type="date" name="end_date" required value="<?= $today ?>" min="<?= $today ?>"
                                class="w-full px-2 py-1.5 bg-transparent border-0 text-xs font-bold text-slate-900 outline-none">
                     </div>
                     <div class="p-3 bg-white rounded-xl border border-cyan-200">
