@@ -117,11 +117,29 @@ $colorThemes = [
                     $theme = $colorThemes[$i % count($colorThemes)];
                     $i++;
                 ?>
-                <label class="flex items-start gap-3 p-4 rounded-2xl border-2 <?= $theme['border'] ?> <?= $theme['bg'] ?> <?= $theme['hover'] ?> cursor-pointer transition-all hover:scale-[1.01] shadow-sm">
+                <label class="flex items-start gap-3.5 p-4 rounded-2xl border-2 <?= $theme['border'] ?> <?= $theme['bg'] ?> <?= $theme['hover'] ?> cursor-pointer transition-all hover:scale-[1.01] shadow-sm">
                     <input type="checkbox" name="requested_equipment_types[]" value="<?= $eqKey ?>" 
-                           class="mt-1 w-4 h-4 text-blue-600 rounded border-slate-300 <?= $theme['ring'] ?>">
-                    <div class="min-w-0">
-                        <span class="text-xs font-black <?= $theme['text'] ?> block"><?= e($eq['name']) ?></span>
+                           class="mt-1.5 w-4 h-4 text-blue-600 rounded border-slate-300 <?= $theme['ring'] ?>">
+                    
+                    <!-- Gambar / Ikon Visual Peralatan -->
+                    <div class="w-11 h-11 rounded-xl bg-white/90 border border-slate-200/80 shadow-sm flex items-center justify-center text-xl shrink-0">
+                        <?= $eq['icon'] ?? '💻' ?>
+                    </div>
+
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center gap-1.5 flex-wrap">
+                            <span class="text-xs font-black <?= $theme['text'] ?> block"><?= e($eq['name']) ?></span>
+                        </div>
+                        <?php if (!empty($eq['type_label'])): ?>
+                        <span class="inline-block text-[10px] font-bold text-blue-800 bg-white/80 border border-blue-200/60 px-1.5 py-0.5 rounded mt-0.5">
+                            Jenis: <?= e($eq['type_label']) ?>
+                        </span>
+                        <?php endif; ?>
+                        <?php if (!empty($eq['sample_serial'])): ?>
+                        <span class="block text-[10px] font-mono font-semibold text-slate-600 mt-1">
+                            No. Siri: <?= e($eq['sample_serial']) ?>
+                        </span>
+                        <?php endif; ?>
                         <span class="text-[11px] <?= $theme['desc'] ?> block leading-tight mt-1"><?= e($eq['description']) ?></span>
                     </div>
                 </label>

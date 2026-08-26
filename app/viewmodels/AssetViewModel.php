@@ -18,18 +18,24 @@ class AssetViewModel
         ];
 
         $conditionClasses = [
-            'BAIK' => 'bg-slate-100 text-slate-700',
-            'SEDERHANA' => 'bg-amber-100 text-amber-800',
-            'PERLU_SERVIS' => 'bg-rose-100 text-rose-800',
+            'BAIK' => 'bg-emerald-50 text-emerald-800 border-emerald-200',
+            'SEDERHANA' => 'bg-amber-50 text-amber-800 border-amber-200',
+            'PERLU_SERVIS' => 'bg-rose-50 text-rose-800 border-rose-200',
         ];
 
         $typeIcons = [
-            'IPHONE' => 'smartphone',
-            'KAMERA_DSLR' => 'camera',
-            'MIKROFON_AUDIO' => 'mic',
-            'KOMPUTER_RIBA' => 'laptop',
-            'PROJEKTOR_SKRIN' => 'monitor',
-            'PENUNJUK_LASER' => 'mouse-pointer',
+            'LAPTOP_DELL' => '💻',
+            'IPHONE_15' => '📱',
+            'LENOVO_TAB' => '📟',
+            'KAMERA_CANON' => '📷',
+            'KAMERA_NIKON' => '📸',
+            'KAMERA_SONY' => '📹',
+            'FLASH_NIKON' => '⚡',
+            'TRIPOD_RED_BUFFALO' => '📐',
+            'POINTER_LOGITECH' => '🎯',
+            'HARD_DISK' => '💾',
+            'MIKROFON_AUDIO' => '🎙️',
+            'OTHER' => '🔌',
         ];
 
         $eqTypes = app_config('services.equipment_types', []);
@@ -37,7 +43,8 @@ class AssetViewModel
 
         return array_merge($asset, [
             'type_name' => $typeConfig['name'] ?? $asset['type'],
-            'type_icon' => $typeIcons[$asset['type'] ?? ''] ?? 'box',
+            'type_label' => $typeConfig['type_label'] ?? $asset['type'],
+            'image_icon' => $typeIcons[$asset['type'] ?? ''] ?? ($typeConfig['icon'] ?? '📦'),
             'status_badge_class' => $statusClasses[$asset['status'] ?? 'TERSEDIA'] ?? 'bg-slate-100 text-slate-700',
             'condition_badge_class' => $conditionClasses[$asset['condition'] ?? 'BAIK'] ?? 'bg-slate-100 text-slate-700',
         ]);
