@@ -255,4 +255,30 @@ class TicketController extends BaseController
             $this->redirect("/tickets/{$id}", 'error', 'Permohonan tidak dapat dibatalkan.');
         }
     }
+
+    /**
+     * Delete Ticket Permanently (Khusus farhah@johor.gov.my sahaja)
+     */
+    public function delete(Request $request, string $id): void
+    {
+        $user = Auth::user();
+
+        if (($user['email'] ?? '') !== 'farhah@johor.gov.my') {
+            $this->abort(403, 'Akses dinafikan. Hanya Pentadbir Khas (farhah@johor.gov.my) dibenarkan memadam rekod permohonan.');
+        }
+
+        $ticket = $this->ticketRepo->find($id);
+        if (!$ticket) {
+            $this->redirect('/tickets', 'error', 'Rekod permohonan tidak dijumpai.');
+        }
+
+        $refNo = $ticket['reference_no'] ?? $id;
+        $success = $this->ticketService->deleteTicket($id, $user);
+
+        if ($success) {
+            $this->redirect('/tickets', 'success', "Permohonan {$refNo} telah berjaya dipadam secara kekal dari sistem.");
+        } else {
+            $this->redirect('/tickets', 'error', 'Gagal memadam permohonan.');
+        }
+    }
 }

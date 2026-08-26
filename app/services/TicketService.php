@@ -167,4 +167,44 @@ class TicketService
 
         return true;
     }
+
+    /**
+     * Delete ticket permanently (Khusus farhah@johor.gov.my sahaja)
+     */
+    public function deleteTicket(string $id, array $user): bool
+    {
+        if (($user['email'] ?? '') !== 'farhah@johor.gov.my') {
+            return false;
+        }
+
+        $ticket = $this->ticketRepo->find($id);
+        if (!$ticket) {
+            return false;
+        }
+
+        // Release any assigned assets back to TERSEDIA
+        if (!empty($ticket['assigned_asset_ids'])) {
+            foreach ($ticket['assigned_asset_ids'] as $assetId) {
+                $this->engine->update('assets', $assetId, [
+                    'status' => 'TERSEDIA',
+                    'current_ticket_id' => null,
+                    'current_holder_id' => null,
+                    'current_holder_name' => null,
+                ]);
+            }
+        }
+
+        $deleted = $this->ticketRepo->delete($id);
+
+        if ($deleted) {
+            $this->audit->log(
+                'TICKET_DELETED',
+                "Permohonan {$ticket['reference_no']} telah dipadam secara kekal oleh {$user['name']} ({$user['email']})",
+                $id,
+                ['reference_no' => $ticket['reference_no'], 'deleted_by' => $user['email']]
+            );
+        }
+
+        return $deleted;
+    }
 }

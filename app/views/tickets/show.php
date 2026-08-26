@@ -43,6 +43,14 @@ $statusKey = $ticket['status'] ?? '';
                 Batalkan Permohonan
             </button>
             <?php endif; ?>
+
+            <?php if (($user['email'] ?? '') === 'farhah@johor.gov.my'): ?>
+            <button onclick="openModal('delete-ticket-modal')" 
+                    class="px-3.5 py-2.5 bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white text-xs font-bold rounded-xl shadow-sm transition-all flex items-center gap-1.5" title="Padam Permohonan (Khusus Pentadbir Farhah)">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                <span>Padam Permohonan</span>
+            </button>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -516,3 +524,29 @@ $statusKey = $ticket['status'] ?? '';
         </form>
     </div>
 </div>
+
+<?php if (($user['email'] ?? '') === 'farhah@johor.gov.my'): ?>
+<!-- Modal: Padam Permohonan Secara Kekal (Khusus Pentadbir Farhah) -->
+<div id="delete-ticket-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white max-w-md w-full rounded-2xl p-6 shadow-2xl border border-rose-200 space-y-4">
+        <div class="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+        </div>
+        <div class="text-center space-y-1">
+            <h3 class="text-base font-bold text-slate-900">Padam Permohonan Secara Kekal</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Adakah anda pasti ingin memadam rekod permohonan <strong class="text-rose-600 font-mono font-bold"><?= e($ticket['reference_no']) ?></strong>? Tindakan ini akan memadam data secara kekal dari pangkalan data sistem dan tidak boleh diundur semula.
+            </p>
+        </div>
+        <form action="<?= url("/tickets/{$ticket['id']}/delete") ?>" method="POST" class="flex justify-end gap-2 pt-2">
+            <?= csrf_field() ?>
+            <button type="button" onclick="closeModal('delete-ticket-modal')" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl transition-colors">
+                Batal
+            </button>
+            <button type="submit" class="px-5 py-2.5 bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white text-xs font-bold rounded-xl shadow-md transition-all">
+                Sahkan Padam Kekal
+            </button>
+        </form>
+    </div>
+</div>
+<?php endif; ?>
