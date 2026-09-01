@@ -1,18 +1,5 @@
 [
     {
-        "id": "USR-ADMIN-01",
-        "name": "Farhah Binti Abd Rahman",
-        "email": "farhah@johor.gov.my",
-        "password": "$2y$10$WqLW2mdOzIEfhDK0F2e6HOki2p95q.fuEknawBx/axdOnp3xRnLf2",
-        "role": "ADMIN",
-        "unit": "ICT_BKP",
-        "position": "Penolong Pegawai Teknologi Maklumat F29 / Pentadbir ICT",
-        "phone": "0105528875",
-        "is_active": true,
-        "created_at": "2026-08-23T14:41:15+00:00",
-        "updated_at": "2026-08-23T14:41:15+00:00"
-    },
-    {
         "id": "USR-DB3ABDE2",
         "name": "Abdul Halim Abdullah",
         "email": "halim.abdullah@johor.gov.my",
@@ -260,6 +247,19 @@
         "updated_at": "2026-08-23T14:41:15+00:00"
     },
     {
+        "id": "USR-ADMIN-01",
+        "name": "Farhah Binti Abd Rahman",
+        "email": "farhah@johor.gov.my",
+        "password": "$2y$10$WqLW2mdOzIEfhDK0F2e6HOki2p95q.fuEknawBx/axdOnp3xRnLf2",
+        "role": "ADMIN",
+        "unit": "ICT_BKP",
+        "position": "Penolong Pegawai Teknologi Maklumat F29 / Pentadbir ICT",
+        "phone": "0105528875",
+        "is_active": true,
+        "created_at": "2026-08-23T14:41:15+00:00",
+        "updated_at": "2026-08-23T14:41:15+00:00"
+    },
+    {
         "id": "USR-B0F50224",
         "name": "Fatin Aqilah binti Khamis",
         "email": "fatin.aqilah@johor.gov.my",
@@ -336,6 +336,19 @@
         "is_active": true,
         "created_at": "2026-08-23T14:41:15+00:00",
         "updated_at": "2026-08-23T14:41:15+00:00"
+    },
+    {
+        "id": "USR-3FBB81BF",
+        "name": "Intan Shafrina binti Haji Abd Karim",
+        "email": "intan.shafrina@johor.gov.my",
+        "password": "$2y$10$iDZkKEVVWKmPc6yX8jzYges5rDHdvn0ySYrK6QZxP2eqoP.0nOOli",
+        "role": "STAF",
+        "unit": "KEWANGAN",
+        "position": "Pembantu Tadbir (Kewangan) (W19)",
+        "phone": "010-5528875",
+        "is_active": true,
+        "created_at": "2026-09-01T15:32:19+08:00",
+        "updated_at": "2026-09-01T15:32:19+08:00"
     },
     {
         "id": "USR-4FDDA254",
