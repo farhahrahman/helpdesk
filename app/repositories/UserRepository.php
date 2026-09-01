@@ -45,4 +45,31 @@ class UserRepository extends BaseRepository
             ->where('is_active', true)
             ->get();
     }
+
+    /**
+     * Search and filter users by keyword and unit
+     */
+    public function searchUsers(string $search = '', ?string $unitCode = null): array
+    {
+        $query = $this->query();
+
+        if (!empty($unitCode)) {
+            $query->where('unit', $unitCode);
+        }
+
+        $results = $query->orderBy('name', 'ASC')->get();
+
+        if (!empty($search)) {
+            $search = strtolower(trim($search));
+            $results = array_filter($results, function ($user) use ($search) {
+                return str_contains(strtolower($user['name'] ?? ''), $search)
+                    || str_contains(strtolower($user['email'] ?? ''), $search)
+                    || str_contains(strtolower($user['position'] ?? ''), $search)
+                    || str_contains(strtolower($user['phone'] ?? ''), $search);
+            });
+            $results = array_values($results);
+        }
+
+        return $results;
+    }
 }
