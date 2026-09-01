@@ -96,6 +96,7 @@ class TicketController extends BaseController
             'meetingPlatforms' => app_config('services.meeting_platforms', []),
             'meetingVenues' => app_config('services.meeting_venues', []),
             'mediaScopes' => app_config('services.media_scopes', []),
+            'technicalSupportTypes' => app_config('services.technical_support_types', []),
             'units' => app_config('units', []),
             'availableAssets' => AssetViewModel::presentCollection($availableAssets),
         ], $layout);
@@ -139,7 +140,38 @@ class TicketController extends BaseController
             }
         }
 
-        // Auto-generate title for PEMINJAMAN_ASET if empty or not provided
+        // Merge technical help specific fields if provided
+        if (($data['category'] ?? '') === 'LAIN_LAIN') {
+            if (!empty($data['technical_problem_description'])) {
+                $data['purpose'] = $data['technical_problem_description'];
+            }
+            if (!empty($data['technical_location'])) {
+                $data['location'] = $data['technical_location'];
+            }
+            if (!empty($data['technical_phone'])) {
+                $data['applicant_phone'] = $data['technical_phone'];
+            }
+            if (!empty($data['technical_date'])) {
+                $data['start_date'] = $data['technical_date'];
+            }
+            if (!empty($data['technical_title'])) {
+                $data['title'] = $data['technical_title'];
+            }
+            if (!empty($data['technical_unit'])) {
+                $data['unit'] = $data['technical_unit'];
+            }
+            if (!empty($data['technical_applicant_name'])) {
+                $data['applicant_name'] = $data['technical_applicant_name'];
+            }
+            if (!empty($data['technical_applicant_email'])) {
+                $data['applicant_email'] = $data['technical_applicant_email'];
+            }
+            if (!empty($data['technical_applicant_position'])) {
+                $data['applicant_position'] = $data['technical_applicant_position'];
+            }
+        }
+
+        // Auto-generate title if empty or not provided
         if (empty($data['title'])) {
             if (($data['category'] ?? '') === 'PEMINJAMAN_ASET') {
                 $eqList = (array)($data['requested_equipment_types'] ?? []);
@@ -155,6 +187,11 @@ class TicketController extends BaseController
                 } else {
                     $data['title'] = 'Permohonan Pinjaman Aset ICT (KEW.PA-9)';
                 }
+            } elseif (($data['category'] ?? '') === 'LAIN_LAIN') {
+                $techTypes = app_config('services.technical_support_types', []);
+                $tKey = $data['technical_type'] ?? '';
+                $tName = $techTypes[$tKey]['name'] ?? 'Aduan Kerosakan / Sokongan Teknikal';
+                $data['title'] = 'Bantuan ICT: ' . $tName;
             } else {
                 $data['title'] = 'Permohonan Perkhidmatan ICT';
             }

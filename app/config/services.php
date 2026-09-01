@@ -7,7 +7,7 @@ declare(strict_types=1);
  */
 
 return [
-    // 3 Kategori Utama Permohonan
+    // 4 Kategori Utama Permohonan
     'categories' => [
         'PEMINJAMAN_ASET' => [
             'id' => 'PEMINJAMAN_ASET',
@@ -32,6 +32,14 @@ return [
             'icon' => 'camera',
             'badge' => 'purple',
             'lead_time_days' => 3,
+        ],
+        'LAIN_LAIN' => [
+            'id' => 'LAIN_LAIN',
+            'name' => 'Bantuan ICT & Aduan Teknikal',
+            'description' => 'Bantuan teknikal perkakasan, perisian, rangkaian, pencetak, emel dan khidmat nasihat ICT am.',
+            'icon' => 'tool',
+            'badge' => 'emerald',
+            'lead_time_days' => 1,
         ],
     ],
 
@@ -189,5 +197,44 @@ return [
         'FOTOGRAFI' => 'Fotografi Sahaja (Rakaman Gambar Beresolusi Tinggi)',
         'VIDEOGRAFI' => 'Videografi Sahaja (Rakaman Video Penuh / Klip Sorotan)',
         'FOTO_DAN_VIDEO' => 'Pakej Lengkap (Fotografi & Videografi Majlis)',
+    ],
+
+    // Jenis Masalah / Bantuan Teknikal ICT (Kategori Aduan & Sokongan ICT)
+    'technical_support_types' => [
+        'MASALAH_KOMPUTER' => [
+            'id' => 'MASALAH_KOMPUTER',
+            'name' => 'Komputer / Laptop (Kerosakan Windows, Format, Lembab, Blue Screen)',
+            'icon' => '💻',
+        ],
+        'MASALAH_RANGKAIAN' => [
+            'id' => 'MASALAH_RANGKAIAN',
+            'name' => 'Rangkaian & Capaian Internet (Wi-Fi, Kabel LAN, IP Konflik)',
+            'icon' => '🌐',
+        ],
+        'PENCETAK_SCANNER' => [
+            'id' => 'PENCETAK_SCANNER',
+            'name' => 'Pencetak & Pengimbas (Printer Offline, Jammed, Sambungan Network)',
+            'icon' => '🖨️',
+        ],
+        'RESET_KATALALUAN' => [
+            'id' => 'RESET_KATALALUAN',
+            'name' => 'Reset Kata Laluan / Akaun Emel Rasmi Johor / ID Pengguna',
+            'icon' => '🔑',
+        ],
+        'PEMASANGAN_PERISIAN' => [
+            'id' => 'PEMASANGAN_PERISIAN',
+            'name' => 'Pemasangan & Lesen Perisian (MS Office, Antivirus, Adobe, dll.)',
+            'icon' => '💿',
+        ],
+        'SIARAYA_AV' => [
+            'id' => 'SIARAYA_AV',
+            'name' => 'Sistem Siar Raya, TV Paparan & Audio Visual Pejabat',
+            'icon' => '🔊',
+        ],
+        'KHIDMAT_NASIHAT' => [
+            'id' => 'KHIDMAT_NASIHAT',
+            'name' => 'Khidmat Nasihat ICT / Lain-lain Masalah Teknikal',
+            'icon' => '🛠️',
+        ],
     ],
 ];

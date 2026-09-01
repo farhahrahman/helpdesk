@@ -6,6 +6,7 @@ $user = Auth::user();
 $today = date('Y-m-d');
 $selectedCategory = (string)($_GET['category'] ?? 'PEMINJAMAN_ASET');
 $unitsList = $units ?? app_config('units', []);
+$techSupportList = $technicalSupportTypes ?? app_config('services.technical_support_types', []);
 
 // Color palette for alternating equipment checklist cards
 $colorThemes = [
@@ -31,7 +32,7 @@ $colorThemes = [
                     <span class="px-2 py-0.5 text-[10px] font-extrabold bg-blue-100 text-blue-800 rounded font-mono uppercase">Borang Rasmi</span>
                     <span class="text-xs font-bold text-slate-900 uppercase tracking-tight">Permohonan Perkhidmatan ICT & Aset BKP</span>
                 </div>
-                <p class="text-[11px] text-slate-500">Pilih kategori di bawah dan lengkapkan maklumat yang diperlukan (Format KEW.PA-9 / Mesyuarat)</p>
+                <p class="text-[11px] text-slate-500">Sila pilih kategori di bawah dan lengkapkan butiran permohonan anda</p>
             </div>
 
             <!-- Action / Back -->
@@ -47,7 +48,7 @@ $colorThemes = [
             <!-- LANGKAH 1: Kategori Ribbon (Horizontal Tabs Bar) -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
                 <!-- 1. Peminjaman Aset -->
-                <label class="category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'PEMINJAMAN_ASET') ? 'border-blue-600 bg-blue-50/80 ring-2 ring-blue-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-blue-50/40' ?>">
+                <label data-cat="PEMINJAMAN_ASET" class="category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'PEMINJAMAN_ASET') ? 'border-blue-600 bg-blue-50/80 ring-2 ring-blue-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-blue-50/40' ?>">
                     <input type="radio" name="category" value="PEMINJAMAN_ASET" <?= ($selectedCategory === 'PEMINJAMAN_ASET') ? 'checked' : '' ?> onchange="switchCategoryView('PEMINJAMAN_ASET')" class="sr-only">
                     <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-sm text-sm">
                         💻
@@ -59,7 +60,7 @@ $colorThemes = [
                 </label>
 
                 <!-- 2. Sokongan Mesyuarat -->
-                <label class="category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'SOKONGAN_MESYUARAT') ? 'border-indigo-600 bg-indigo-50/80 ring-2 ring-indigo-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-indigo-50/40' ?>">
+                <label data-cat="SOKONGAN_MESYUARAT" class="category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'SOKONGAN_MESYUARAT') ? 'border-indigo-600 bg-indigo-50/80 ring-2 ring-indigo-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-indigo-50/40' ?>">
                     <input type="radio" name="category" value="SOKONGAN_MESYUARAT" <?= ($selectedCategory === 'SOKONGAN_MESYUARAT') ? 'checked' : '' ?> onchange="switchCategoryView('SOKONGAN_MESYUARAT')" class="sr-only">
                     <div class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm text-sm">
                         🌐
@@ -71,7 +72,7 @@ $colorThemes = [
                 </label>
 
                 <!-- 3. Khidmat Media -->
-                <label class="category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'MEDIA_JURUKAMERA') ? 'border-purple-600 bg-purple-50/80 ring-2 ring-purple-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-purple-50/40' ?>">
+                <label data-cat="MEDIA_JURUKAMERA" class="category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'MEDIA_JURUKAMERA') ? 'border-purple-600 bg-purple-50/80 ring-2 ring-purple-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-purple-50/40' ?>">
                     <input type="radio" name="category" value="MEDIA_JURUKAMERA" <?= ($selectedCategory === 'MEDIA_JURUKAMERA') ? 'checked' : '' ?> onchange="switchCategoryView('MEDIA_JURUKAMERA')" class="sr-only">
                     <div class="w-8 h-8 rounded-lg bg-purple-600 text-white flex items-center justify-center shrink-0 shadow-sm text-sm">
                         📸
@@ -83,7 +84,7 @@ $colorThemes = [
                 </label>
 
                 <!-- 4. Bantuan ICT -->
-                <label class="category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'LAIN_LAIN') ? 'border-emerald-600 bg-emerald-50/80 ring-2 ring-emerald-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-emerald-50/40' ?>">
+                <label data-cat="LAIN_LAIN" class="category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'LAIN_LAIN') ? 'border-emerald-600 bg-emerald-50/80 ring-2 ring-emerald-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-emerald-50/40' ?>">
                     <input type="radio" name="category" value="LAIN_LAIN" <?= ($selectedCategory === 'LAIN_LAIN') ? 'checked' : '' ?> onchange="switchCategoryView('LAIN_LAIN')" class="sr-only">
                     <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-sm text-sm">
                         🛠️
@@ -98,11 +99,11 @@ $colorThemes = [
             <!-- 2-COLUMN UNIFIED WORKSPACE (Left: Checklist/Config | Right: Details & Submit) -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
                 
-                <!-- LEFT COLUMN (5 of 12): Peralatan / Konfigurasi -->
+                <!-- LEFT COLUMN (6 of 12): Peralatan / Konfigurasi / Aduan -->
                 <div class="lg:col-span-6 space-y-3">
                     
-                    <!-- Section: Peminjaman Aset (Checklist) -->
-                    <div id="section-equipment" class="p-3.5 sm:p-4 rounded-2xl border-2 border-blue-200 bg-blue-50/30 space-y-2.5 <?= in_array($selectedCategory, ['PEMINJAMAN_ASET', 'LAIN_LAIN']) ? '' : 'hidden' ?>">
+                    <!-- Section 1: Peminjaman Aset (Checklist) -->
+                    <div id="section-equipment" class="p-3.5 sm:p-4 rounded-2xl border-2 border-blue-200 bg-blue-50/30 space-y-2.5 <?= ($selectedCategory === 'PEMINJAMAN_ASET') ? '' : 'hidden' ?>">
                         <div class="flex items-center justify-between border-b border-blue-200 pb-2">
                             <span class="text-xs font-black text-blue-950 uppercase tracking-wide">Pilih Peralatan ICT Yang Ingin Dipinjam <span class="text-rose-500">*</span></span>
                             <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-bold">Langkah 2</span>
@@ -140,7 +141,7 @@ $colorThemes = [
                         </div>
                     </div>
 
-                    <!-- Section: Sokongan Mesyuarat -->
+                    <!-- Section 2: Sokongan Mesyuarat -->
                     <div id="section-meeting" class="p-3.5 sm:p-4 rounded-2xl border-2 border-indigo-200 bg-indigo-50/30 space-y-3 <?= ($selectedCategory === 'SOKONGAN_MESYUARAT') ? '' : 'hidden' ?>">
                         <div class="flex items-center justify-between border-b border-indigo-200 pb-2">
                             <span class="text-xs font-black text-indigo-950 uppercase tracking-wide">Konfigurasi Sokongan Mesyuarat</span>
@@ -179,7 +180,7 @@ $colorThemes = [
                         </div>
                     </div>
 
-                    <!-- Section: Khidmat Media -->
+                    <!-- Section 3: Khidmat Media -->
                     <div id="section-media" class="p-3.5 sm:p-4 rounded-2xl border-2 border-purple-200 bg-purple-50/30 space-y-3 <?= ($selectedCategory === 'MEDIA_JURUKAMERA') ? '' : 'hidden' ?>">
                         <div class="flex items-center justify-between border-b border-purple-200 pb-2">
                             <span class="text-xs font-black text-purple-950 uppercase tracking-wide">Skop Liputan Media & Dokumentasi</span>
@@ -201,9 +202,50 @@ $colorThemes = [
                             </div>
                         </div>
                     </div>
+
+                    <!-- Section 4: Bantuan ICT & Aduan Teknikal -->
+                    <div id="section-technical" class="p-3.5 sm:p-4 rounded-2xl border-2 border-emerald-200 bg-emerald-50/30 space-y-3 <?= ($selectedCategory === 'LAIN_LAIN') ? '' : 'hidden' ?>">
+                        <div class="flex items-center justify-between border-b border-emerald-200 pb-2">
+                            <span class="text-xs font-black text-emerald-950 uppercase tracking-wide">Skop Bantuan & Kategori Aduan ICT</span>
+                            <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">Langkah 2</span>
+                        </div>
+
+                        <div class="space-y-2.5">
+                            <div>
+                                <label class="block text-[11px] font-bold text-emerald-950 uppercase mb-1">
+                                    Jenis Masalah / Kategori Bantuan <span class="text-rose-500">*</span>
+                                </label>
+                                <select name="technical_type" id="technical_type" class="w-full px-3 py-2 bg-white border border-emerald-300 rounded-xl text-xs font-bold text-emerald-900 outline-none">
+                                    <?php foreach ($techSupportList as $tKey => $t): ?>
+                                    <option value="<?= $tKey ?>"><?= $t['icon'] ?? '🛠️' ?> <?= e($t['name']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-[11px] font-bold text-emerald-950 uppercase mb-1">
+                                    Tahap Keutamaan / Urgensi
+                                </label>
+                                <select name="priority" class="w-full px-3 py-2 bg-white border border-emerald-300 rounded-xl text-xs outline-none font-medium">
+                                    <option value="BIASA">Biasa (Tindakan dalam 24 Jam)</option>
+                                    <option value="SEGERA">Segera (Tindakan Hari Ini / Menjejaskan Tugasan)</option>
+                                    <option value="KRITIKAL">Kritikal (Kecemasan / Mesyuarat Penting)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-[11px] font-black text-emerald-950 uppercase mb-1">
+                                    Penerangan Kerosakan / Gejala Masalah <span class="text-rose-500">*</span>
+                                </label>
+                                <textarea name="technical_problem_description" id="technical_problem_description" rows="3"
+                                          placeholder="Sila nyatakan kerosakan yang dialami secara ringkas (Cth: Komputer tidak dapat dihidupkan, printer tidak menyambung, kata laluan emel disekat dll.)..." 
+                                          class="w-full px-3 py-2 bg-white border border-emerald-300 focus:border-emerald-600 rounded-xl text-xs outline-none leading-relaxed"></textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- RIGHT COLUMN (7 of 12): Form Fields (KEW.PA-9 / Program Details) & Submit -->
+                <!-- RIGHT COLUMN (6 of 12): Form Fields (KEW.PA-9 / Program / Aduan) & Submit -->
                 <div class="lg:col-span-6 space-y-3">
                     
                     <!-- STEP 3A: Peminjaman Aset (Format KEW.PA-9) -->
@@ -218,7 +260,7 @@ $colorThemes = [
                             <label class="block text-[11px] font-black text-blue-950 uppercase mb-1">
                                 Tujuan Permohonan & Justifikasi Rasmi <span class="text-rose-500">*</span>
                             </label>
-                            <textarea name="purpose_loan" id="purpose_loan" rows="2" required
+                            <textarea name="purpose_loan" id="purpose_loan" rows="2"
                                       placeholder="Nyatakan tujuan rasmi pinjaman aset (Cth: Menyediakan laporan taskforce / pembentangan / mesyuarat luar)..." 
                                       class="w-full px-3 py-1.5 bg-white border border-blue-300 focus:border-blue-600 rounded-lg text-xs outline-none leading-relaxed"></textarea>
                         </div>
@@ -229,7 +271,7 @@ $colorThemes = [
                                 <label class="block text-[11px] font-bold text-amber-950 uppercase mb-1">
                                     Tempat Digunakan <span class="text-rose-500">*</span>
                                 </label>
-                                <input type="text" name="location_loan" id="location_loan" required 
+                                <input type="text" name="location_loan" id="location_loan" 
                                        placeholder="Cth: Pejabat BKP Aras 3 / Bilik Mesyuarat" 
                                        class="w-full px-3 py-1.5 bg-white border border-amber-300 rounded-lg text-xs outline-none">
                             </div>
@@ -238,7 +280,7 @@ $colorThemes = [
                                 <label class="block text-[11px] font-bold text-purple-950 uppercase mb-1">
                                     No. Telefon Pemohon <span class="text-rose-500">*</span>
                                 </label>
-                                <input type="text" name="applicant_phone_loan" id="applicant_phone_loan" required value="<?= e($isLoggedIn ? ($user['phone'] ?? '') : '') ?>" 
+                                <input type="text" name="applicant_phone_loan" id="applicant_phone_loan" value="<?= e($isLoggedIn ? ($user['phone'] ?? '') : '') ?>" 
                                        placeholder="01X-XXXXXXX atau VoIP" 
                                        class="w-full px-3 py-1.5 bg-white border border-purple-300 rounded-lg text-xs font-bold text-purple-900 outline-none">
                             </div>
@@ -251,14 +293,14 @@ $colorThemes = [
                                     <label class="block text-[10px] font-bold text-slate-700 uppercase mb-0.5">
                                         Tarikh Pinjam <span class="text-rose-500">*</span>
                                     </label>
-                                    <input type="date" name="start_date_loan" id="start_date_loan" required value="<?= $today ?>" min="<?= $today ?>"
+                                    <input type="date" name="start_date_loan" id="start_date_loan" value="<?= $today ?>" min="<?= $today ?>"
                                            class="w-full px-2 py-1 bg-white border border-cyan-300 rounded-md text-xs font-bold text-slate-900 outline-none">
                                 </div>
                                 <div>
                                     <label class="block text-[10px] font-bold text-slate-700 uppercase mb-0.5">
                                         Tarikh Dijangka Pulang <span class="text-rose-500">*</span>
                                     </label>
-                                    <input type="date" name="end_date_loan" id="end_date_loan" required value="<?= $today ?>" min="<?= $today ?>"
+                                    <input type="date" name="end_date_loan" id="end_date_loan" value="<?= $today ?>" min="<?= $today ?>"
                                            class="w-full px-2 py-1 bg-white border border-cyan-300 rounded-md text-xs font-bold text-cyan-950 outline-none">
                                 </div>
                             </div>
@@ -290,11 +332,11 @@ $colorThemes = [
                         <?php endif; ?>
                     </div>
 
-                    <!-- STEP 3B: Sokongan Mesyuarat / Media / Bantuan ICT -->
-                    <div id="step3-event-service" class="p-3.5 sm:p-4 rounded-2xl border-2 border-emerald-200 bg-white space-y-3 <?= ($selectedCategory !== 'PEMINJAMAN_ASET') ? '' : 'hidden' ?>">
-                        <div class="flex items-center justify-between border-b border-emerald-100 pb-1.5">
+                    <!-- STEP 3B: Sokongan Mesyuarat & Khidmat Media -->
+                    <div id="step3-event-service" class="p-3.5 sm:p-4 rounded-2xl border-2 border-indigo-200 bg-white space-y-3 <?= in_array($selectedCategory, ['SOKONGAN_MESYUARAT', 'MEDIA_JURUKAMERA']) ? '' : 'hidden' ?>">
+                        <div class="flex items-center justify-between border-b border-indigo-100 pb-1.5">
                             <span class="text-xs font-black text-slate-900 uppercase tracking-wide">Maklumat Acara & Jadual Masa</span>
-                            <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">Langkah 3</span>
+                            <span class="text-[10px] bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded font-bold">Langkah 3</span>
                         </div>
 
                         <!-- 1. Tajuk Program -->
@@ -371,6 +413,79 @@ $colorThemes = [
                         <?php endif; ?>
                     </div>
 
+                    <!-- STEP 3C: Bantuan ICT & Aduan Teknikal -->
+                    <div id="step3-technical-help" class="p-3.5 sm:p-4 rounded-2xl border-2 border-emerald-300 bg-white space-y-3 <?= ($selectedCategory === 'LAIN_LAIN') ? '' : 'hidden' ?>">
+                        <div class="flex items-center justify-between border-b border-emerald-100 pb-1.5">
+                            <span class="text-xs font-black text-emerald-950 uppercase tracking-wide">Maklumat Lokasi & Pengadu (Bantuan ICT)</span>
+                            <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">Langkah 3</span>
+                        </div>
+
+                        <!-- 1. Tajuk Ringkas Permohonan / Masalah -->
+                        <div class="p-2.5 rounded-xl bg-blue-50/70 border border-blue-200">
+                            <label class="block text-[11px] font-black text-blue-950 uppercase mb-1">
+                                Tajuk Permohonan / Aduan <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="text" name="technical_title" id="technical_title"
+                                   placeholder="Cth: Masalah Capaian Internet & Sambungan Pencetak Unit Pentadbiran" 
+                                   class="w-full px-3 py-1.5 bg-white border border-blue-300 focus:border-blue-600 rounded-lg text-xs font-semibold outline-none">
+                        </div>
+
+                        <!-- 2. Lokasi Meja & No Telefon -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-200">
+                                <label class="block text-[11px] font-bold text-amber-950 uppercase mb-1">
+                                    Lokasi / Aras / Meja Pegawai <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="text" name="technical_location" id="technical_location" 
+                                       placeholder="Cth: Pejabat BKP Aras 3 (Meja Pentadbiran)" 
+                                       class="w-full px-3 py-1.5 bg-white border border-amber-300 rounded-lg text-xs outline-none">
+                            </div>
+
+                            <div class="p-2.5 rounded-xl bg-purple-50/70 border border-purple-200">
+                                <label class="block text-[11px] font-bold text-purple-950 uppercase mb-1">
+                                    No. Telefon / VoIP <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="text" name="technical_phone" id="technical_phone" value="<?= e($isLoggedIn ? ($user['phone'] ?? '') : '') ?>" 
+                                       placeholder="01X-XXXXXXX atau Sambungan VoIP" 
+                                       class="w-full px-3 py-1.5 bg-white border border-purple-300 rounded-lg text-xs font-bold text-purple-900 outline-none">
+                            </div>
+                        </div>
+
+                        <!-- 3. Tarikh Diperlukan -->
+                        <div class="p-2.5 rounded-xl bg-cyan-50/70 border border-cyan-200">
+                            <label class="block text-[10px] font-bold text-slate-700 uppercase mb-0.5">
+                                Tarikh Aduan / Bantuan Diperlukan <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="date" name="technical_date" id="technical_date" value="<?= $today ?>" min="<?= $today ?>"
+                                   class="w-full px-2 py-1 bg-white border border-cyan-300 rounded-md text-xs font-bold text-slate-900 outline-none">
+                        </div>
+
+                        <?php if (!$isLoggedIn): ?>
+                        <!-- 4. Maklumat Pegawai Pemohon (Untuk Tetamu) -->
+                        <div class="p-2.5 rounded-xl bg-indigo-50/70 border border-indigo-200 space-y-2">
+                            <span class="text-[10px] font-black text-indigo-950 uppercase block">Maklumat Pegawai Pengadu (BKP)</span>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <select name="technical_unit" class="w-full px-2 py-1.5 bg-white border border-indigo-300 rounded-lg text-[11px] outline-none font-bold text-indigo-900">
+                                        <?php foreach ($unitsList as $uKey => $u): ?>
+                                        <option value="<?= $uKey ?>"><?= e($u['name']) ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div>
+                                    <input type="text" name="technical_applicant_name" placeholder="Nama Penuh Pegawai" class="w-full px-2.5 py-1.5 bg-white border border-indigo-300 rounded-lg text-[11px] outline-none">
+                                </div>
+                                <div>
+                                    <input type="email" name="technical_applicant_email" placeholder="emel@johor.gov.my" class="w-full px-2.5 py-1.5 bg-white border border-indigo-300 rounded-lg text-[11px] outline-none">
+                                </div>
+                                <div>
+                                    <input type="text" name="technical_applicant_position" placeholder="Jawatan & Gred" class="w-full px-2.5 py-1.5 bg-white border border-indigo-300 rounded-lg text-[11px] outline-none">
+                                </div>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+
                     <!-- Submission Action Button -->
                     <div class="pt-1">
                         <button type="submit" 
@@ -390,76 +505,122 @@ $colorThemes = [
 
 <script>
 function switchCategoryView(cat) {
+    // Reset all category cards
     document.querySelectorAll('.category-card').forEach(el => {
-        el.className = 'category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-slate-200 bg-slate-50/60 hover:bg-blue-50/40';
+        el.className = 'category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-slate-200 bg-slate-50/60 hover:bg-slate-100/70';
     });
 
+    // Highlight selected card
+    const activeLabel = document.querySelector(`.category-card[data-cat="${cat}"]`);
+    if (activeLabel) {
+        if (cat === 'PEMINJAMAN_ASET') {
+            activeLabel.className = 'category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-blue-600 bg-blue-50/80 ring-2 ring-blue-500/20';
+        } else if (cat === 'SOKONGAN_MESYUARAT') {
+            activeLabel.className = 'category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-indigo-600 bg-indigo-50/80 ring-2 ring-indigo-500/20';
+        } else if (cat === 'MEDIA_JURUKAMERA') {
+            activeLabel.className = 'category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-purple-600 bg-purple-50/80 ring-2 ring-purple-500/20';
+        } else if (cat === 'LAIN_LAIN') {
+            activeLabel.className = 'category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-emerald-600 bg-emerald-50/80 ring-2 ring-emerald-500/20';
+        }
+    }
+
+    // Sections
     const eqSec = document.getElementById('section-equipment');
     const meetSec = document.getElementById('section-meeting');
     const mediaSec = document.getElementById('section-media');
+    const techSec = document.getElementById('section-technical');
+
     const step3Loan = document.getElementById('step3-asset-loan');
     const step3Event = document.getElementById('step3-event-service');
+    const step3Tech = document.getElementById('step3-technical-help');
 
+    // Inputs for Loan
     const purposeLoan = document.getElementById('purpose_loan');
     const locationLoan = document.getElementById('location_loan');
     const startLoan = document.getElementById('start_date_loan');
     const endLoan = document.getElementById('end_date_loan');
     const phoneLoan = document.getElementById('applicant_phone_loan');
 
+    // Inputs for Event (Meeting/Media)
     const eventTitle = document.getElementById('event_title');
     const eventLoc = document.getElementById('event_location');
     const eventPurpose = document.getElementById('event_purpose');
     const eventPhone = document.getElementById('event_phone');
     const eventStart = document.getElementById('event_start_date');
 
+    // Inputs for Technical Help
+    const techTitle = document.getElementById('technical_title');
+    const techProb = document.getElementById('technical_problem_description');
+    const techLoc = document.getElementById('technical_location');
+    const techPhone = document.getElementById('technical_phone');
+    const techDate = document.getElementById('technical_date');
+
+    // Reset visibility
+    eqSec.classList.add('hidden');
+    meetSec.classList.add('hidden');
+    mediaSec.classList.add('hidden');
+    techSec.classList.add('hidden');
+
+    step3Loan.classList.add('hidden');
+    step3Event.classList.add('hidden');
+    step3Tech.classList.add('hidden');
+
+    // Disable all required first
+    if (purposeLoan) purposeLoan.required = false;
+    if (locationLoan) locationLoan.required = false;
+    if (startLoan) startLoan.required = false;
+    if (endLoan) endLoan.required = false;
+    if (phoneLoan) phoneLoan.required = false;
+
+    if (eventTitle) eventTitle.required = false;
+    if (eventLoc) eventLoc.required = false;
+    if (eventPurpose) eventPurpose.required = false;
+    if (eventPhone) eventPhone.required = false;
+    if (eventStart) eventStart.required = false;
+
+    if (techTitle) techTitle.required = false;
+    if (techProb) techProb.required = false;
+    if (techLoc) techLoc.required = false;
+    if (techPhone) techPhone.required = false;
+    if (techDate) techDate.required = false;
+
+    // Activate specific category
     if (cat === 'PEMINJAMAN_ASET') {
         eqSec.classList.remove('hidden');
-        meetSec.classList.add('hidden');
-        mediaSec.classList.add('hidden');
         step3Loan.classList.remove('hidden');
-        step3Event.classList.add('hidden');
 
-        // Toggle required attributes
         if (purposeLoan) purposeLoan.required = true;
         if (locationLoan) locationLoan.required = true;
         if (startLoan) startLoan.required = true;
         if (endLoan) endLoan.required = true;
         if (phoneLoan) phoneLoan.required = true;
-
-        if (eventTitle) eventTitle.required = false;
-        if (eventLoc) eventLoc.required = false;
-        if (eventPurpose) eventPurpose.required = false;
-        if (eventPhone) eventPhone.required = false;
-        if (eventStart) eventStart.required = false;
-    } else {
-        step3Loan.classList.add('hidden');
+    } else if (cat === 'SOKONGAN_MESYUARAT') {
+        meetSec.classList.remove('hidden');
         step3Event.classList.remove('hidden');
-
-        if (purposeLoan) purposeLoan.required = false;
-        if (locationLoan) locationLoan.required = false;
-        if (startLoan) startLoan.required = false;
-        if (endLoan) endLoan.required = false;
-        if (phoneLoan) phoneLoan.required = false;
 
         if (eventTitle) eventTitle.required = true;
         if (eventLoc) eventLoc.required = true;
         if (eventPurpose) eventPurpose.required = true;
         if (eventPhone) eventPhone.required = true;
         if (eventStart) eventStart.required = true;
+    } else if (cat === 'MEDIA_JURUKAMERA') {
+        mediaSec.classList.remove('hidden');
+        step3Event.classList.remove('hidden');
 
-        if (cat === 'SOKONGAN_MESYUARAT') {
-            eqSec.classList.add('hidden');
-            meetSec.classList.remove('hidden');
-            mediaSec.classList.add('hidden');
-        } else if (cat === 'MEDIA_JURUKAMERA') {
-            eqSec.classList.add('hidden');
-            meetSec.classList.add('hidden');
-            mediaSec.classList.remove('hidden');
-        } else {
-            eqSec.classList.remove('hidden');
-            meetSec.classList.add('hidden');
-            mediaSec.classList.add('hidden');
-        }
+        if (eventTitle) eventTitle.required = true;
+        if (eventLoc) eventLoc.required = true;
+        if (eventPurpose) eventPurpose.required = true;
+        if (eventPhone) eventPhone.required = true;
+        if (eventStart) eventStart.required = true;
+    } else if (cat === 'LAIN_LAIN') {
+        techSec.classList.remove('hidden');
+        step3Tech.classList.remove('hidden');
+
+        if (techTitle) techTitle.required = true;
+        if (techProb) techProb.required = true;
+        if (techLoc) techLoc.required = true;
+        if (techPhone) techPhone.required = true;
+        if (techDate) techDate.required = true;
     }
 }
 
