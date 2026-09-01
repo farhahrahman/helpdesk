@@ -140,6 +140,80 @@ class TicketController extends BaseController
             }
         }
 
+        // Merge meeting specific fields if provided
+        if (($data['category'] ?? '') === 'SOKONGAN_MESYUARAT') {
+            if (!empty($data['meeting_title'])) {
+                $data['title'] = $data['meeting_title'];
+            }
+            if (!empty($data['meeting_vip'])) {
+                $data['vip_attendees'] = $data['meeting_vip'];
+            }
+            if (!empty($data['meeting_location'])) {
+                $data['location'] = $data['meeting_location'];
+            }
+            if (!empty($data['meeting_date'])) {
+                $data['start_date'] = $data['meeting_date'];
+            }
+            if (!empty($data['meeting_time'])) {
+                $data['start_time'] = $data['meeting_time'];
+            }
+            if (!empty($data['meeting_purpose'])) {
+                $data['purpose'] = $data['meeting_purpose'];
+            }
+            if (!empty($data['meeting_phone'])) {
+                $data['applicant_phone'] = $data['meeting_phone'];
+            }
+            if (!empty($data['meeting_unit'])) {
+                $data['unit'] = $data['meeting_unit'];
+            }
+            if (!empty($data['meeting_applicant_name'])) {
+                $data['applicant_name'] = $data['meeting_applicant_name'];
+            }
+            if (!empty($data['meeting_applicant_email'])) {
+                $data['applicant_email'] = $data['meeting_applicant_email'];
+            }
+            if (!empty($data['meeting_applicant_position'])) {
+                $data['applicant_position'] = $data['meeting_applicant_position'];
+            }
+        }
+
+        // Merge media specific fields if provided
+        if (($data['category'] ?? '') === 'MEDIA_JURUKAMERA') {
+            if (!empty($data['media_title'])) {
+                $data['title'] = $data['media_title'];
+            }
+            if (!empty($data['media_vip'])) {
+                $data['vip_attendees'] = $data['media_vip'];
+            }
+            if (!empty($data['media_location'])) {
+                $data['location'] = $data['media_location'];
+            }
+            if (!empty($data['media_date'])) {
+                $data['start_date'] = $data['media_date'];
+            }
+            if (!empty($data['media_time'])) {
+                $data['start_time'] = $data['media_time'];
+            }
+            if (!empty($data['media_phone'])) {
+                $data['applicant_phone'] = $data['media_phone'];
+            }
+            if (empty($data['purpose'])) {
+                $data['purpose'] = !empty($data['event_agenda']) ? ('Liputan Media: ' . $data['event_agenda']) : 'Khidmat Fotografi & Videografi Majlis';
+            }
+            if (!empty($data['media_unit'])) {
+                $data['unit'] = $data['media_unit'];
+            }
+            if (!empty($data['media_applicant_name'])) {
+                $data['applicant_name'] = $data['media_applicant_name'];
+            }
+            if (!empty($data['media_applicant_email'])) {
+                $data['applicant_email'] = $data['media_applicant_email'];
+            }
+            if (!empty($data['media_applicant_position'])) {
+                $data['applicant_position'] = $data['media_applicant_position'];
+            }
+        }
+
         // Merge technical help specific fields if provided
         if (($data['category'] ?? '') === 'LAIN_LAIN') {
             if (!empty($data['technical_problem_description'])) {
@@ -187,6 +261,10 @@ class TicketController extends BaseController
                 } else {
                     $data['title'] = 'Permohonan Pinjaman Aset ICT (KEW.PA-9)';
                 }
+            } elseif (($data['category'] ?? '') === 'MEDIA_JURUKAMERA') {
+                $data['title'] = 'Liputan Khidmat Media & Dokumentasi';
+            } elseif (($data['category'] ?? '') === 'SOKONGAN_MESYUARAT') {
+                $data['title'] = 'Sokongan Teknikal & Mesyuarat Online';
             } elseif (($data['category'] ?? '') === 'LAIN_LAIN') {
                 $techTypes = app_config('services.technical_support_types', []);
                 $tKey = $data['technical_type'] ?? '';

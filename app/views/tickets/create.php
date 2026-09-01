@@ -32,7 +32,7 @@ $colorThemes = [
                     <span class="px-2 py-0.5 text-[10px] font-extrabold bg-blue-100 text-blue-800 rounded font-mono uppercase">Borang Rasmi</span>
                     <span class="text-xs font-bold text-slate-900 uppercase tracking-tight">Permohonan Perkhidmatan ICT & Aset BKP</span>
                 </div>
-                <p class="text-[11px] text-slate-500">Sila pilih kategori di bawah dan lengkapkan butiran permohonan anda</p>
+                <p class="text-[11px] text-slate-500">Sila pilih kategori di bawah dan lengkapkan butiran khusus mengikut keperluan permohonan anda</p>
             </div>
 
             <!-- Action / Back -->
@@ -96,13 +96,15 @@ $colorThemes = [
                 </label>
             </div>
 
-            <!-- 2-COLUMN UNIFIED WORKSPACE (Left: Checklist/Config | Right: Details & Submit) -->
+            <!-- 2-COLUMN UNIFIED WORKSPACE (Left: Langkah 2 | Right: Langkah 3) -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
                 
-                <!-- LEFT COLUMN (6 of 12): Peralatan / Konfigurasi / Aduan -->
+                <!-- ========================================================================= -->
+                <!-- LEFT COLUMN (6 of 12): LANGKAH 2 (Checklist / Konfigurasi / Skop / Kerosakan) -->
+                <!-- ========================================================================= -->
                 <div class="lg:col-span-6 space-y-3">
                     
-                    <!-- Section 1: Peminjaman Aset (Checklist) -->
+                    <!-- 1. Langkah 2: Peminjaman Aset (Checklist Peralatan) -->
                     <div id="section-equipment" class="p-3.5 sm:p-4 rounded-2xl border-2 border-blue-200 bg-blue-50/30 space-y-2.5 <?= ($selectedCategory === 'PEMINJAMAN_ASET') ? '' : 'hidden' ?>">
                         <div class="flex items-center justify-between border-b border-blue-200 pb-2">
                             <span class="text-xs font-black text-blue-950 uppercase tracking-wide">Pilih Peralatan ICT Yang Ingin Dipinjam <span class="text-rose-500">*</span></span>
@@ -141,7 +143,7 @@ $colorThemes = [
                         </div>
                     </div>
 
-                    <!-- Section 2: Sokongan Mesyuarat -->
+                    <!-- 2. Langkah 2: Sokongan Mesyuarat (Konfigurasi Teknikal) -->
                     <div id="section-meeting" class="p-3.5 sm:p-4 rounded-2xl border-2 border-indigo-200 bg-indigo-50/30 space-y-3 <?= ($selectedCategory === 'SOKONGAN_MESYUARAT') ? '' : 'hidden' ?>">
                         <div class="flex items-center justify-between border-b border-indigo-200 pb-2">
                             <span class="text-xs font-black text-indigo-950 uppercase tracking-wide">Konfigurasi Sokongan Mesyuarat</span>
@@ -169,18 +171,18 @@ $colorThemes = [
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                 <div>
-                                    <label class="block text-[11px] font-bold text-indigo-950 uppercase mb-1">Pautan Mesyuarat</label>
+                                    <label class="block text-[11px] font-bold text-indigo-950 uppercase mb-1">Pautan Mesyuarat (Jika Ada)</label>
                                     <input type="url" name="meeting_link" placeholder="https://johor.webex.com/..." class="w-full px-3 py-2 bg-white border border-indigo-200 rounded-xl text-xs outline-none font-mono">
                                 </div>
                                 <div>
-                                    <label class="block text-[11px] font-bold text-indigo-950 uppercase mb-1">Passcode Bilik</label>
+                                    <label class="block text-[11px] font-bold text-indigo-950 uppercase mb-1">Passcode / Kata Laluan Bilik</label>
                                     <input type="text" name="meeting_passcode" placeholder="Cth: BKP2026" class="w-full px-3 py-2 bg-white border border-indigo-200 rounded-xl text-xs outline-none font-mono font-bold">
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Section 3: Khidmat Media -->
+                    <!-- 3. Langkah 2: Khidmat Media (Skop & Tentatif Majlis) -->
                     <div id="section-media" class="p-3.5 sm:p-4 rounded-2xl border-2 border-purple-200 bg-purple-50/30 space-y-3 <?= ($selectedCategory === 'MEDIA_JURUKAMERA') ? '' : 'hidden' ?>">
                         <div class="flex items-center justify-between border-b border-purple-200 pb-2">
                             <span class="text-xs font-black text-purple-950 uppercase tracking-wide">Skop Liputan Media & Dokumentasi</span>
@@ -189,7 +191,7 @@ $colorThemes = [
 
                         <div class="space-y-2.5">
                             <div>
-                                <label class="block text-[11px] font-bold text-purple-950 uppercase mb-1">Skop Perkhidmatan Jurukamera</label>
+                                <label class="block text-[11px] font-bold text-purple-950 uppercase mb-1">Skop Perkhidmatan Jurukamera <span class="text-rose-500">*</span></label>
                                 <select name="media_scope" class="w-full px-3 py-2 bg-white border border-purple-200 rounded-xl text-xs outline-none font-medium">
                                     <?php foreach ($mediaScopes as $scKey => $sc): ?>
                                     <option value="<?= $scKey ?>"><?= e($sc) ?></option>
@@ -197,13 +199,13 @@ $colorThemes = [
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-[11px] font-bold text-purple-950 uppercase mb-1">Tentatif / Agenda Ringkas Majlis</label>
-                                <textarea name="event_agenda" rows="3" placeholder="Sila nyatakan susunan majlis, masa ketibaan tetamu..." class="w-full px-3 py-2 bg-white border border-purple-200 rounded-xl text-xs outline-none"></textarea>
+                                <label class="block text-[11px] font-bold text-purple-950 uppercase mb-1">Tentatif & Susunan Acara Majlis <span class="text-rose-500">*</span></label>
+                                <textarea name="event_agenda" id="event_agenda" rows="3" placeholder="Sila nyatakan masa ketibaan tetamu kehormat, susunan acara, gimik perasmian, sesi bergambar..." class="w-full px-3 py-2 bg-white border border-purple-200 rounded-xl text-xs outline-none leading-relaxed"></textarea>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Section 4: Bantuan ICT & Aduan Teknikal -->
+                    <!-- 4. Langkah 2: Bantuan ICT (Kategori Aduan & Kerosakan) -->
                     <div id="section-technical" class="p-3.5 sm:p-4 rounded-2xl border-2 border-emerald-200 bg-emerald-50/30 space-y-3 <?= ($selectedCategory === 'LAIN_LAIN') ? '' : 'hidden' ?>">
                         <div class="flex items-center justify-between border-b border-emerald-200 pb-2">
                             <span class="text-xs font-black text-emerald-950 uppercase tracking-wide">Skop Bantuan & Kategori Aduan ICT</span>
@@ -245,13 +247,15 @@ $colorThemes = [
                     </div>
                 </div>
 
-                <!-- RIGHT COLUMN (6 of 12): Form Fields (KEW.PA-9 / Program / Aduan) & Submit -->
+                <!-- ========================================================================= -->
+                <!-- RIGHT COLUMN (6 of 12): LANGKAH 3 (Khusus Mengikut Kategori) & BUTANG HANTAR -->
+                <!-- ========================================================================= -->
                 <div class="lg:col-span-6 space-y-3">
                     
-                    <!-- STEP 3A: Peminjaman Aset (Format KEW.PA-9) -->
+                    <!-- 1. Langkah 3: Peminjaman Aset (Format Rasmi KEW.PA-9) -->
                     <div id="step3-asset-loan" class="p-3.5 sm:p-4 rounded-2xl border-2 border-blue-300 bg-white space-y-3 <?= ($selectedCategory === 'PEMINJAMAN_ASET') ? '' : 'hidden' ?>">
                         <div class="flex items-center justify-between border-b border-blue-100 pb-1.5">
-                            <span class="text-xs font-black text-blue-950 uppercase tracking-wide">Butiran Pinjaman Aset Alih (KEW.PA-9)</span>
+                            <span class="text-xs font-black text-blue-950 uppercase tracking-wide">Butiran Pinjaman Aset Alih (Format KEW.PA-9)</span>
                             <span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-0.5 rounded font-bold">Langkah 3</span>
                         </div>
 
@@ -272,7 +276,7 @@ $colorThemes = [
                                     Tempat Digunakan <span class="text-rose-500">*</span>
                                 </label>
                                 <input type="text" name="location_loan" id="location_loan" 
-                                       placeholder="Cth: Pejabat BKP Aras 3 / Bilik Mesyuarat" 
+                                       placeholder="Cth: Pejabat BKP Aras 3 / Luar Pejabat" 
                                        class="w-full px-3 py-1.5 bg-white border border-amber-300 rounded-lg text-xs outline-none">
                             </div>
 
@@ -332,58 +336,58 @@ $colorThemes = [
                         <?php endif; ?>
                     </div>
 
-                    <!-- STEP 3B: Sokongan Mesyuarat & Khidmat Media -->
-                    <div id="step3-event-service" class="p-3.5 sm:p-4 rounded-2xl border-2 border-indigo-200 bg-white space-y-3 <?= in_array($selectedCategory, ['SOKONGAN_MESYUARAT', 'MEDIA_JURUKAMERA']) ? '' : 'hidden' ?>">
+                    <!-- 2. Langkah 3: Sokongan Mesyuarat (Maklumat Mesyuarat & Jadual) -->
+                    <div id="step3-meeting" class="p-3.5 sm:p-4 rounded-2xl border-2 border-indigo-200 bg-white space-y-3 <?= ($selectedCategory === 'SOKONGAN_MESYUARAT') ? '' : 'hidden' ?>">
                         <div class="flex items-center justify-between border-b border-indigo-100 pb-1.5">
-                            <span class="text-xs font-black text-slate-900 uppercase tracking-wide">Maklumat Acara & Jadual Masa</span>
+                            <span class="text-xs font-black text-slate-900 uppercase tracking-wide">Maklumat Mesyuarat & Jadual Masa</span>
                             <span class="text-[10px] bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded font-bold">Langkah 3</span>
                         </div>
 
-                        <!-- 1. Tajuk Program -->
+                        <!-- 1. Tajuk Mesyuarat -->
                         <div class="p-2.5 rounded-xl bg-blue-50/70 border border-blue-200">
                             <label class="block text-[11px] font-black text-blue-950 uppercase mb-1">
-                                Tajuk Permohonan / Nama Program <span class="text-rose-500">*</span>
+                                Nama / Tajuk Mesyuarat <span class="text-rose-500">*</span>
                             </label>
-                            <input type="text" name="title" id="event_title"
+                            <input type="text" name="meeting_title" id="meeting_title"
                                    placeholder="Cth: Mesyuarat Penyelarasan Pembangunan Sistem ICT BKP Bil. 2/2026" 
                                    class="w-full px-3 py-1.5 bg-white border border-blue-300 focus:border-blue-600 rounded-lg text-xs font-semibold outline-none">
                         </div>
 
-                        <!-- 2. Pengerusi & Lokasi -->
+                        <!-- 2. Pengerusi & Lokasi Bilik -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-200">
-                                <label class="block text-[10px] font-bold text-amber-950 uppercase mb-0.5">Pengerusi / VIP</label>
-                                <input type="text" name="vip_attendees" placeholder="Cth: YB SUK / Timbalan SUK" class="w-full px-2.5 py-1 bg-white border border-amber-300 rounded-md text-xs outline-none">
+                                <label class="block text-[10px] font-bold text-amber-950 uppercase mb-0.5">Pengerusi Mesyuarat</label>
+                                <input type="text" name="meeting_vip" placeholder="Cth: YB SUK / Timbalan SUK / Ketua Bahagian" class="w-full px-2.5 py-1 bg-white border border-amber-300 rounded-md text-xs outline-none">
                             </div>
                             <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-200">
-                                <label class="block text-[10px] font-bold text-amber-950 uppercase mb-0.5">Lokasi / Bilik <span class="text-rose-500">*</span></label>
-                                <input type="text" name="location" id="event_location" placeholder="Cth: Bilik Mesyuarat Utama" class="w-full px-2.5 py-1 bg-white border border-amber-300 rounded-md text-xs outline-none">
+                                <label class="block text-[10px] font-bold text-amber-950 uppercase mb-0.5">Lokasi / Bilik Mesyuarat <span class="text-rose-500">*</span></label>
+                                <input type="text" name="meeting_location" id="meeting_location" placeholder="Cth: Bilik Mesyuarat Utama BKP (Aras 3)" class="w-full px-2.5 py-1 bg-white border border-amber-300 rounded-md text-xs outline-none">
                             </div>
                         </div>
 
-                        <!-- 3. Tujuan & No Telefon -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-200">
-                                <label class="block text-[10px] font-black text-emerald-950 uppercase mb-0.5">Tujuan Rasmi <span class="text-rose-500">*</span></label>
-                                <textarea name="purpose" id="event_purpose" rows="1" placeholder="Nyatakan tujuan rasmi..." class="w-full px-2.5 py-1 bg-white border border-emerald-300 rounded-md text-xs outline-none"></textarea>
-                            </div>
-                            <div class="p-2.5 rounded-xl bg-purple-50/70 border border-purple-200">
-                                <label class="block text-[10px] font-bold text-purple-950 uppercase mb-0.5">No. Telefon <span class="text-rose-500">*</span></label>
-                                <input type="text" name="applicant_phone" id="event_phone" value="<?= e($isLoggedIn ? ($user['phone'] ?? '') : '') ?>" placeholder="01X-XXXXXXX" class="w-full px-2.5 py-1 bg-white border border-purple-300 rounded-md text-xs font-bold text-purple-900 outline-none">
-                            </div>
-                        </div>
-
-                        <!-- 4. Tarikh & Masa Mula -->
+                        <!-- 3. Jadual Tarikh & Masa Mula -->
                         <div class="p-2.5 rounded-xl bg-cyan-50/70 border border-cyan-200">
                             <div class="grid grid-cols-2 gap-2">
                                 <div>
-                                    <label class="block text-[10px] font-bold text-slate-700 uppercase mb-0.5">Tarikh Acara <span class="text-rose-500">*</span></label>
-                                    <input type="date" name="start_date" id="event_start_date" value="<?= $today ?>" min="<?= $today ?>" class="w-full px-2 py-1 bg-white border border-cyan-300 rounded-md text-xs font-bold text-slate-900 outline-none">
+                                    <label class="block text-[10px] font-bold text-slate-700 uppercase mb-0.5">Tarikh Mesyuarat <span class="text-rose-500">*</span></label>
+                                    <input type="date" name="meeting_date" id="meeting_date" value="<?= $today ?>" min="<?= $today ?>" class="w-full px-2 py-1 bg-white border border-cyan-300 rounded-md text-xs font-bold text-slate-900 outline-none">
                                 </div>
                                 <div>
                                     <label class="block text-[10px] font-bold text-slate-700 uppercase mb-0.5">Masa Mula <span class="text-rose-500">*</span></label>
-                                    <input type="time" name="start_time" id="event_start_time" value="09:00" class="w-full px-2 py-1 bg-white border border-cyan-300 rounded-md text-xs font-bold text-cyan-950 outline-none">
+                                    <input type="time" name="meeting_time" id="meeting_time" value="09:00" class="w-full px-2 py-1 bg-white border border-cyan-300 rounded-md text-xs font-bold text-cyan-950 outline-none">
                                 </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Tujuan & No Telefon -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-200">
+                                <label class="block text-[10px] font-black text-emerald-950 uppercase mb-0.5">Tujuan / Keperluan Khas <span class="text-rose-500">*</span></label>
+                                <textarea name="meeting_purpose" id="meeting_purpose" rows="1" placeholder="Nyatakan tujuan ringkas mesyuarat..." class="w-full px-2.5 py-1 bg-white border border-emerald-300 rounded-md text-xs outline-none"></textarea>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-purple-50/70 border border-purple-200">
+                                <label class="block text-[10px] font-bold text-purple-950 uppercase mb-0.5">No. Telefon Urus Setia <span class="text-rose-500">*</span></label>
+                                <input type="text" name="meeting_phone" id="meeting_phone" value="<?= e($isLoggedIn ? ($user['phone'] ?? '') : '') ?>" placeholder="01X-XXXXXXX" class="w-full px-2.5 py-1 bg-white border border-purple-300 rounded-md text-xs font-bold text-purple-900 outline-none">
                             </div>
                         </div>
 
@@ -393,30 +397,105 @@ $colorThemes = [
                             <span class="text-[10px] font-black text-indigo-950 uppercase block">Maklumat Pegawai Pemohon (BKP)</span>
                             <div class="grid grid-cols-2 gap-2">
                                 <div>
-                                    <select name="unit" class="w-full px-2 py-1.5 bg-white border border-indigo-300 rounded-lg text-[11px] outline-none font-bold text-indigo-900">
+                                    <select name="meeting_unit" class="w-full px-2 py-1.5 bg-white border border-indigo-300 rounded-lg text-[11px] outline-none font-bold text-indigo-900">
                                         <?php foreach ($unitsList as $uKey => $u): ?>
                                         <option value="<?= $uKey ?>"><?= e($u['name']) ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
                                 <div>
-                                    <input type="text" name="applicant_name" placeholder="Nama Penuh Pegawai" class="w-full px-2.5 py-1.5 bg-white border border-indigo-300 rounded-lg text-[11px] outline-none">
+                                    <input type="text" name="meeting_applicant_name" placeholder="Nama Penuh Pegawai" class="w-full px-2.5 py-1.5 bg-white border border-indigo-300 rounded-lg text-[11px] outline-none">
                                 </div>
                                 <div>
-                                    <input type="email" name="applicant_email" placeholder="emel@johor.gov.my" class="w-full px-2.5 py-1.5 bg-white border border-indigo-300 rounded-lg text-[11px] outline-none">
+                                    <input type="email" name="meeting_applicant_email" placeholder="emel@johor.gov.my" class="w-full px-2.5 py-1.5 bg-white border border-indigo-300 rounded-lg text-[11px] outline-none">
                                 </div>
                                 <div>
-                                    <input type="text" name="applicant_position" placeholder="Jawatan & Gred" class="w-full px-2.5 py-1.5 bg-white border border-indigo-300 rounded-lg text-[11px] outline-none">
+                                    <input type="text" name="meeting_applicant_position" placeholder="Jawatan & Gred" class="w-full px-2.5 py-1.5 bg-white border border-indigo-300 rounded-lg text-[11px] outline-none">
                                 </div>
                             </div>
                         </div>
                         <?php endif; ?>
                     </div>
 
-                    <!-- STEP 3C: Bantuan ICT & Aduan Teknikal -->
-                    <div id="step3-technical-help" class="p-3.5 sm:p-4 rounded-2xl border-2 border-emerald-300 bg-white space-y-3 <?= ($selectedCategory === 'LAIN_LAIN') ? '' : 'hidden' ?>">
+                    <!-- 3. Langkah 3: Khidmat Media (Maklumat Majlis / Acara Rasmi) -->
+                    <div id="step3-media" class="p-3.5 sm:p-4 rounded-2xl border-2 border-purple-200 bg-white space-y-3 <?= ($selectedCategory === 'MEDIA_JURUKAMERA') ? '' : 'hidden' ?>">
+                        <div class="flex items-center justify-between border-b border-purple-100 pb-1.5">
+                            <span class="text-xs font-black text-purple-950 uppercase tracking-wide">Maklumat Majlis / Acara Rasmi</span>
+                            <span class="text-[10px] bg-purple-100 text-purple-800 px-2 py-0.5 rounded font-bold">Langkah 3</span>
+                        </div>
+
+                        <!-- 1. Nama Majlis -->
+                        <div class="p-2.5 rounded-xl bg-purple-50/70 border border-purple-200">
+                            <label class="block text-[11px] font-black text-purple-950 uppercase mb-1">
+                                Nama Acara / Majlis Rasmi <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="text" name="media_title" id="media_title"
+                                   placeholder="Cth: Majlis Perhimpunan Bulanan BKP Bersama YB Setiausaha Kerajaan Negeri" 
+                                   class="w-full px-3 py-1.5 bg-white border border-purple-300 focus:border-purple-600 rounded-lg text-xs font-semibold outline-none">
+                        </div>
+
+                        <!-- 2. Tetamu Utama & Lokasi Majlis -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-200">
+                                <label class="block text-[10px] font-bold text-amber-950 uppercase mb-0.5">Tetamu Utama / Perasmi</label>
+                                <input type="text" name="media_vip" placeholder="Cth: YB SUK Johor / Pegawai Khas" class="w-full px-2.5 py-1 bg-white border border-amber-300 rounded-md text-xs outline-none">
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-200">
+                                <label class="block text-[10px] font-bold text-amber-950 uppercase mb-0.5">Tempat / Lokasi Majlis <span class="text-rose-500">*</span></label>
+                                <input type="text" name="media_location" id="media_location" placeholder="Cth: Dewan Serbaguna Kompleks Kerajaan" class="w-full px-2.5 py-1 bg-white border border-amber-300 rounded-md text-xs outline-none">
+                            </div>
+                        </div>
+
+                        <!-- 3. Jadual Tarikh & Masa Majlis -->
+                        <div class="p-2.5 rounded-xl bg-cyan-50/70 border border-cyan-200">
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-700 uppercase mb-0.5">Tarikh Majlis <span class="text-rose-500">*</span></label>
+                                    <input type="date" name="media_date" id="media_date" value="<?= $today ?>" min="<?= $today ?>" class="w-full px-2 py-1 bg-white border border-cyan-300 rounded-md text-xs font-bold text-slate-900 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-slate-700 uppercase mb-0.5">Masa Ketibaan / Mula <span class="text-rose-500">*</span></label>
+                                    <input type="time" name="media_time" id="media_time" value="09:00" class="w-full px-2 py-1 bg-white border border-cyan-300 rounded-md text-xs font-bold text-cyan-950 outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. No Telefon Penyelaras -->
+                        <div class="p-2.5 rounded-xl bg-purple-50/70 border border-purple-200">
+                            <label class="block text-[10px] font-bold text-purple-950 uppercase mb-0.5">No. Telefon Pegawai Penyelaras Majlis <span class="text-rose-500">*</span></label>
+                            <input type="text" name="media_phone" id="media_phone" value="<?= e($isLoggedIn ? ($user['phone'] ?? '') : '') ?>" placeholder="01X-XXXXXXX" class="w-full px-2.5 py-1 bg-white border border-purple-300 rounded-md text-xs font-bold text-purple-900 outline-none">
+                        </div>
+
+                        <?php if (!$isLoggedIn): ?>
+                        <!-- 5. Maklumat Pegawai Pemohon (Untuk Tetamu) -->
+                        <div class="p-2.5 rounded-xl bg-indigo-50/70 border border-indigo-200 space-y-2">
+                            <span class="text-[10px] font-black text-indigo-950 uppercase block">Maklumat Pegawai Pemohon (BKP)</span>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <select name="media_unit" class="w-full px-2 py-1.5 bg-white border border-indigo-300 rounded-lg text-[11px] outline-none font-bold text-indigo-900">
+                                        <?php foreach ($unitsList as $uKey => $u): ?>
+                                        <option value="<?= $uKey ?>"><?= e($u['name']) ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div>
+                                    <input type="text" name="media_applicant_name" placeholder="Nama Penuh Pegawai" class="w-full px-2.5 py-1.5 bg-white border border-indigo-300 rounded-lg text-[11px] outline-none">
+                                </div>
+                                <div>
+                                    <input type="email" name="media_applicant_email" placeholder="emel@johor.gov.my" class="w-full px-2.5 py-1.5 bg-white border border-indigo-300 rounded-lg text-[11px] outline-none">
+                                </div>
+                                <div>
+                                    <input type="text" name="media_applicant_position" placeholder="Jawatan & Gred" class="w-full px-2.5 py-1.5 bg-white border border-indigo-300 rounded-lg text-[11px] outline-none">
+                                </div>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- 4. Langkah 3: Bantuan ICT & Aduan (Maklumat Lokasi & Pegawai Pengadu) -->
+                    <div id="step3-technical" class="p-3.5 sm:p-4 rounded-2xl border-2 border-emerald-300 bg-white space-y-3 <?= ($selectedCategory === 'LAIN_LAIN') ? '' : 'hidden' ?>">
                         <div class="flex items-center justify-between border-b border-emerald-100 pb-1.5">
-                            <span class="text-xs font-black text-emerald-950 uppercase tracking-wide">Maklumat Lokasi & Pengadu (Bantuan ICT)</span>
+                            <span class="text-xs font-black text-emerald-950 uppercase tracking-wide">Maklumat Lokasi & Pegawai Pengadu</span>
                             <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">Langkah 3</span>
                         </div>
 
@@ -443,7 +522,7 @@ $colorThemes = [
 
                             <div class="p-2.5 rounded-xl bg-purple-50/70 border border-purple-200">
                                 <label class="block text-[11px] font-bold text-purple-950 uppercase mb-1">
-                                    No. Telefon / VoIP <span class="text-rose-500">*</span>
+                                    No. Telefon / Sambungan VoIP <span class="text-rose-500">*</span>
                                 </label>
                                 <input type="text" name="technical_phone" id="technical_phone" value="<?= e($isLoggedIn ? ($user['phone'] ?? '') : '') ?>" 
                                        placeholder="01X-XXXXXXX atau Sambungan VoIP" 
@@ -524,45 +603,56 @@ function switchCategoryView(cat) {
         }
     }
 
-    // Sections
+    // Left Column Sections (Langkah 2)
     const eqSec = document.getElementById('section-equipment');
     const meetSec = document.getElementById('section-meeting');
     const mediaSec = document.getElementById('section-media');
     const techSec = document.getElementById('section-technical');
 
+    // Right Column Sections (Langkah 3)
     const step3Loan = document.getElementById('step3-asset-loan');
-    const step3Event = document.getElementById('step3-event-service');
-    const step3Tech = document.getElementById('step3-technical-help');
+    const step3Meeting = document.getElementById('step3-meeting');
+    const step3Media = document.getElementById('step3-media');
+    const step3Tech = document.getElementById('step3-technical');
 
-    // Inputs for Loan
+    // 1. Inputs for Loan (KEW.PA-9)
     const purposeLoan = document.getElementById('purpose_loan');
     const locationLoan = document.getElementById('location_loan');
     const startLoan = document.getElementById('start_date_loan');
     const endLoan = document.getElementById('end_date_loan');
     const phoneLoan = document.getElementById('applicant_phone_loan');
 
-    // Inputs for Event (Meeting/Media)
-    const eventTitle = document.getElementById('event_title');
-    const eventLoc = document.getElementById('event_location');
-    const eventPurpose = document.getElementById('event_purpose');
-    const eventPhone = document.getElementById('event_phone');
-    const eventStart = document.getElementById('event_start_date');
+    // 2. Inputs for Meeting
+    const meetTitle = document.getElementById('meeting_title');
+    const meetLoc = document.getElementById('meeting_location');
+    const meetDate = document.getElementById('meeting_date');
+    const meetPurpose = document.getElementById('meeting_purpose');
+    const meetPhone = document.getElementById('meeting_phone');
 
-    // Inputs for Technical Help
+    // 3. Inputs for Media
+    const mediaTitle = document.getElementById('media_title');
+    const mediaLoc = document.getElementById('media_location');
+    const mediaDate = document.getElementById('media_date');
+    const mediaPhone = document.getElementById('media_phone');
+    const eventAgenda = document.getElementById('event_agenda');
+
+    // 4. Inputs for Technical Help
     const techTitle = document.getElementById('technical_title');
     const techProb = document.getElementById('technical_problem_description');
     const techLoc = document.getElementById('technical_location');
     const techPhone = document.getElementById('technical_phone');
     const techDate = document.getElementById('technical_date');
 
-    // Reset visibility
+    // Reset visibility (Langkah 2)
     eqSec.classList.add('hidden');
     meetSec.classList.add('hidden');
     mediaSec.classList.add('hidden');
     techSec.classList.add('hidden');
 
+    // Reset visibility (Langkah 3)
     step3Loan.classList.add('hidden');
-    step3Event.classList.add('hidden');
+    step3Meeting.classList.add('hidden');
+    step3Media.classList.add('hidden');
     step3Tech.classList.add('hidden');
 
     // Disable all required first
@@ -572,11 +662,17 @@ function switchCategoryView(cat) {
     if (endLoan) endLoan.required = false;
     if (phoneLoan) phoneLoan.required = false;
 
-    if (eventTitle) eventTitle.required = false;
-    if (eventLoc) eventLoc.required = false;
-    if (eventPurpose) eventPurpose.required = false;
-    if (eventPhone) eventPhone.required = false;
-    if (eventStart) eventStart.required = false;
+    if (meetTitle) meetTitle.required = false;
+    if (meetLoc) meetLoc.required = false;
+    if (meetDate) meetDate.required = false;
+    if (meetPurpose) meetPurpose.required = false;
+    if (meetPhone) meetPhone.required = false;
+
+    if (mediaTitle) mediaTitle.required = false;
+    if (mediaLoc) mediaLoc.required = false;
+    if (mediaDate) mediaDate.required = false;
+    if (mediaPhone) mediaPhone.required = false;
+    if (eventAgenda) eventAgenda.required = false;
 
     if (techTitle) techTitle.required = false;
     if (techProb) techProb.required = false;
@@ -596,22 +692,22 @@ function switchCategoryView(cat) {
         if (phoneLoan) phoneLoan.required = true;
     } else if (cat === 'SOKONGAN_MESYUARAT') {
         meetSec.classList.remove('hidden');
-        step3Event.classList.remove('hidden');
+        step3Meeting.classList.remove('hidden');
 
-        if (eventTitle) eventTitle.required = true;
-        if (eventLoc) eventLoc.required = true;
-        if (eventPurpose) eventPurpose.required = true;
-        if (eventPhone) eventPhone.required = true;
-        if (eventStart) eventStart.required = true;
+        if (meetTitle) meetTitle.required = true;
+        if (meetLoc) meetLoc.required = true;
+        if (meetDate) meetDate.required = true;
+        if (meetPurpose) meetPurpose.required = true;
+        if (meetPhone) meetPhone.required = true;
     } else if (cat === 'MEDIA_JURUKAMERA') {
         mediaSec.classList.remove('hidden');
-        step3Event.classList.remove('hidden');
+        step3Media.classList.remove('hidden');
 
-        if (eventTitle) eventTitle.required = true;
-        if (eventLoc) eventLoc.required = true;
-        if (eventPurpose) eventPurpose.required = true;
-        if (eventPhone) eventPhone.required = true;
-        if (eventStart) eventStart.required = true;
+        if (mediaTitle) mediaTitle.required = true;
+        if (mediaLoc) mediaLoc.required = true;
+        if (mediaDate) mediaDate.required = true;
+        if (mediaPhone) mediaPhone.required = true;
+        if (eventAgenda) eventAgenda.required = true;
     } else if (cat === 'LAIN_LAIN') {
         techSec.classList.remove('hidden');
         step3Tech.classList.remove('hidden');
