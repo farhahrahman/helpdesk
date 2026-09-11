@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ms" class="h-full bg-slate-900">
+<html lang="ms" class="h-full bg-slate-100">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,8 +29,8 @@
     </script>
     <link rel="stylesheet" href="<?= asset('css/custom.css') ?>">
 </head>
-<body class="h-full flex items-center justify-center p-4 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 antialiased selection:bg-blue-600 selection:text-white">
-    <div class="w-full max-w-lg">
+<body class="min-h-full flex items-center justify-center p-4 bg-slate-100 bg-cover bg-center bg-no-repeat antialiased selection:bg-blue-600 selection:text-white" style="background-image: url('<?= asset('images/bg-helpdesk.png') ?>');">
+    <div class="w-full max-w-lg my-auto py-6">
         <?= $content ?>
     </div>
     <script src="<?= asset('js/app.js') ?>"></script>

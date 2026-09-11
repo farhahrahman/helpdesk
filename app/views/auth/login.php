@@ -6,7 +6,7 @@ $error = Session::getFlash('error');
 $info = Session::getFlash('info');
 ?>
 
-<div class="bg-white rounded-2xl shadow-2xl border border-slate-700/60 overflow-hidden">
+<div class="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200/90 overflow-hidden">
     <!-- Header Graphic -->
     <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-8 text-center border-b border-slate-800 text-white relative">
         <div class="w-16 h-16 rounded-2xl bg-blue-600/20 border border-blue-500/30 text-blue-400 mx-auto flex items-center justify-center shadow-lg mb-4 ring-4 ring-blue-500/10">
@@ -80,6 +80,14 @@ $info = Session::getFlash('info');
                     Sila gunakan <strong>Emel Rasmi Kerajaan</strong> anda (<span class="font-mono text-slate-700">@johor.gov.my</span>) dan kata laluan asas (<span class="font-mono font-bold bg-blue-100 px-1.5 py-0.5 rounded text-blue-900 border border-blue-200">123456</span>) untuk log masuk melihat sejarah permohonan.
                 </p>
             </div>
+        </div>
+
+        <!-- Pautan Kembali ke Portal Depan -->
+        <div class="mt-5 text-center">
+            <a href="<?= url('/') ?>" class="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-blue-600 transition-colors font-medium">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                <span>Kembali ke Portal Muka Depan</span>
+            </a>
         </div>
     </div>
 </div>
