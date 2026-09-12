@@ -117,5 +117,8 @@ $currentUser = Auth::user();
 
     <!-- App JS -->
     <script src="<?= asset('js/app.js') ?>"></script>
+
+    <!-- Floating Chatbot Widget Helpdesk ICT -->
+    <?php \App\Core\View::partial('chatbot'); ?>
 </body>
 </html>
