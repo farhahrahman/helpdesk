@@ -240,6 +240,80 @@ $statusKey = $ticket['status'] ?? '';
             </div>
             <?php endif; ?>
 
+            <?php if ($ticket['category'] === 'ADUAN_KUARTERS'): ?>
+            <div class="bg-white p-6 rounded-2xl border-2 border-amber-200 shadow-sm space-y-4">
+                <div class="border-b border-amber-100 pb-3 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center text-base shadow-sm">🏢</span>
+                        <div>
+                            <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Butiran Aduan Sistem Kuarters Kerajaan</h2>
+                            <p class="text-[11px] text-slate-500">Rekod aduan kerosakan fizikal / aplikasi e-Kuarters</p>
+                        </div>
+                    </div>
+                    <span class="px-2.5 py-1 text-xs bg-amber-100 text-amber-900 font-bold rounded-lg border border-amber-300">
+                        Kuarters Awam
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                    <div class="p-3 bg-amber-50/50 rounded-xl border border-amber-200">
+                        <span class="text-amber-800 text-[10px] font-bold uppercase block mb-1">1. Maklumat Pengguna & Penghuni Kuarters</span>
+                        <div class="space-y-1 text-slate-800 font-medium">
+                            <p><strong>Nama Penghuni:</strong> <?= e($ticket['applicant_name']) ?></p>
+                            <?php if (!empty($ticket['kuarters_ic_no'])): ?>
+                            <p><strong>No. Kad Pengenalan:</strong> <?= e($ticket['kuarters_ic_no']) ?></p>
+                            <?php endif; ?>
+                            <p><strong>No. Telefon / WhatsApp:</strong> <?= e($ticket['applicant_phone']) ?></p>
+                            <p><strong>Emel:</strong> <?= e($ticket['applicant_email']) ?></p>
+                            <p><strong>Unit / Jabatan:</strong> <?= e($ticket['unit_name'] ?? $ticket['unit']) ?></p>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-amber-50/50 rounded-xl border border-amber-200">
+                        <span class="text-amber-800 text-[10px] font-bold uppercase block mb-1">Lokasi Kuarters & Urgensi</span>
+                        <div class="space-y-1 text-slate-800 font-medium">
+                            <p><strong>Kompleks Kuarters:</strong> <?= e($ticket['kuarters_complex'] ?? $ticket['location']) ?></p>
+                            <?php if (!empty($ticket['kuarters_unit_no'])): ?>
+                            <p><strong>No. Rumah / Blok:</strong> <?= e($ticket['kuarters_unit_no']) ?></p>
+                            <?php endif; ?>
+                            <p><strong>Tahap Urgensi:</strong> <span class="px-2 py-0.5 rounded font-bold text-[10px] bg-amber-200 text-amber-900"><?= e($ticket['kuarters_urgency'] ?? 'BIASA') ?></span></p>
+                            <p><strong>Tarikh Aduan:</strong> <?= format_date($ticket['start_date']) ?></p>
+                        </div>
+                    </div>
+
+                    <div class="sm:col-span-2 p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <span class="text-slate-600 text-[10px] font-bold uppercase block mb-1">2. Keterangan Masalah / Kerosakan</span>
+                        <p class="text-slate-800 text-xs font-semibold leading-relaxed whitespace-pre-line">
+                            <?= e($ticket['purpose']) ?>
+                        </p>
+                    </div>
+
+                    <?php if (!empty($ticket['attachment_url'])): ?>
+                    <div class="sm:col-span-2 p-3 bg-amber-50/40 rounded-xl border border-amber-200 space-y-2">
+                        <span class="text-amber-900 text-xs font-bold uppercase flex items-center gap-1.5">
+                            <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            Gambar Bukti Kerosakan Kuarters (Upload)
+                        </span>
+                        <div class="flex flex-col sm:flex-row items-start gap-4">
+                            <a href="<?= e(url($ticket['attachment_url'])) ?>" target="_blank" class="block group relative overflow-hidden rounded-xl border-2 border-amber-300 shadow-sm max-w-xs hover:border-amber-500 transition-all">
+                                <img src="<?= e(url($ticket['attachment_url'])) ?>" alt="Bukti Kerosakan Kuarters" class="max-h-60 w-auto object-cover rounded-lg group-hover:scale-105 transition-transform duration-200">
+                                <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold rounded-lg">
+                                    Klik untuk saiz penuh &rarr;
+                                </div>
+                            </a>
+                            <div class="text-xs text-slate-600 space-y-1">
+                                <p class="font-medium text-slate-900"><?= e($ticket['attachment_name'] ?? 'Lampiran Gambar') ?></p>
+                                <a href="<?= e(url($ticket['attachment_url'])) ?>" target="_blank" download class="inline-flex items-center gap-1 px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-bold text-[11px] shadow-sm">
+                                    Muat Turun Gambar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php endif; ?>
+
             <!-- Audit Trail & Action Timeline -->
             <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
                 <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Jejak Audit & Rekod Tindakan</h2>

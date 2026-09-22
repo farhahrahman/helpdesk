@@ -251,6 +251,20 @@
             <?php if (!empty($ticket['media_scope'])): ?>
             <p class="mt-1"><strong>Skop Media:</strong> <?= e($ticket['media_scope']) ?></p>
             <?php endif; ?>
+            <?php if ($ticket['category'] === 'ADUAN_KUARTERS'): ?>
+            <div class="mt-2 p-2 bg-slate-50 border border-slate-300 rounded text-xs space-y-1">
+                <p><strong>Kompleks Kuarters:</strong> <?= e($ticket['kuarters_complex'] ?? $ticket['location']) ?> <?= !empty($ticket['kuarters_unit_no']) ? ('(Unit/Blok: ' . e($ticket['kuarters_unit_no']) . ')') : '' ?></p>
+                <?php if (!empty($ticket['kuarters_ic_no'])): ?>
+                <p><strong>No. Kad Pengenalan Penghuni:</strong> <?= e($ticket['kuarters_ic_no']) ?></p>
+                <?php endif; ?>
+                <?php if (!empty($ticket['attachment_url'])): ?>
+                <div class="mt-2 pt-1 border-t border-slate-200">
+                    <p class="font-bold text-[11px] mb-1">Lampiran Gambar Bukti Kerosakan:</p>
+                    <img src="<?= e(url($ticket['attachment_url'])) ?>" alt="Bukti Kerosakan" class="max-h-44 border border-slate-300 rounded object-contain">
+                </div>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
         </div>
         <?php endif; ?>
     </div>

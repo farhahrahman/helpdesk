@@ -32,19 +32,28 @@ $info = Session::getFlash('info');
         </div>
         <?php endif; ?>
 
+        <!-- Demo Account Hint Box -->
+        <div class="mb-5 p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-start gap-2.5">
+            <svg class="w-4 h-4 text-amber-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <div>
+                <span class="font-bold">Akaun Percubaan / Demo (Try & Error):</span><br>
+                ID Pengguna: <code class="bg-amber-100/80 px-1 py-0.5 rounded font-mono font-bold text-amber-950">admin</code> &bull; Kata Laluan: <code class="bg-amber-100/80 px-1 py-0.5 rounded font-mono font-bold text-amber-950">P@s5w06d</code>
+            </div>
+        </div>
+
         <form action="<?= url('/login') ?>" method="POST" class="space-y-4">
             <?= csrf_field() ?>
 
             <div>
                 <label for="email" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Emel Rasmi Kerajaan
+                    ID Pengguna / Emel Rasmi
                 </label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path></svg>
                     </div>
-                    <input type="email" id="email" name="email" value="<?= e($oldEmail) ?>" required autofocus
-                           placeholder="nama@johor.gov.my"
+                    <input type="text" id="email" name="email" value="<?= e($oldEmail ?: 'admin') ?>" required autofocus
+                           placeholder="admin atau nama@johor.gov.my"
                            class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-xl text-sm text-slate-900 transition-all outline-none">
                 </div>
             </div>

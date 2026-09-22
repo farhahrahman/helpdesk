@@ -223,6 +223,25 @@ $ticketFound = !empty($ticket);
                     </a>
                 </div>
                 <?php endif; ?>
+
+                <?php if (($ticket['category'] ?? '') === 'ADUAN_KUARTERS'): ?>
+                <div class="pt-2 space-y-2">
+                    <?php if (!empty($ticket['kuarters_unit_no'])): ?>
+                    <div>
+                        <span class="text-slate-500 block text-[10px]">No. Rumah / Unit Kuarters:</span>
+                        <span class="font-bold text-amber-900"><?= e($ticket['kuarters_unit_no']) ?></span>
+                    </div>
+                    <?php endif; ?>
+                    <?php if (!empty($ticket['attachment_url'])): ?>
+                    <div>
+                        <span class="text-slate-500 block text-[10px] mb-1">Gambar Bukti Kerosakan:</span>
+                        <a href="<?= e(url($ticket['attachment_url'])) ?>" target="_blank" class="inline-block border border-amber-300 rounded-lg overflow-hidden shadow-sm">
+                            <img src="<?= e(url($ticket['attachment_url'])) ?>" alt="Bukti Kerosakan" class="max-h-28 object-cover">
+                        </a>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

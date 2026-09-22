@@ -41,6 +41,14 @@ return [
             'badge' => 'emerald',
             'lead_time_days' => 1,
         ],
+        'ADUAN_KUARTERS' => [
+            'id' => 'ADUAN_KUARTERS',
+            'name' => 'Aduan Sistem Kuarters',
+            'description' => 'Aduan kerosakan fizikal, fasiliti kuarters, dan isu sistem aplikasi e-Kuarters Kerajaan Negeri Johor.',
+            'icon' => 'home',
+            'badge' => 'amber',
+            'lead_time_days' => 1,
+        ],
     ],
 
     // Senarai Rasmi Peralatan ICT untuk Peminjaman (Lengkap Jenis, No. Siri & Gambar)
@@ -236,5 +244,57 @@ return [
             'name' => 'Khidmat Nasihat ICT / Lain-lain Masalah Teknikal',
             'icon' => '🛠️',
         ],
+    ],
+
+    // Senarai Jenis Kerosakan & Aduan Sistem Kuarters
+    'kuarters_complaint_types' => [
+        'KEROSAKAN_PAIP' => [
+            'id' => 'KEROSAKAN_PAIP',
+            'name' => 'Kerosakan Paip / Kebocoran Air / Sanitari / Tandas',
+            'icon' => '🚰',
+        ],
+        'KEROSAKAN_ELEKTRIK' => [
+            'id' => 'KEROSAKAN_ELEKTRIK',
+            'name' => 'Kerosakan Pendawaian / Elektrik / DB Box / Lampu / Kipas',
+            'icon' => '⚡',
+        ],
+        'STRUKTUR_BUMBUNG' => [
+            'id' => 'STRUKTUR_BUMBUNG',
+            'name' => 'Kerosakan Bumbung / Kebocoran Siling / Retakan Dinding',
+            'icon' => '🏠',
+        ],
+        'PINTU_KUNCI_TINGKAP' => [
+            'id' => 'PINTU_KUNCI_TINGKAP',
+            'name' => 'Kerosakan Pintu Utama, Tombol Kunci, Tingkap & Gril',
+            'icon' => '🔑',
+        ],
+        'SISTEM_EKUARTERS' => [
+            'id' => 'SISTEM_EKUARTERS',
+            'name' => 'Isu Sistem / Portal e-Kuarters (Akaun, Semakan, Kata Laluan)',
+            'icon' => '💻',
+        ],
+        'FASILITI_AWAM' => [
+            'id' => 'FASILITI_AWAM',
+            'name' => 'Fasiliti Bersama Kuarters (Lif, Tangki Air, Pagar, Lampu Jalan Kawasan)',
+            'icon' => '🏢',
+        ],
+        'LAIN_LAIN_KUARTERS' => [
+            'id' => 'LAIN_LAIN_KUARTERS',
+            'name' => 'Lain-lain Kerosakan / Aduan Kuarters',
+            'icon' => '📝',
+        ],
+    ],
+
+    // Senarai Kompleks Kuarters Kerajaan Negeri Johor
+    'kuarters_complexes' => [
+        'Kuarters Kolam Air, Johor Bahru',
+        'Kuarters Bukit Pasir, Johor Bahru',
+        'Kuarters Larkin, Johor Bahru',
+        'Kuarters Jalan Kebun Teh, Johor Bahru',
+        'Kuarters Straits View, Johor Bahru',
+        'Kuarters Jalan Mahmoodiah, Johor Bahru',
+        'Kuarters Kota Iskandar, Iskandar Puteri',
+        'Kuarters Pegawai Daerah / Luar Daerah',
+        'Lain-lain Lokasi Kuarters Kerajaan',
     ],
 ];

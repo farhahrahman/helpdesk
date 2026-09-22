@@ -97,6 +97,8 @@ class TicketController extends BaseController
             'meetingVenues' => app_config('services.meeting_venues', []),
             'mediaScopes' => app_config('services.media_scopes', []),
             'technicalSupportTypes' => app_config('services.technical_support_types', []),
+            'kuartersComplaintTypes' => app_config('services.kuarters_complaint_types', []),
+            'kuartersComplexes' => app_config('services.kuarters_complexes', []),
             'units' => app_config('units', []),
             'availableAssets' => AssetViewModel::presentCollection($availableAssets),
         ], $layout);
@@ -245,6 +247,65 @@ class TicketController extends BaseController
             }
         }
 
+        // Handle image upload for kuarters complaints
+        $attachmentUrl = null;
+        $attachmentName = null;
+        if ($request->hasFile('kuarters_photo')) {
+            $file = $request->file('kuarters_photo');
+            $allowedExts = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+            $ext = strtolower(pathinfo($file['name'] ?? '', PATHINFO_EXTENSION));
+            if (in_array($ext, $allowedExts) && (($file['size'] ?? 0) <= 12 * 1024 * 1024)) {
+                $uploadDir = dirname(__DIR__, 2) . '/public/uploads/kuarters';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0755, true);
+                }
+                $safeFilename = 'kuarters_' . date('Ymd_His') . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
+                $destination = $uploadDir . '/' . $safeFilename;
+                if (move_uploaded_file($file['tmp_name'], $destination)) {
+                    $attachmentUrl = '/uploads/kuarters/' . $safeFilename;
+                    $attachmentName = $file['name'];
+                }
+            }
+        }
+
+        // Merge kuarters specific fields if provided
+        if (($data['category'] ?? '') === 'ADUAN_KUARTERS') {
+            if ($attachmentUrl) {
+                $data['attachment_url'] = $attachmentUrl;
+                $data['attachment_name'] = $attachmentName;
+            }
+            if (!empty($data['kuarters_problem_description'])) {
+                $data['purpose'] = $data['kuarters_problem_description'];
+            }
+            $complex = trim((string)($data['kuarters_complex'] ?? ''));
+            $unitNo = trim((string)($data['kuarters_unit_no'] ?? ''));
+            $loc = trim($complex . ($unitNo ? ' (No: ' . $unitNo . ')' : ''));
+            if (!empty($loc)) {
+                $data['location'] = $loc;
+            }
+            if (!empty($data['kuarters_phone'])) {
+                $data['applicant_phone'] = $data['kuarters_phone'];
+            }
+            if (!empty($data['kuarters_date'])) {
+                $data['start_date'] = $data['kuarters_date'];
+            }
+            if (!empty($data['kuarters_title'])) {
+                $data['title'] = $data['kuarters_title'];
+            }
+            if (!empty($data['kuarters_unit'])) {
+                $data['unit'] = $data['kuarters_unit'];
+            }
+            if (!empty($data['kuarters_occupant_name'])) {
+                $data['applicant_name'] = $data['kuarters_occupant_name'];
+            }
+            if (!empty($data['kuarters_email'])) {
+                $data['applicant_email'] = $data['kuarters_email'];
+            }
+            if (!empty($data['kuarters_position'])) {
+                $data['applicant_position'] = $data['kuarters_position'];
+            }
+        }
+
         // Auto-generate title if empty or not provided
         if (empty($data['title'])) {
             if (($data['category'] ?? '') === 'PEMINJAMAN_ASET') {
@@ -270,6 +331,12 @@ class TicketController extends BaseController
                 $tKey = $data['technical_type'] ?? '';
                 $tName = $techTypes[$tKey]['name'] ?? 'Aduan Kerosakan / Sokongan Teknikal';
                 $data['title'] = 'Bantuan ICT: ' . $tName;
+            } elseif (($data['category'] ?? '') === 'ADUAN_KUARTERS') {
+                $kTypes = app_config('services.kuarters_complaint_types', []);
+                $kKey = $data['kuarters_complaint_type'] ?? '';
+                $kName = $kTypes[$kKey]['name'] ?? 'Kerosakan Kuarters';
+                $loc = !empty($data['kuarters_complex']) ? (' - ' . $data['kuarters_complex']) : '';
+                $data['title'] = 'Aduan Kuarters: ' . $kName . $loc;
             } else {
                 $data['title'] = 'Permohonan Perkhidmatan ICT';
             }

@@ -7,6 +7,8 @@ $today = date('Y-m-d');
 $selectedCategory = (string)($_GET['category'] ?? 'PEMINJAMAN_ASET');
 $unitsList = $units ?? app_config('units', []);
 $techSupportList = $technicalSupportTypes ?? app_config('services.technical_support_types', []);
+$kuartersComplaintList = $kuartersComplaintTypes ?? app_config('services.kuarters_complaint_types', []);
+$kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_complexes', []);
 
 // Color palette for alternating equipment checklist cards
 $colorThemes = [
@@ -30,7 +32,7 @@ $colorThemes = [
             <div>
                 <div class="flex items-center gap-2">
                     <span class="px-2 py-0.5 text-[10px] font-extrabold bg-blue-100 text-blue-800 rounded font-mono uppercase">Borang Rasmi</span>
-                    <span class="text-xs font-bold text-slate-900 uppercase tracking-tight">Permohonan Perkhidmatan ICT & Aset BKP</span>
+                    <span class="text-xs font-bold text-slate-900 uppercase tracking-tight">Permohonan Perkhidmatan ICT & Fasiliti BKP</span>
                 </div>
                 <p class="text-[11px] text-slate-500">Sila pilih kategori di bawah dan lengkapkan butiran khusus mengikut keperluan permohonan anda</p>
             </div>
@@ -42,15 +44,15 @@ $colorThemes = [
         </div>
 
         <!-- Main Form -->
-        <form action="<?= url('/tickets') ?>" method="POST" id="ticket-application-form" class="space-y-4">
+        <form action="<?= url('/tickets') ?>" method="POST" enctype="multipart/form-data" id="ticket-application-form" class="space-y-4">
             <?= csrf_field() ?>
 
-            <!-- LANGKAH 1: Kategori Ribbon (Horizontal Tabs Bar) -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+            <!-- LANGKAH 1: Kategori Ribbon (Horizontal Tabs Bar - 5 Kategori) -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
                 <!-- 1. Peminjaman Aset -->
-                <label data-cat="PEMINJAMAN_ASET" class="category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'PEMINJAMAN_ASET') ? 'border-blue-600 bg-blue-50/80 ring-2 ring-blue-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-blue-50/40' ?>">
+                <label data-cat="PEMINJAMAN_ASET" class="category-card relative flex items-center gap-2 p-2 sm:p-2.5 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'PEMINJAMAN_ASET') ? 'border-blue-600 bg-blue-50/80 ring-2 ring-blue-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-blue-50/40' ?>">
                     <input type="radio" name="category" value="PEMINJAMAN_ASET" <?= ($selectedCategory === 'PEMINJAMAN_ASET') ? 'checked' : '' ?> onchange="switchCategoryView('PEMINJAMAN_ASET')" class="sr-only">
-                    <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-sm text-sm">
+                    <div class="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-sm text-xs">
                         💻
                     </div>
                     <div class="min-w-0">
@@ -60,38 +62,50 @@ $colorThemes = [
                 </label>
 
                 <!-- 2. Sokongan Mesyuarat -->
-                <label data-cat="SOKONGAN_MESYUARAT" class="category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'SOKONGAN_MESYUARAT') ? 'border-indigo-600 bg-indigo-50/80 ring-2 ring-indigo-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-indigo-50/40' ?>">
+                <label data-cat="SOKONGAN_MESYUARAT" class="category-card relative flex items-center gap-2 p-2 sm:p-2.5 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'SOKONGAN_MESYUARAT') ? 'border-indigo-600 bg-indigo-50/80 ring-2 ring-indigo-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-indigo-50/40' ?>">
                     <input type="radio" name="category" value="SOKONGAN_MESYUARAT" <?= ($selectedCategory === 'SOKONGAN_MESYUARAT') ? 'checked' : '' ?> onchange="switchCategoryView('SOKONGAN_MESYUARAT')" class="sr-only">
-                    <div class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm text-sm">
+                    <div class="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm text-xs">
                         🌐
                     </div>
                     <div class="min-w-0">
                         <span class="text-xs font-black text-slate-900 block truncate">Sokongan Mesyuarat</span>
-                        <span class="text-[10px] font-bold text-indigo-700 block truncate">Cisco Webex / Bilik</span>
+                        <span class="text-[10px] font-bold text-indigo-700 block truncate">Webex / Bilik</span>
                     </div>
                 </label>
 
                 <!-- 3. Khidmat Media -->
-                <label data-cat="MEDIA_JURUKAMERA" class="category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'MEDIA_JURUKAMERA') ? 'border-purple-600 bg-purple-50/80 ring-2 ring-purple-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-purple-50/40' ?>">
+                <label data-cat="MEDIA_JURUKAMERA" class="category-card relative flex items-center gap-2 p-2 sm:p-2.5 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'MEDIA_JURUKAMERA') ? 'border-purple-600 bg-purple-50/80 ring-2 ring-purple-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-purple-50/40' ?>">
                     <input type="radio" name="category" value="MEDIA_JURUKAMERA" <?= ($selectedCategory === 'MEDIA_JURUKAMERA') ? 'checked' : '' ?> onchange="switchCategoryView('MEDIA_JURUKAMERA')" class="sr-only">
-                    <div class="w-8 h-8 rounded-lg bg-purple-600 text-white flex items-center justify-center shrink-0 shadow-sm text-sm">
+                    <div class="w-7 h-7 rounded-lg bg-purple-600 text-white flex items-center justify-center shrink-0 shadow-sm text-xs">
                         📸
                     </div>
                     <div class="min-w-0">
                         <span class="text-xs font-black text-slate-900 block truncate">Khidmat Media</span>
-                        <span class="text-[10px] font-bold text-purple-700 block truncate">Jurugambar & Video</span>
+                        <span class="text-[10px] font-bold text-purple-700 block truncate">Foto & Video</span>
                     </div>
                 </label>
 
                 <!-- 4. Bantuan ICT -->
-                <label data-cat="LAIN_LAIN" class="category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'LAIN_LAIN') ? 'border-emerald-600 bg-emerald-50/80 ring-2 ring-emerald-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-emerald-50/40' ?>">
+                <label data-cat="LAIN_LAIN" class="category-card relative flex items-center gap-2 p-2 sm:p-2.5 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'LAIN_LAIN') ? 'border-emerald-600 bg-emerald-50/80 ring-2 ring-emerald-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-emerald-50/40' ?>">
                     <input type="radio" name="category" value="LAIN_LAIN" <?= ($selectedCategory === 'LAIN_LAIN') ? 'checked' : '' ?> onchange="switchCategoryView('LAIN_LAIN')" class="sr-only">
-                    <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-sm text-sm">
+                    <div class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-sm text-xs">
                         🛠️
                     </div>
                     <div class="min-w-0">
                         <span class="text-xs font-black text-slate-900 block truncate">Bantuan ICT</span>
                         <span class="text-[10px] font-bold text-emerald-700 block truncate">Teknikal & Aduan</span>
+                    </div>
+                </label>
+
+                <!-- 5. Aduan Sistem Kuarters -->
+                <label data-cat="ADUAN_KUARTERS" class="category-card relative flex items-center gap-2 p-2 sm:p-2.5 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm <?= ($selectedCategory === 'ADUAN_KUARTERS') ? 'border-amber-600 bg-amber-50/80 ring-2 ring-amber-500/20' : 'border-slate-200 bg-slate-50/60 hover:bg-amber-50/40' ?>">
+                    <input type="radio" name="category" value="ADUAN_KUARTERS" <?= ($selectedCategory === 'ADUAN_KUARTERS') ? 'checked' : '' ?> onchange="switchCategoryView('ADUAN_KUARTERS')" class="sr-only">
+                    <div class="w-7 h-7 rounded-lg bg-amber-600 text-white flex items-center justify-center shrink-0 shadow-sm text-xs">
+                        🏢
+                    </div>
+                    <div class="min-w-0">
+                        <span class="text-xs font-black text-slate-900 block truncate">Aduan Kuarters</span>
+                        <span class="text-[10px] font-bold text-amber-700 block truncate">e-Kuarters & Fasiliti</span>
                     </div>
                 </label>
             </div>
@@ -242,6 +256,78 @@ $colorThemes = [
                                 <textarea name="technical_problem_description" id="technical_problem_description" rows="3"
                                           placeholder="Sila nyatakan kerosakan yang dialami secara ringkas (Cth: Komputer tidak dapat dihidupkan, printer tidak menyambung, kata laluan emel disekat dll.)..." 
                                           class="w-full px-3 py-2 bg-white border border-emerald-300 focus:border-emerald-600 rounded-xl text-xs outline-none leading-relaxed"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Langkah 2: Aduan Sistem Kuarters (Kategori Kerosakan, Keterangan Masalah & Upload Gambar) -->
+                    <div id="section-kuarters" class="p-3.5 sm:p-4 rounded-2xl border-2 border-amber-300 bg-amber-50/30 space-y-3 <?= ($selectedCategory === 'ADUAN_KUARTERS') ? '' : 'hidden' ?>">
+                        <div class="flex items-center justify-between border-b border-amber-200 pb-2">
+                            <span class="text-xs font-black text-amber-950 uppercase tracking-wide">Skop Aduan & Keterangan Masalah Kuarters</span>
+                            <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-bold">Langkah 2</span>
+                        </div>
+
+                        <div class="space-y-2.5">
+                            <div>
+                                <label class="block text-[11px] font-bold text-amber-950 uppercase mb-1">
+                                    Jenis Kerosakan / Kategori Aduan <span class="text-rose-500">*</span>
+                                </label>
+                                <select name="kuarters_complaint_type" id="kuarters_complaint_type" class="w-full px-3 py-2 bg-white border border-amber-300 rounded-xl text-xs font-bold text-amber-950 outline-none">
+                                    <?php foreach ($kuartersComplaintList as $kKey => $k): ?>
+                                    <option value="<?= $kKey ?>"><?= $k['icon'] ?? '🏢' ?> <?= e($k['name']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-[11px] font-bold text-amber-950 uppercase mb-1">
+                                    Tahap Urgensi / Keutamaan Tindakan
+                                </label>
+                                <select name="kuarters_urgency" id="kuarters_urgency" class="w-full px-3 py-2 bg-white border border-amber-300 rounded-xl text-xs outline-none font-medium">
+                                    <option value="BIASA">Biasa (Tindakan berjadual / kerosakan kecil)</option>
+                                    <option value="SEGERA">Segera (Menjejaskan keselesaan / bekalan harian)</option>
+                                    <option value="KECEMASAN">Kecemasan / Kritikal (Kebocoran besar, litar pintas, bahaya keselamatan)</option>
+                                </select>
+                            </div>
+
+                            <!-- Penerangan 2: Keterangan Masalah -->
+                            <div>
+                                <label class="block text-[11px] font-black text-amber-950 uppercase mb-1">
+                                    Penerangan 2: Keterangan Masalah / Kerosakan Kuarters <span class="text-rose-500">*</span>
+                                </label>
+                                <textarea name="kuarters_problem_description" id="kuarters_problem_description" rows="3"
+                                          placeholder="Sila terangkan secara spesifik masalah kerosakan kuarters atau isu sistem e-Kuarters (Cth: Paip bawah singki dapur patah dan air melimpah, siling bilik tidur bocor air hujan, akaun e-Kuarters disekat)..." 
+                                          class="w-full px-3 py-2 bg-white border border-amber-300 focus:border-amber-600 rounded-xl text-xs outline-none leading-relaxed"></textarea>
+                            </div>
+
+                            <!-- Upload Gambar / Bukti Kerosakan -->
+                            <div>
+                                <label class="block text-[11px] font-black text-amber-950 uppercase mb-1">
+                                    Upload Gambar Bukti Kerosakan / Tangkapan Skrin
+                                </label>
+                                <div class="relative border-2 border-dashed border-amber-300 hover:border-amber-500 rounded-xl p-3 bg-white/90 text-center transition-all cursor-pointer" onclick="document.getElementById('kuarters_photo').click()">
+                                    <input type="file" name="kuarters_photo" id="kuarters_photo" accept="image/jpeg,image/png,image/webp,image/jpg" class="hidden" onchange="previewKuartersImage(this)">
+                                    
+                                    <div id="kuarters_upload_prompt" class="space-y-1">
+                                        <div class="w-9 h-9 mx-auto rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-base shadow-xs">
+                                            📸
+                                        </div>
+                                        <p class="text-xs font-bold text-amber-950">Klik untuk Pilih Gambar atau Tangkap Foto</p>
+                                        <p class="text-[10px] text-slate-500">Format disokong: JPG, PNG, WebP (Maksimum 10MB)</p>
+                                    </div>
+
+                                    <!-- Image Live Preview Container -->
+                                    <div id="kuarters_preview_box" class="hidden space-y-2">
+                                        <div class="relative inline-block mx-auto">
+                                            <img id="kuarters_img_preview" src="" alt="Preview Gambar Kerosakan" class="max-h-32 rounded-lg border border-amber-300 shadow-sm mx-auto object-cover">
+                                            <button type="button" onclick="event.stopPropagation(); removeKuartersImage();" class="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-rose-600 text-white font-bold text-xs flex items-center justify-center shadow hover:bg-rose-700">
+                                                &times;
+                                            </button>
+                                        </div>
+                                        <p id="kuarters_file_name" class="text-[11px] font-mono text-amber-900 font-semibold truncate max-w-xs mx-auto"></p>
+                                        <p class="text-[10px] text-blue-600 underline font-semibold">Klik jika ingin menukar gambar lain</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -565,6 +651,89 @@ $colorThemes = [
                         <?php endif; ?>
                     </div>
 
+                    <!-- 5. Langkah 3: Aduan Sistem Kuarters (Penerangan 1: Maklumat Pengguna & Lokasi Kuarters) -->
+                    <div id="step3-kuarters" class="p-3.5 sm:p-4 rounded-2xl border-2 border-amber-300 bg-white space-y-3 <?= ($selectedCategory === 'ADUAN_KUARTERS') ? '' : 'hidden' ?>">
+                        <div class="flex items-center justify-between border-b border-amber-100 pb-1.5">
+                            <span class="text-xs font-black text-amber-950 uppercase tracking-wide">Penerangan 1: Maklumat Pengguna & Lokasi Kuarters</span>
+                            <span class="text-[10px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-bold">Langkah 3</span>
+                        </div>
+
+                        <!-- 1. Tajuk Aduan Kuarters -->
+                        <div class="p-2.5 rounded-xl bg-amber-50/70 border border-amber-200">
+                            <label class="block text-[11px] font-black text-amber-950 uppercase mb-1">
+                                Tajuk Ringkas Aduan Kuarters <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="text" name="kuarters_title" id="kuarters_title"
+                                   placeholder="Cth: Kerosakan Paip Utama Bocor di Ruang Dapur Kuarters Kolam Air" 
+                                   class="w-full px-3 py-1.5 bg-white border border-amber-300 focus:border-amber-600 rounded-lg text-xs font-semibold outline-none">
+                        </div>
+
+                        <!-- 2. Maklumat Lokasi Kompleks & No Unit Kuarters -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div class="p-2.5 rounded-xl bg-blue-50/70 border border-blue-200">
+                                <label class="block text-[11px] font-bold text-blue-950 uppercase mb-1">
+                                    Kompleks / Lokasi Kuarters <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="text" name="kuarters_complex" id="kuarters_complex" list="kuarters_complex_list"
+                                       placeholder="Pilih atau taip kompleks kuarters..." 
+                                       class="w-full px-2.5 py-1 bg-white border border-blue-300 rounded-md text-xs font-semibold text-blue-950 outline-none">
+                                <datalist id="kuarters_complex_list">
+                                    <?php foreach ($kuartersComplexesList as $cName): ?>
+                                    <option value="<?= e($cName) ?>"></option>
+                                    <?php endforeach; ?>
+                                </datalist>
+                            </div>
+
+                            <div class="p-2.5 rounded-xl bg-purple-50/70 border border-purple-200">
+                                <label class="block text-[11px] font-bold text-purple-950 uppercase mb-1">
+                                    No. Rumah / Blok / Tingkat <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="text" name="kuarters_unit_no" id="kuarters_unit_no" 
+                                       placeholder="Cth: Blok B, No. 03-05" 
+                                       class="w-full px-2.5 py-1 bg-white border border-purple-300 rounded-md text-xs font-bold text-purple-950 outline-none">
+                            </div>
+                        </div>
+
+                        <!-- 3. Maklumat Pengguna / Penghuni Kuarters (Penerangan 1) -->
+                        <div class="p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-2">
+                            <span class="text-[10px] font-black text-emerald-950 uppercase block">Maklumat Penghuni / Pengadu</span>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-emerald-900 uppercase mb-0.5">Nama Penuh Penghuni <span class="text-rose-500">*</span></label>
+                                    <input type="text" name="kuarters_occupant_name" id="kuarters_occupant_name" value="<?= e($isLoggedIn ? $user['name'] : '') ?>" placeholder="Nama penuh penghuni" class="w-full px-2.5 py-1 bg-white border border-emerald-300 rounded-md text-xs outline-none font-semibold">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-emerald-900 uppercase mb-0.5">No. Kad Pengenalan</label>
+                                    <input type="text" name="kuarters_ic_no" id="kuarters_ic_no" placeholder="Cth: 880101-01-XXXX" class="w-full px-2.5 py-1 bg-white border border-emerald-300 rounded-md text-xs font-mono outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-emerald-900 uppercase mb-0.5">No. Telefon / WhatsApp <span class="text-rose-500">*</span></label>
+                                    <input type="text" name="kuarters_phone" id="kuarters_phone" value="<?= e($isLoggedIn ? ($user['phone'] ?? '') : '') ?>" placeholder="01X-XXXXXXX" class="w-full px-2.5 py-1 bg-white border border-emerald-300 rounded-md text-xs font-bold text-emerald-950 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-emerald-900 uppercase mb-0.5">Emel Rasmi / Penghuni</label>
+                                    <input type="email" name="kuarters_email" id="kuarters_email" value="<?= e($isLoggedIn ? $user['email'] : '') ?>" placeholder="nama@johor.gov.my" class="w-full px-2.5 py-1 bg-white border border-emerald-300 rounded-md text-xs outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Unit / Jabatan & Tarikh Aduan -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div class="p-2.5 rounded-xl bg-indigo-50/70 border border-indigo-200">
+                                <label class="block text-[10px] font-bold text-indigo-950 uppercase mb-0.5">Jabatan / Unit Bertugas</label>
+                                <select name="kuarters_unit" class="w-full px-2 py-1 bg-white border border-indigo-300 rounded-md text-xs outline-none font-bold text-indigo-900">
+                                    <?php foreach ($unitsList as $uKey => $u): ?>
+                                    <option value="<?= $uKey ?>" <?= (($user['unit'] ?? '') === $uKey) ? 'selected' : '' ?>><?= e($u['name']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-cyan-50/70 border border-cyan-200">
+                                <label class="block text-[10px] font-bold text-cyan-950 uppercase mb-0.5">Tarikh Laporan / Aduan <span class="text-rose-500">*</span></label>
+                                <input type="date" name="kuarters_date" id="kuarters_date" value="<?= $today ?>" class="w-full px-2 py-1 bg-white border border-cyan-300 rounded-md text-xs font-bold text-cyan-950 outline-none">
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Submission Action Button -->
                     <div class="pt-1">
                         <button type="submit" 
@@ -573,7 +742,7 @@ $colorThemes = [
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </button>
                         <p class="text-[10px] text-center text-slate-500 mt-1.5">
-                            Permohonan akan disalurkan secara automatik kepada <strong>Ketua Unit</strong> dan <strong>Seksyen ICT BKP</strong>.
+                            Permohonan akan disalurkan secara automatik kepada <strong>Ketua Unit</strong> dan <strong>Seksyen ICT / Pengurusan BKP</strong>.
                         </p>
                     </div>
                 </div>
@@ -586,20 +755,22 @@ $colorThemes = [
 function switchCategoryView(cat) {
     // Reset all category cards
     document.querySelectorAll('.category-card').forEach(el => {
-        el.className = 'category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-slate-200 bg-slate-50/60 hover:bg-slate-100/70';
+        el.className = 'category-card relative flex items-center gap-2 p-2 sm:p-2.5 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-slate-200 bg-slate-50/60 hover:bg-slate-100/70';
     });
 
     // Highlight selected card
     const activeLabel = document.querySelector(`.category-card[data-cat="${cat}"]`);
     if (activeLabel) {
         if (cat === 'PEMINJAMAN_ASET') {
-            activeLabel.className = 'category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-blue-600 bg-blue-50/80 ring-2 ring-blue-500/20';
+            activeLabel.className = 'category-card relative flex items-center gap-2 p-2 sm:p-2.5 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-blue-600 bg-blue-50/80 ring-2 ring-blue-500/20';
         } else if (cat === 'SOKONGAN_MESYUARAT') {
-            activeLabel.className = 'category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-indigo-600 bg-indigo-50/80 ring-2 ring-indigo-500/20';
+            activeLabel.className = 'category-card relative flex items-center gap-2 p-2 sm:p-2.5 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-indigo-600 bg-indigo-50/80 ring-2 ring-indigo-500/20';
         } else if (cat === 'MEDIA_JURUKAMERA') {
-            activeLabel.className = 'category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-purple-600 bg-purple-50/80 ring-2 ring-purple-500/20';
+            activeLabel.className = 'category-card relative flex items-center gap-2 p-2 sm:p-2.5 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-purple-600 bg-purple-50/80 ring-2 ring-purple-500/20';
         } else if (cat === 'LAIN_LAIN') {
-            activeLabel.className = 'category-card relative flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-emerald-600 bg-emerald-50/80 ring-2 ring-emerald-500/20';
+            activeLabel.className = 'category-card relative flex items-center gap-2 p-2 sm:p-2.5 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-emerald-600 bg-emerald-50/80 ring-2 ring-emerald-500/20';
+        } else if (cat === 'ADUAN_KUARTERS') {
+            activeLabel.className = 'category-card relative flex items-center gap-2 p-2 sm:p-2.5 rounded-xl border-2 cursor-pointer transition-all hover:scale-[1.01] shadow-sm border-amber-600 bg-amber-50/80 ring-2 ring-amber-500/20';
         }
     }
 
@@ -608,12 +779,14 @@ function switchCategoryView(cat) {
     const meetSec = document.getElementById('section-meeting');
     const mediaSec = document.getElementById('section-media');
     const techSec = document.getElementById('section-technical');
+    const kuartersSec = document.getElementById('section-kuarters');
 
     // Right Column Sections (Langkah 3)
     const step3Loan = document.getElementById('step3-asset-loan');
     const step3Meeting = document.getElementById('step3-meeting');
     const step3Media = document.getElementById('step3-media');
     const step3Tech = document.getElementById('step3-technical');
+    const step3Kuarters = document.getElementById('step3-kuarters');
 
     // 1. Inputs for Loan (KEW.PA-9)
     const purposeLoan = document.getElementById('purpose_loan');
@@ -643,17 +816,28 @@ function switchCategoryView(cat) {
     const techPhone = document.getElementById('technical_phone');
     const techDate = document.getElementById('technical_date');
 
+    // 5. Inputs for Kuarters
+    const kuartersProb = document.getElementById('kuarters_problem_description');
+    const kuartersTitle = document.getElementById('kuarters_title');
+    const kuartersComplex = document.getElementById('kuarters_complex');
+    const kuartersUnitNo = document.getElementById('kuarters_unit_no');
+    const kuartersOccupant = document.getElementById('kuarters_occupant_name');
+    const kuartersPhone = document.getElementById('kuarters_phone');
+    const kuartersDate = document.getElementById('kuarters_date');
+
     // Reset visibility (Langkah 2)
     eqSec.classList.add('hidden');
     meetSec.classList.add('hidden');
     mediaSec.classList.add('hidden');
     techSec.classList.add('hidden');
+    if (kuartersSec) kuartersSec.classList.add('hidden');
 
     // Reset visibility (Langkah 3)
     step3Loan.classList.add('hidden');
     step3Meeting.classList.add('hidden');
     step3Media.classList.add('hidden');
     step3Tech.classList.add('hidden');
+    if (step3Kuarters) step3Kuarters.classList.add('hidden');
 
     // Disable all required first
     if (purposeLoan) purposeLoan.required = false;
@@ -679,6 +863,14 @@ function switchCategoryView(cat) {
     if (techLoc) techLoc.required = false;
     if (techPhone) techPhone.required = false;
     if (techDate) techDate.required = false;
+
+    if (kuartersProb) kuartersProb.required = false;
+    if (kuartersTitle) kuartersTitle.required = false;
+    if (kuartersComplex) kuartersComplex.required = false;
+    if (kuartersUnitNo) kuartersUnitNo.required = false;
+    if (kuartersOccupant) kuartersOccupant.required = false;
+    if (kuartersPhone) kuartersPhone.required = false;
+    if (kuartersDate) kuartersDate.required = false;
 
     // Activate specific category
     if (cat === 'PEMINJAMAN_ASET') {
@@ -717,7 +909,46 @@ function switchCategoryView(cat) {
         if (techLoc) techLoc.required = true;
         if (techPhone) techPhone.required = true;
         if (techDate) techDate.required = true;
+    } else if (cat === 'ADUAN_KUARTERS') {
+        if (kuartersSec) kuartersSec.classList.remove('hidden');
+        if (step3Kuarters) step3Kuarters.classList.remove('hidden');
+
+        if (kuartersProb) kuartersProb.required = true;
+        if (kuartersTitle) kuartersTitle.required = true;
+        if (kuartersComplex) kuartersComplex.required = true;
+        if (kuartersUnitNo) kuartersUnitNo.required = true;
+        if (kuartersOccupant) kuartersOccupant.required = true;
+        if (kuartersPhone) kuartersPhone.required = true;
+        if (kuartersDate) kuartersDate.required = true;
     }
+}
+
+// Preview uploaded kuarters image
+function previewKuartersImage(input) {
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('kuarters_img_preview').src = e.target.result;
+            document.getElementById('kuarters_file_name').innerText = file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)';
+            document.getElementById('kuarters_upload_prompt').classList.add('hidden');
+            document.getElementById('kuarters_preview_box').classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+function removeKuartersImage() {
+    const input = document.getElementById('kuarters_photo');
+    if (input) input.value = '';
+    const preview = document.getElementById('kuarters_img_preview');
+    if (preview) preview.src = '';
+    const fn = document.getElementById('kuarters_file_name');
+    if (fn) fn.innerText = '';
+    const box = document.getElementById('kuarters_preview_box');
+    if (box) box.classList.add('hidden');
+    const prompt = document.getElementById('kuarters_upload_prompt');
+    if (prompt) prompt.classList.remove('hidden');
 }
 
 // Initialize on page load

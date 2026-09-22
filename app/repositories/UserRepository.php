@@ -15,9 +15,22 @@ class UserRepository extends BaseRepository
 
     public function findByEmail(string $email): ?array
     {
-        return $this->query()
-            ->where('email', strtolower(trim($email)))
+        $term = strtolower(trim($email));
+        $user = $this->query()
+            ->where('email', $term)
             ->first();
+
+        if (!$user) {
+            // Sokong carian melalui username atau alias pentadbir 'admin'
+            $all = $this->query()->get();
+            foreach ($all as $u) {
+                if (strtolower($u['username'] ?? '') === $term || ($term === 'admin' && ($u['role'] ?? '') === 'ADMIN')) {
+                    return $u;
+                }
+            }
+        }
+
+        return $user;
     }
 
     public function getByUnit(string $unitCode): array

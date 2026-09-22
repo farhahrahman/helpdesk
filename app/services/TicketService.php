@@ -76,6 +76,14 @@ class TicketService
             'media_scope' => $data['media_scope'] ?? null,
             'event_agenda' => trim($data['event_agenda'] ?? ''),
 
+            'kuarters_complaint_type' => $data['kuarters_complaint_type'] ?? null,
+            'kuarters_complex' => $data['kuarters_complex'] ?? null,
+            'kuarters_unit_no' => $data['kuarters_unit_no'] ?? null,
+            'kuarters_ic_no' => $data['kuarters_ic_no'] ?? null,
+            'kuarters_urgency' => $data['kuarters_urgency'] ?? null,
+            'attachment_url' => $data['attachment_url'] ?? null,
+            'attachment_name' => $data['attachment_name'] ?? null,
+
             // Approval details
             'unit_approval' => [
                 'status' => 'PENDING',

@@ -125,6 +125,22 @@ class Request
     }
 
     /**
+     * Retrieve uploaded file data
+     */
+    public function file(string $key): ?array
+    {
+        return $this->files[$key] ?? null;
+    }
+
+    /**
+     * Check if a file was successfully uploaded
+     */
+    public function hasFile(string $key): bool
+    {
+        return isset($this->files[$key]) && is_array($this->files[$key]) && ($this->files[$key]['error'] === UPLOAD_ERR_OK);
+    }
+
+    /**
      * Check if request is AJAX / JSON
      */
     public function isAjax(): bool

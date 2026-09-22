@@ -73,6 +73,8 @@ class DashboardViewModel
             'PEMINJAMAN_ASET' => 0,
             'SOKONGAN_MESYUARAT' => 0,
             'MEDIA_JURUKAMERA' => 0,
+            'LAIN_LAIN' => 0,
+            'ADUAN_KUARTERS' => 0,
         ];
         foreach ($allTickets as $t) {
             $c = $t['category'] ?? 'PEMINJAMAN_ASET';

@@ -20,3 +20,9 @@ list_sheets.php
 inspect_sheet2.php
 inspect_headers.php
 import_assets.php
+
+# Uploaded Files
+/public/uploads/*
+!/public/uploads/kuarters/
+/public/uploads/kuarters/*
+!/public/uploads/kuarters/.gitkeep

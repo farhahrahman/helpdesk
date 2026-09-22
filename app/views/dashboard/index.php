@@ -157,10 +157,38 @@ $role = $user['role'] ?? 'STAF';
                                 <span class="w-2 h-2 rounded-full bg-purple-500"></span>
                                 Jurukamera & Media Acara
                             </span>
-                            <span class="text-slate-900 font-bold"><?= $category_counts['MEDIA_JURUKAMERA'] ?></span>
+                            <span class="text-slate-900 font-bold"><?= $category_counts['MEDIA_JURUKAMERA'] ?? 0 ?></span>
                         </div>
                         <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                            <div class="h-full bg-purple-600 rounded-full" style="width: <?= ($metrics['total'] > 0) ? ($category_counts['MEDIA_JURUKAMERA'] / $metrics['total'] * 100) : 0 ?>%"></div>
+                            <div class="h-full bg-purple-600 rounded-full" style="width: <?= ($metrics['total'] > 0) ? (($category_counts['MEDIA_JURUKAMERA'] ?? 0) / $metrics['total'] * 100) : 0 ?>%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Bantuan ICT -->
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between text-xs font-medium">
+                            <span class="text-slate-700 flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                Bantuan & Sokongan ICT
+                            </span>
+                            <span class="text-slate-900 font-bold"><?= $category_counts['LAIN_LAIN'] ?? 0 ?></span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                            <div class="h-full bg-emerald-600 rounded-full" style="width: <?= ($metrics['total'] > 0) ? (($category_counts['LAIN_LAIN'] ?? 0) / $metrics['total'] * 100) : 0 ?>%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Aduan Sistem Kuarters -->
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between text-xs font-medium">
+                            <span class="text-slate-700 flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                                Aduan Sistem Kuarters
+                            </span>
+                            <span class="text-slate-900 font-bold"><?= $category_counts['ADUAN_KUARTERS'] ?? 0 ?></span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                            <div class="h-full bg-amber-600 rounded-full" style="width: <?= ($metrics['total'] > 0) ? (($category_counts['ADUAN_KUARTERS'] ?? 0) / $metrics['total'] * 100) : 0 ?>%"></div>
                         </div>
                     </div>
                 </div>
