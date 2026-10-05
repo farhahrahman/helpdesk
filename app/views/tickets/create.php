@@ -249,7 +249,7 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                                     </label>
                                     <select name="technical_type" id="technical_type" class="w-full px-3 py-2 bg-slate-50/70 border border-slate-200 focus:bg-white focus:border-[#1d3d75] rounded-xl text-xs font-bold text-slate-900 outline-none">
                                         <?php foreach ($techSupportList as $tKey => $t): ?>
-                                        <option value="<?= $tKey ?>"><?= $t['icon'] ?? '🛠️' ?> <?= e($t['name']) ?></option>
+                                        <option value="<?= $tKey ?>"><?= $t['icon'] ?? '•' ?> <?= e($t['name']) ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -766,7 +766,7 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                                         </label>
                                         <select name="kuarters_complaint_type" id="kuarters_complaint_type" class="w-full px-3 py-2 bg-slate-50/70 border border-slate-200 focus:bg-white focus:border-[#1d3d75] rounded-xl text-xs font-medium outline-none">
                                             <?php foreach ($kuartersComplaintList as $kKey => $k): ?>
-                                            <option value="<?= $kKey ?>"><?= $k['icon'] ?? '🏢' ?> <?= e($k['name']) ?></option>
+                                            <option value="<?= $kKey ?>"><?= $k['icon'] ?? '•' ?> <?= e($k['name']) ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
