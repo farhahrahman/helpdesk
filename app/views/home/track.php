@@ -95,11 +95,17 @@ $ticketFound = !empty($ticket);
                 <p class="text-xs text-slate-500 mt-1">Dihantar pada <?= e($ticket['formatted_created_at'] ?? format_datetime($ticket['created_at'])) ?></p>
             </div>
 
-            <div class="flex flex-col sm:items-end gap-2">
-                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold ring-1 border <?= $ticket['status_badge_class'] ?>">
-                    <span class="w-2 h-2 rounded-full bg-current"></span>
-                    <?= e($ticket['status_label']) ?>
+                <?php if ($ticket['status'] === 'SELESAI'): ?>
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-black bg-emerald-100 text-emerald-800 border border-emerald-300 shadow-2xs">
+                    <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                    DAH SELESAI
                 </span>
+                <?php else: ?>
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-black bg-amber-100 text-amber-900 border border-amber-300 shadow-2xs">
+                    <span class="w-2 h-2 rounded-full bg-amber-600 animate-pulse"></span>
+                    BELUM SELESAI (<?= e($ticket['status_label']) ?>)
+                </span>
+                <?php endif; ?>
                 
                 <a href="<?= url('/tickets/' . $ticket['id'] . '/print') ?>" target="_blank"
                    class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg border border-slate-300 transition-colors">

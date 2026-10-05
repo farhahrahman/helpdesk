@@ -238,15 +238,73 @@
     }
 
     // Penjana Jawapan Pintar Berasaskan Soalan (Smart FAQ Knowledge Engine)
-    function generateBotResponse(userInput) {
+    async function generateBotResponse(userInput) {
         const query = userInput.toLowerCase();
+
+        // 0. Semakan Terus Nombor Tiket (Cth: ICTBKP/2026/10/0002, TCK-202609-001, atau nombor digit 0002)
+        const matchIct = userInput.match(/ICTBKP\/\d{4}\/\d{1,2}\/\d{1,4}/i);
+        const matchTck = userInput.match(/TCK-\d{6}-\d{1,4}/i);
+        const matchDigits = userInput.match(/\b\d{4}\b/) || userInput.match(/^\s*(\d{1,4})\s*$/);
+        const ticketRef = matchIct ? matchIct[0] : (matchTck ? matchTck[0] : (matchDigits ? matchDigits[0] : null));
+
+        if (ticketRef) {
+            try {
+                const res = await fetch('<?= url('/track') ?>?ref=' + encodeURIComponent(ticketRef) + '&format=json');
+                const data = await res.json();
+                if (data && data.found && data.ticket) {
+                    const t = data.ticket;
+                    const isCompleted = t.is_completed;
+                    const badgeHtml = isCompleted 
+                        ? `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-black bg-emerald-100 text-emerald-800 border border-emerald-300">✅ DAH SELESAI</span>`
+                        : `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-black bg-amber-100 text-amber-800 border border-amber-300">⏳ BELUM SELESAI</span>`;
+                    
+                    return `Maklumat status rasmi bagi tiket <strong>${escapeHtml(t.reference_no)}</strong>:<br><br>
+                        <div class="p-3.5 bg-white rounded-2xl border border-slate-200/90 shadow-xs space-y-2.5 text-left text-slate-800">
+                            <div class="flex items-center justify-between gap-2 pb-2 border-b border-slate-100">
+                                <span class="font-mono font-extrabold text-xs text-[#1d3d75] bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200">${escapeHtml(t.reference_no)}</span>
+                                ${badgeHtml}
+                            </div>
+                            <div class="space-y-1.5 text-xs">
+                                <div>
+                                    <span class="text-[10px] uppercase font-bold text-slate-400 block">Tugasan / Tajuk:</span>
+                                    <span class="font-bold text-slate-900 block leading-snug">${escapeHtml(t.title)}</span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-100 text-[11px]">
+                                    <div>
+                                        <span class="text-slate-400 font-semibold block">Pemohon:</span>
+                                        <span class="font-bold text-slate-800 block truncate">${escapeHtml(t.applicant_name)}</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-slate-400 font-semibold block">Unit:</span>
+                                        <span class="font-bold text-slate-800 block truncate">${escapeHtml(t.unit_name)}</span>
+                                    </div>
+                                </div>
+                                <div class="pt-1 border-t border-slate-100 text-[11px]">
+                                    <span class="text-slate-400 font-semibold">Status Aliran Kerja:</span>
+                                    <span class="font-extrabold ${isCompleted ? 'text-emerald-700' : 'text-amber-700'}">${escapeHtml(t.status_label)}</span>
+                                </div>
+                            </div>
+                            <div class="pt-2 border-t border-slate-100">
+                                <a href="${t.track_url}" target="_blank" class="block w-full text-center py-2 bg-[#1d3d75] hover:bg-[#163060] text-white text-xs font-bold rounded-xl shadow-xs transition-colors">
+                                    Buka Slip & Jejak Penuh &rarr;
+                                </a>
+                            </div>
+                        </div>`;
+                } else {
+                    return `Maaf, rekod permohonan bagi nombor rujukan <strong class="font-mono text-slate-900">${escapeHtml(ticketRef)}</strong> tidak ditemui dalam pangkalan data.<br><br>
+                        Sila pastikan nombor rujukan dimasukkan dengan tepat atau anda boleh menyemak semula di <a href="<?= url('/track') ?>" class="text-blue-600 font-bold underline hover:text-blue-800">Halaman Semak Status</a>.`;
+                }
+            } catch (err) {
+                // If fetch fails, proceed with standard response
+            }
+        }
 
         // 1. Semakan Status Tiket
         if (query.includes('status') || query.includes('tiket') || query.includes('semak') || query.includes('track') || query.includes('rujukan')) {
             return `Untuk menyemak status permohonan terkini:<br><br>
-                1. Masukkan nombor tiket anda (contoh: <code>ICTBKP/2026/08/0001</code> atau <code>0001</code>) pada kotak carian muka depan.<br>
-                2. Atau anda boleh terus ke <a href="<?= url('/track') ?>" class="text-blue-600 font-bold underline hover:text-blue-800">Halaman Semak Status Tiket Di Sini</a>.<br>
-                3. Jika permohonan telah lulus, anda boleh terus memuat turun Slip Rasmi di situ.`;
+                &bull; <strong>Cara Pantas:</strong> Taip terus nombor rujukan tiket anda di sini (contoh: <code>ICTBKP/2026/10/0002</code> atau <code>0002</code>) dan saya akan terus semakkan statusnya (<strong>Dah Selesai</strong> atau <strong>Belum Selesai</strong>)!<br>
+                &bull; Atau anda boleh terus ke <a href="<?= url('/track') ?>" class="text-blue-600 font-bold underline hover:text-blue-800">Halaman Semak Status Tiket Di Sini</a>.<br>
+                &bull; Jika permohonan telah lulus, anda boleh terus memuat turun Slip Rasmi di situ.`;
         }
 
         // 2. Peminjaman Aset / Laptop
@@ -327,12 +385,17 @@
         if (typing) typing.classList.remove('hidden');
         scrollChatToBottom();
 
-        // Simulate reply delay (500ms - 800ms)
-        setTimeout(() => {
-            if (typing) typing.classList.add('hidden');
-            const botReply = generateBotResponse(text);
-            appendMessage('bot', botReply, true);
-        }, 650);
+        // Asynchronous bot response with typing delay
+        setTimeout(async () => {
+            try {
+                const botReply = await generateBotResponse(text);
+                if (typing) typing.classList.add('hidden');
+                appendMessage('bot', botReply, true);
+            } catch (err) {
+                if (typing) typing.classList.add('hidden');
+                appendMessage('bot', 'Maaf, berlaku sedikit ralat rangkaian semasa memproses pertanyaan anda.', true);
+            }
+        }, 500);
     };
 
     // Handle Quick Action Chip Click
@@ -342,11 +405,16 @@
         if (typing) typing.classList.remove('hidden');
         scrollChatToBottom();
 
-        setTimeout(() => {
-            if (typing) typing.classList.add('hidden');
-            const botReply = generateBotResponse(text);
-            appendMessage('bot', botReply, true);
-        }, 600);
+        setTimeout(async () => {
+            try {
+                const botReply = await generateBotResponse(text);
+                if (typing) typing.classList.add('hidden');
+                appendMessage('bot', botReply, true);
+            } catch (err) {
+                if (typing) typing.classList.add('hidden');
+                appendMessage('bot', 'Maaf, berlaku sedikit ralat rangkaian.', true);
+            }
+        }, 450);
     };
 })();
 </script>

@@ -17,10 +17,17 @@ $statusKey = $ticket['status'] ?? '';
                 <span class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 text-xs font-semibold">
                     <?= e($ticket['category_name']) ?>
                 </span>
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ring-1 <?= $ticket['status_badge_class'] ?>">
-                    <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
-                    <?= e($ticket['status_label']) ?>
+                <?php if ($ticket['status'] === 'SELESAI'): ?>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-emerald-100 text-emerald-800 border border-emerald-300">
+                    <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                    DAH SELESAI
                 </span>
+                <?php else: ?>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-amber-100 text-amber-900 border border-amber-300">
+                    <span class="w-2 h-2 rounded-full bg-amber-600 animate-pulse"></span>
+                    BELUM SELESAI (<?= e($ticket['status_label']) ?>)
+                </span>
+                <?php endif; ?>
             </div>
             <h1 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-snug">
                 <?= e($ticket['title']) ?>

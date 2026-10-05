@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
 
+date_default_timezone_set('Asia/Kuala_Lumpur');
+
 use App\Storage\JsonStorageEngine;
 
 $engine = JsonStorageEngine::getInstance();

@@ -12,6 +12,9 @@ ini_set('display_errors', '0');
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+// Set Malaysian Timezone as default across entire application
+date_default_timezone_set(app_config('app.timezone', 'Asia/Kuala_Lumpur'));
+
 use App\Core\Auth;
 use App\Core\Request;
 use App\Core\Response;

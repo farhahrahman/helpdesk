@@ -63,6 +63,39 @@ class HomeController extends BaseController
             }
         }
 
+        // Respons JSON jika diminta oleh chatbot atau AJAX
+        if ($request->input('format') === 'json' || $request->isAjax()) {
+            if (!$ticket) {
+                $this->json([
+                    'found' => false,
+                    'ref' => $refNo,
+                    'message' => 'Tiada rekod permohonan ditemui bagi nombor rujukan ini.',
+                ], 200);
+                return;
+            }
+
+            $isCompleted = in_array($ticket['status'], ['SELESAI', 'COMPLETED']);
+            $this->json([
+                'found' => true,
+                'ref' => $ticket['reference_no'],
+                'ticket' => [
+                    'id' => $ticket['id'],
+                    'reference_no' => $ticket['reference_no'],
+                    'title' => $ticket['title'],
+                    'category_name' => $ticket['category_name'],
+                    'status' => $ticket['status'],
+                    'status_label' => $ticket['status_label'],
+                    'is_completed' => $isCompleted,
+                    'status_badge' => $isCompleted ? 'DAH SELESAI' : 'BELUM SELESAI',
+                    'applicant_name' => $ticket['applicant_name'],
+                    'unit_name' => $ticket['unit_name'],
+                    'created_at' => $ticket['formatted_created_at'] ?? format_datetime($ticket['created_at']),
+                    'track_url' => url('/track/' . urlencode($ticket['reference_no'])),
+                ],
+            ], 200);
+            return;
+        }
+
         $this->render('home/track', [
             'pageTitle' => 'Semakan Status No. Tiket: ' . ($refNo ?: 'Carian') . ' - ' . app_config('app.short_name'),
             'refNo' => $refNo,

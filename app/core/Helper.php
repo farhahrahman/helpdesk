@@ -189,7 +189,9 @@ if (!function_exists('format_date')) {
             return '-';
         }
         try {
-            $dt = new \DateTime($dateStr, new \DateTimeZone(app_config('app.timezone', 'Asia/Kuala_Lumpur')));
+            $tz = new \DateTimeZone(app_config('app.timezone', 'Asia/Kuala_Lumpur'));
+            $dt = new \DateTime($dateStr);
+            $dt->setTimezone($tz);
             $months = [
                 'Jan' => 'Jan', 'Feb' => 'Feb', 'Mar' => 'Mac', 'Apr' => 'Apr',
                 'May' => 'Mei', 'Jun' => 'Jun', 'Jul' => 'Jul', 'Aug' => 'Ogos',
