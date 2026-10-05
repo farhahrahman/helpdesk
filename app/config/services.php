@@ -152,15 +152,6 @@ return [
             'icon' => '🎙️',
             'description' => 'Mikrofon tanpa wayar (wireless / clip-on lavalier) dan pembesar suara mudah alih',
         ],
-        'OTHER' => [
-            'id' => 'OTHER',
-            'name' => 'Peralatan ICT Khas / Lain-lain',
-            'category' => 'PEMINJAMAN_ASET',
-            'type_label' => 'Aksesori Tambahan',
-            'sample_serial' => 'BKP/ICT/ACC/2026/01',
-            'icon' => '🔌',
-            'description' => 'Kabel HDMI 20m, USB-C Multiport Hub, Extension Cord atau aksesori khusus',
-        ],
     ],
 
     // Jenis Sokongan Mesyuarat
