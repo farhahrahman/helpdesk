@@ -137,16 +137,16 @@ $currentUser = Auth::user();
         <?= $content ?? '' ?>
     </main>
 
-    <!-- Corporate Footer (Sesuai Mockup) -->
-    <footer class="bg-white border-t border-slate-200 text-slate-500 text-xs py-6 sm:py-8 px-4 sm:px-8 mt-auto">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex flex-wrap items-center gap-2">
-                <span class="font-extrabold text-slate-900 tracking-tight">HELPDESK ICT BKP</span>
-                <span class="text-slate-300">|</span>
-                <span class="text-slate-500 font-medium">Memacu Perkhidmatan · Memperkasa Digital</span>
+    <!-- Corporate Footer (Exact Mockup Match) -->
+    <footer class="bg-white border-t border-slate-200 text-slate-500 text-xs py-5 px-4 sm:px-8 mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <div class="text-slate-500 font-medium">
+                Memacu Perkhidmatan <span class="mx-1.5 text-slate-300">·</span> Memperkasa Digital
             </div>
-            <div class="text-[11px] text-slate-500 text-center sm:text-right">
-                &copy; <?= date('Y') ?> Seksyen ICT, Bahagian Khidmat Pengurusan, Pejabat Setiausaha Kerajaan Johor.
+            <div class="flex items-center gap-2">
+                <span class="w-10 h-0.5 bg-amber-500 rounded-full inline-block"></span>
+                <span class="font-extrabold text-slate-900 tracking-tight">HELPDESK ICT</span>
+                <span class="text-amber-500 font-extrabold">BKP</span>
             </div>
         </div>
     </footer>

@@ -5,129 +5,114 @@ $isLoggedIn = Auth::check();
 $currentUser = Auth::user();
 ?>
 
-<!-- 1. Hero Section (Clean, Professional High-Fidelity UI) -->
-<section class="relative bg-white border-b border-slate-200/80 overflow-hidden">
-    <!-- Desktop Background Hero Image with Smooth Left Alpha Gradient Mask -->
-    <div class="hidden lg:block absolute right-0 top-0 bottom-0 w-1/2 xl:w-7/12 pointer-events-none select-none overflow-hidden">
+<!-- 1. Hero Section (Matching User Mockup Layout) -->
+<section class="relative bg-white border-b border-slate-200/80 overflow-hidden min-h-[500px] lg:min-h-[560px] flex items-center">
+    <!-- Desktop Background Hero Image with Left Alpha Gradient Mask -->
+    <div class="hidden lg:block absolute right-0 top-0 bottom-0 w-7/12 xl:w-2/3 pointer-events-none select-none overflow-hidden">
         <img src="<?= asset('images/hero-counter.png') ?>" 
              alt="Kaunter Perkhidmatan BKP SUKJ" 
              class="h-full w-full object-cover object-right">
     </div>
 
-    <!-- Soft Gradient Mask for Ultra-Crisp Left Text Readability on all screens -->
-    <div class="hidden lg:block absolute inset-y-0 left-0 w-3/5 bg-gradient-to-r from-white via-white/90 to-transparent pointer-events-none z-[1]"></div>
+    <!-- Soft Left White Gradient Mask to blend seamlessly behind text -->
+    <div class="hidden lg:block absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-white via-white/95 to-transparent pointer-events-none z-[1]"></div>
 
     <!-- Mobile/Tablet Subtle Background Overlay -->
-    <div class="lg:hidden absolute inset-0 pointer-events-none select-none opacity-10">
+    <div class="lg:hidden absolute inset-0 pointer-events-none select-none opacity-15">
         <img src="<?= asset('images/hero-counter.png') ?>" 
              alt="Kaunter Perkhidmatan BKP SUKJ" 
-             class="h-full w-full object-cover object-center">
+             class="h-full w-full object-cover object-right">
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 relative z-10 w-full">
         <div class="max-w-xl lg:max-w-2xl space-y-6">
             <!-- Top Tagline Pill -->
             <div>
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 border border-blue-200/80 text-blue-800 text-xs font-extrabold uppercase tracking-widest shadow-sm">
-                    <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-                    <span>Satu Platform</span>
-                </div>
+                <span class="text-xs font-extrabold uppercase tracking-widest text-slate-400">
+                    Satu Platform
+                </span>
             </div>
 
-            <!-- Main Headline -->
-            <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-black text-slate-900 tracking-tight leading-[1.12]">
-                Sokongan ICT dan Perkhidmatan Aset <span class="text-amber-500">Lebih Mudah.</span>
+            <!-- Main Headline (Matching Mockup) -->
+            <h1 class="text-3xl sm:text-5xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.15]">
+                Sokongan ICT<br>dan Perkhidmatan Aset<br><span class="text-amber-500">Lebih Mudah.</span>
             </h1>
 
-            <!-- Description Paragraph -->
-            <p class="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
-                Sistem bersepadu pengurusan permohonan peminjaman peralatan ICT, sokongan teknikal mesyuarat, dan liputan media rasmi Bahagian Khidmat Pengurusan tanpa perlu log masuk.
+            <!-- Description Paragraph (Matching Mockup) -->
+            <p class="text-slate-600 text-xs sm:text-sm lg:text-base leading-relaxed font-normal max-w-xl">
+                Permohonan, aduan dan sokongan teknikal ICT BKP termasuk perkhidmatan aset, media dan mesyuarat dalam satu platform yang ringkas dan tersusun.
             </p>
 
-            <!-- Two Prominent Action Cards Side-by-Side -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3">
-                <!-- Card 1: Navy/Dark Blue "Buat Permohonan Baru" -->
+            <!-- Two Action Cards (Matching Mockup Side-by-Side) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 max-w-2xl">
+                <!-- Card 1: Blue Card "Buat Permohonan Baru" -->
                 <a href="<?= url('/tickets/create') ?>" 
-                   class="group p-5 rounded-2xl bg-[#0a1931] hover:bg-[#0f244a] text-white shadow-xl shadow-slate-900/10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between border border-blue-900/40">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="w-10 h-10 rounded-xl bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-300 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                            </div>
-                            <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/80 group-hover:bg-white group-hover:text-[#0a1931] transition-all">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </div>
+                   class="group p-5 rounded-2xl bg-[#1d3d75] hover:bg-[#163060] text-white shadow-xl shadow-blue-950/15 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-between gap-4 border border-blue-900/40">
+                    <div class="flex items-center gap-3.5 min-w-0">
+                        <div class="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white shrink-0 group-hover:bg-white group-hover:text-blue-900 transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                         </div>
-                        <h3 class="font-bold text-base text-white leading-tight">Buat Permohonan Baru</h3>
-                        <p class="text-xs text-blue-200/80 mt-1.5 leading-relaxed font-normal">Peminjaman laptop, mesyuarat, media & khidmat teknikal</p>
+                        <div class="min-w-0">
+                            <h3 class="font-bold text-base text-white leading-tight">Buat Permohonan Baru</h3>
+                            <p class="text-[11px] text-blue-100/80 mt-1 leading-snug">Hantar permohonan, aduan atau sokongan teknikal ICT.</p>
+                        </div>
                     </div>
-                    <div class="mt-4 pt-3 border-t border-white/10 flex items-center gap-1.5 text-[11px] font-bold text-blue-300 group-hover:text-white">
-                        <span>Buka Borang Permohonan</span>
-                        <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+                    <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white shrink-0 group-hover:bg-white group-hover:text-blue-900 transition-all">
+                        <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </div>
                 </a>
 
-                <!-- Card 2: White Card with Border "Semak Status Permohonan" -->
-                <div class="p-5 rounded-2xl bg-white border-2 border-slate-200/90 hover:border-blue-400 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between mb-2">
-                            <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                            </div>
-                            <a href="<?= url('/track') ?>" class="text-[11px] font-bold text-blue-600 hover:text-blue-800 transition-colors">
-                                Halaman Semakan &rarr;
-                            </a>
+                <!-- Card 2: White Card "Semak Status Permohonan" -->
+                <a href="<?= url('/track') ?>" 
+                   class="group p-5 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 hover:border-blue-300 text-slate-900 shadow-xl shadow-slate-900/5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-3.5 min-w-0">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                         </div>
-                        <h3 class="font-bold text-base text-slate-900 leading-tight">Semak Status Permohonan</h3>
-                        <p class="text-xs text-slate-500 mt-1 leading-relaxed font-normal">Kemas kini masa nyata menggunakan No. Tiket</p>
+                        <div class="min-w-0">
+                            <h3 class="font-bold text-base text-slate-900 leading-tight">Semak Status Permohonan</h3>
+                            <p class="text-[11px] text-slate-500 mt-1 leading-snug">Lihat perkembangan tiket anda dengan cepat.</p>
+                        </div>
                     </div>
-                    <form action="<?= url('/track') ?>" method="GET" class="mt-4 flex items-center gap-2">
-                        <input type="text" name="ref" required 
-                               placeholder="Cth: ICTBKP/2026/08/0001" 
-                               class="w-full px-3 py-2 bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-600 focus:ring-2 focus:ring-blue-100 rounded-xl text-xs font-mono font-bold text-slate-900 outline-none transition-all placeholder:text-slate-400">
-                        <button type="submit" 
-                                class="w-9 h-9 shrink-0 rounded-xl bg-slate-900 hover:bg-slate-800 active:bg-black text-white flex items-center justify-center shadow-sm transition-all"
-                                title="Semak Sekarang">
-                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                        </button>
-                    </form>
-                </div>
+                    <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                        <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 2. Section "PERKHIDMATAN UTAMA" (4 Cards Grid with High-Resolution Photos) -->
-<section id="perkhidmatan" class="py-16 sm:py-20 bg-slate-50/70 border-b border-slate-200/80">
+<!-- 2. Section "PERKHIDMATAN UTAMA" (Matching User Mockup Grid) -->
+<section id="perkhidmatan" class="py-16 sm:py-20 bg-white border-b border-slate-200/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Header -->
         <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 sm:mb-12">
             <div>
-                <div class="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-blue-700 mb-2">
-                    <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                <span class="text-xs font-extrabold uppercase tracking-widest text-slate-400 block mb-2">
                     Perkhidmatan Utama
-                </div>
+                </span>
                 <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-                    Pilih Perkhidmatan Mengikut Keperluan Anda.
+                    Pilih Perkhidmatan<br class="hidden sm:inline"> Mengikut <span class="text-amber-500">Keperluan Anda.</span>
                 </h2>
             </div>
-            <p class="text-slate-600 text-xs sm:text-sm max-w-md font-medium leading-relaxed">
-                Pilih salah satu perkhidmatan di bawah untuk terus mengisi borang permohonan rasmi yang dikhaskan.
+            <p class="text-slate-500 text-xs sm:text-sm max-w-md font-medium leading-relaxed">
+                Kami menyediakan pelbagai perkhidmatan sokongan ICT dan perkhidmatan aset bagi memastikan urusan kerja anda berjalan lancar.
             </p>
         </div>
 
-        <!-- 4-Column Card Grid -->
+        <!-- 4-Column Card Grid (Matching Mockup Numbering 2, 3, 4, 5) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            <!-- Card 1: Pinjaman Laptop -->
+            <!-- Card 1: Pinjaman Laptop (Mockup #2) -->
             <a href="<?= url('/tickets/create?category=PEMINJAMAN_ASET') ?>" 
                class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col group block">
                 <div class="relative h-44 sm:h-48 overflow-hidden bg-slate-100">
                     <img src="<?= asset('images/service-laptop.jpg') ?>" 
                          alt="Pinjaman Laptop & Aset" 
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute bottom-3 left-4 w-10 h-10 rounded-xl bg-white/95 backdrop-blur-sm shadow-md border border-slate-200/80 flex items-center justify-center text-xl">
-                        💻
+                    <div class="absolute bottom-3 left-4 w-9 h-9 rounded-full bg-white shadow-md border border-slate-100 flex items-center justify-center text-blue-600">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                     </div>
                 </div>
                 <div class="p-5 flex-1 flex flex-col justify-between">
@@ -136,27 +121,26 @@ $currentUser = Auth::user();
                             Pinjaman Laptop
                         </h3>
                         <p class="text-xs text-slate-500 mt-2 leading-relaxed font-normal">
-                            Komputer riba Dell, tablet Lenovo, telefon pintar (iPhone 15) dan aksesori untuk kegunaan tugasan rasmi.
+                            Permohonan pinjaman peralatan ICT seperti komputer riba.
                         </p>
                     </div>
-                    <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
-                        <span class="text-xs font-bold text-blue-600 group-hover:text-blue-700">Mohon Sekarang</span>
-                        <span class="w-7 h-7 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white flex items-center justify-center transition-colors">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                        </span>
+                    <div class="pt-4 mt-4 flex items-center justify-end">
+                        <div class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-blue-600 text-slate-600 group-hover:text-white flex items-center justify-center transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </div>
                     </div>
                 </div>
             </a>
 
-            <!-- Card 2: Liputan Media -->
+            <!-- Card 2: Liputan Media (Mockup #3) -->
             <a href="<?= url('/tickets/create?category=MEDIA_JURUKAMERA') ?>" 
                class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col group block">
                 <div class="relative h-44 sm:h-48 overflow-hidden bg-slate-100">
                     <img src="<?= asset('images/service-media.jpg') ?>" 
                          alt="Liputan Media Rasmi" 
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute bottom-3 left-4 w-10 h-10 rounded-xl bg-white/95 backdrop-blur-sm shadow-md border border-slate-200/80 flex items-center justify-center text-xl">
-                        📹
+                    <div class="absolute bottom-3 left-4 w-9 h-9 rounded-full bg-white shadow-md border border-slate-100 flex items-center justify-center text-blue-600">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                     </div>
                 </div>
                 <div class="p-5 flex-1 flex flex-col justify-between">
@@ -165,27 +149,26 @@ $currentUser = Auth::user();
                             Liputan Media
                         </h3>
                         <p class="text-xs text-slate-500 mt-2 leading-relaxed font-normal">
-                            Khidmat jurugambar, juruvideo dan liputan audio-visual untuk majlis atau program rasmi jabatan.
+                            Permohonan penggambaran, video dan liputan program rasmi.
                         </p>
                     </div>
-                    <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
-                        <span class="text-xs font-bold text-blue-600 group-hover:text-blue-700">Mohon Sekarang</span>
-                        <span class="w-7 h-7 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white flex items-center justify-center transition-colors">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                        </span>
+                    <div class="pt-4 mt-4 flex items-center justify-end">
+                        <div class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-blue-600 text-slate-600 group-hover:text-white flex items-center justify-center transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </div>
                     </div>
                 </div>
             </a>
 
-            <!-- Card 3: Sokongan Mesyuarat -->
+            <!-- Card 3: Sokongan Mesyuarat (Mockup #4) -->
             <a href="<?= url('/tickets/create?category=SOKONGAN_MESYUARAT') ?>" 
                class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col group block">
                 <div class="relative h-44 sm:h-48 overflow-hidden bg-slate-100">
                     <img src="<?= asset('images/service-meeting.jpg') ?>" 
                          alt="Sokongan Mesyuarat" 
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute bottom-3 left-4 w-10 h-10 rounded-xl bg-white/95 backdrop-blur-sm shadow-md border border-slate-200/80 flex items-center justify-center text-xl">
-                        🌐
+                    <div class="absolute bottom-3 left-4 w-9 h-9 rounded-full bg-white shadow-md border border-slate-100 flex items-center justify-center text-blue-600">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
                     </div>
                 </div>
                 <div class="p-5 flex-1 flex flex-col justify-between">
@@ -194,27 +177,26 @@ $currentUser = Auth::user();
                             Sokongan Mesyuarat
                         </h3>
                         <p class="text-xs text-slate-500 mt-2 leading-relaxed font-normal">
-                            Bantuan teknikal persidangan video dalam talian (Cisco Webex / Zoom / Teams) di bilik mesyuarat.
+                            Permohonan peralatan dan sokongan teknikal mesyuarat.
                         </p>
                     </div>
-                    <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
-                        <span class="text-xs font-bold text-blue-600 group-hover:text-blue-700">Mohon Sekarang</span>
-                        <span class="w-7 h-7 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white flex items-center justify-center transition-colors">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                        </span>
+                    <div class="pt-4 mt-4 flex items-center justify-end">
+                        <div class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-blue-600 text-slate-600 group-hover:text-white flex items-center justify-center transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </div>
                     </div>
                 </div>
             </a>
 
-            <!-- Card 4: Khidmat Teknikal ICT -->
+            <!-- Card 4: Khidmat Teknikal ICT (Mockup #5) -->
             <a href="<?= url('/tickets/create?category=LAIN_LAIN') ?>" 
                class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col group block">
                 <div class="relative h-44 sm:h-48 overflow-hidden bg-slate-100">
                     <img src="<?= asset('images/service-technical.jpg') ?>" 
                          alt="Khidmat Teknikal ICT" 
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute bottom-3 left-4 w-10 h-10 rounded-xl bg-white/95 backdrop-blur-sm shadow-md border border-slate-200/80 flex items-center justify-center text-xl">
-                        🛠️
+                    <div class="absolute bottom-3 left-4 w-9 h-9 rounded-full bg-white shadow-md border border-slate-100 flex items-center justify-center text-amber-600">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/></svg>
                     </div>
                 </div>
                 <div class="p-5 flex-1 flex flex-col justify-between">
@@ -223,14 +205,13 @@ $currentUser = Auth::user();
                             Khidmat Teknikal ICT
                         </h3>
                         <p class="text-xs text-slate-500 mt-2 leading-relaxed font-normal">
-                            Penyelenggaraan komputer, siar raya, sokongan capaian rangkaian dan bantuan teknikal am.
+                            Aduan, penyelenggaraan dan sokongan teknikal ICT.
                         </p>
                     </div>
-                    <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
-                        <span class="text-xs font-bold text-blue-600 group-hover:text-blue-700">Mohon Sekarang</span>
-                        <span class="w-7 h-7 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white flex items-center justify-center transition-colors">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                        </span>
+                    <div class="pt-4 mt-4 flex items-center justify-end">
+                        <div class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-blue-600 text-slate-600 group-hover:text-white flex items-center justify-center transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </div>
                     </div>
                 </div>
             </a>
@@ -240,7 +221,7 @@ $currentUser = Auth::user();
 </section>
 
 <!-- 3. Section "PANDUAN PERMOHONAN" (3 Steps) -->
-<section id="panduan" class="py-16 sm:py-20 bg-white border-b border-slate-200/80">
+<section id="panduan" class="py-16 sm:py-20 bg-slate-50/70 border-b border-slate-200/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
             <div class="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-blue-700 mb-2">
@@ -257,7 +238,7 @@ $currentUser = Auth::user();
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Step 1 -->
-            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/90 relative">
+            <div class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm relative">
                 <div class="w-10 h-10 rounded-xl bg-blue-600 text-white font-black text-base flex items-center justify-center mb-4 shadow-md shadow-blue-600/20">
                     1
                 </div>
@@ -268,7 +249,7 @@ $currentUser = Auth::user();
             </div>
 
             <!-- Step 2 -->
-            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/90 relative">
+            <div class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm relative">
                 <div class="w-10 h-10 rounded-xl bg-blue-600 text-white font-black text-base flex items-center justify-center mb-4 shadow-md shadow-blue-600/20">
                     2
                 </div>
@@ -279,7 +260,7 @@ $currentUser = Auth::user();
             </div>
 
             <!-- Step 3 -->
-            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/90 relative">
+            <div class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm relative">
                 <div class="w-10 h-10 rounded-xl bg-blue-600 text-white font-black text-base flex items-center justify-center mb-4 shadow-md shadow-blue-600/20">
                     3
                 </div>
@@ -293,7 +274,7 @@ $currentUser = Auth::user();
 </section>
 
 <!-- 4. Section "SOALAN LAZIM (FAQ)" -->
-<section id="faq" class="py-16 sm:py-20 bg-slate-50/70 border-b border-slate-200/80">
+<section id="faq" class="py-16 sm:py-20 bg-white border-b border-slate-200/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
             <div class="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-blue-700 mb-2">
@@ -310,7 +291,7 @@ $currentUser = Auth::user();
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             <!-- FAQ 1 -->
-            <div class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
+            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/90 shadow-sm">
                 <h4 class="font-bold text-sm text-slate-900 flex items-start gap-2.5">
                     <span class="text-blue-600 font-extrabold shrink-0">Q.</span>
                     <span>Berapa hari sebelum program perlu hantar permohonan?</span>
@@ -321,7 +302,7 @@ $currentUser = Auth::user();
             </div>
 
             <!-- FAQ 2 -->
-            <div class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
+            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/90 shadow-sm">
                 <h4 class="font-bold text-sm text-slate-900 flex items-start gap-2.5">
                     <span class="text-blue-600 font-extrabold shrink-0">Q.</span>
                     <span>Adakah pemohon perlu mendaftar akaun pengguna baru?</span>
@@ -332,7 +313,7 @@ $currentUser = Auth::user();
             </div>
 
             <!-- FAQ 3 -->
-            <div class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
+            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/90 shadow-sm">
                 <h4 class="font-bold text-sm text-slate-900 flex items-start gap-2.5">
                     <span class="text-blue-600 font-extrabold shrink-0">Q.</span>
                     <span>Bagaimanakah cara menyemak status permohonan saya?</span>
@@ -343,7 +324,7 @@ $currentUser = Auth::user();
             </div>
 
             <!-- FAQ 4 -->
-            <div class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
+            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/90 shadow-sm">
                 <h4 class="font-bold text-sm text-slate-900 flex items-start gap-2.5">
                     <span class="text-blue-600 font-extrabold shrink-0">Q.</span>
                     <span>Apakah yang perlu dibawa semasa mengambil peralatan?</span>
@@ -357,7 +338,7 @@ $currentUser = Auth::user();
 </section>
 
 <!-- 5. Section "HUBUNGI KAMI" -->
-<section id="hubungi" class="py-16 sm:py-20 bg-white">
+<section id="hubungi" class="py-16 sm:py-20 bg-slate-50/70">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="rounded-3xl bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
             <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
