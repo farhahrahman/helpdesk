@@ -86,7 +86,7 @@ class TicketController extends BaseController
     {
         $availableAssets = $this->assetRepo->getAvailableAssets();
         $isLoggedIn = Auth::check();
-        $layout = $isLoggedIn ? 'app' : 'public';
+        $layout = 'public';
 
         $this->render('tickets/create', [
             'pageTitle' => 'Borang Permohonan Perkhidmatan ICT - ' . app_config('app.short_name'),
@@ -277,17 +277,25 @@ class TicketController extends BaseController
             if (!empty($data['kuarters_problem_description'])) {
                 $data['purpose'] = $data['kuarters_problem_description'];
             }
+
+            $residentStatus = $data['kuarters_resident_status'] ?? 'PEMOHON';
             $complex = trim((string)($data['kuarters_complex'] ?? ''));
             $unitNo = trim((string)($data['kuarters_unit_no'] ?? ''));
-            $loc = trim($complex . ($unitNo ? ' (No: ' . $unitNo . ')' : ''));
-            if (!empty($loc)) {
-                $data['location'] = $loc;
+
+            if ($residentStatus === 'PENGHUNI_SEDIA_ADA') {
+                $loc = trim($complex . ($unitNo ? ' (No: ' . $unitNo . ')' : ''));
+                $data['location'] = !empty($loc) ? $loc : 'Penghuni Sedia Ada';
+            } else {
+                $data['location'] = 'Pemohon Kuarters (Belum Menduduki)';
             }
+
             if (!empty($data['kuarters_phone'])) {
                 $data['applicant_phone'] = $data['kuarters_phone'];
             }
             if (!empty($data['kuarters_date'])) {
                 $data['start_date'] = $data['kuarters_date'];
+            } else {
+                $data['start_date'] = date('Y-m-d');
             }
             if (!empty($data['kuarters_title'])) {
                 $data['title'] = $data['kuarters_title'];
@@ -295,7 +303,9 @@ class TicketController extends BaseController
             if (!empty($data['kuarters_unit'])) {
                 $data['unit'] = $data['kuarters_unit'];
             }
-            if (!empty($data['kuarters_occupant_name'])) {
+            if (!empty($data['kuarters_applicant_name'])) {
+                $data['applicant_name'] = $data['kuarters_applicant_name'];
+            } elseif (!empty($data['kuarters_occupant_name'])) {
                 $data['applicant_name'] = $data['kuarters_occupant_name'];
             }
             if (!empty($data['kuarters_email'])) {
@@ -303,6 +313,11 @@ class TicketController extends BaseController
             }
             if (!empty($data['kuarters_position'])) {
                 $data['applicant_position'] = $data['kuarters_position'];
+            }
+            if (!empty($data['kuarters_ic_no'])) {
+                $data['ic_no'] = $data['kuarters_ic_no'];
+                $statusLabel = ($residentStatus === 'PENGHUNI_SEDIA_ADA') ? 'Penghuni Sedia Ada' : 'Pemohon Kuarters';
+                $data['purpose'] = ($data['purpose'] ?? '') . "\n\n[Status: " . $statusLabel . " | No. KP: " . $data['kuarters_ic_no'] . "]";
             }
         }
 

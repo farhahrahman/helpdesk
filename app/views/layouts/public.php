@@ -68,25 +68,35 @@ $currentUser = Auth::user();
             </a>
 
             <!-- Center Navigation Links (Desktop) -->
+            <?php
+            $currentReq = $_SERVER['REQUEST_URI'] ?? '';
+            $isCreate = (strpos($currentReq, '/tickets/create') !== false);
+            $isTrack = (strpos($currentReq, '/track') !== false);
+            $isHome = !$isCreate && !$isTrack;
+            ?>
             <nav class="hidden md:flex items-center gap-1 lg:gap-2">
                 <a href="<?= url('/') ?>" 
-                   class="px-4 py-2 rounded-full text-xs font-bold transition-all <?= (isset($_SERVER['REQUEST_URI']) && (rtrim($_SERVER['REQUEST_URI'], '/') === rtrim(url('/'), '/') || $_SERVER['REQUEST_URI'] === '/')) ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' ?>">
+                   class="px-3.5 py-2 rounded-full text-xs font-bold transition-all <?= $isHome ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' ?>">
                     Utama
                 </a>
+                <a href="<?= url('/tickets/create') ?>" 
+                   class="px-3.5 py-2 rounded-full text-xs font-bold transition-all <?= $isCreate ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' ?>">
+                    Permohonan Baru
+                </a>
+                <a href="<?= url('/track') ?>" 
+                   class="px-3.5 py-2 rounded-full text-xs font-bold transition-all <?= $isTrack ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' ?>">
+                    Semak Status
+                </a>
                 <a href="<?= url('/#perkhidmatan') ?>" 
-                   class="px-3.5 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+                   class="px-3 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
                     Perkhidmatan
                 </a>
-                <a href="<?= url('/#panduan') ?>" 
-                   class="px-3.5 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
-                    Panduan
-                </a>
                 <a href="<?= url('/#faq') ?>" 
-                   class="px-3.5 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+                   class="px-3 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
                     Soalan Lazim
                 </a>
                 <a href="<?= url('/#hubungi') ?>" 
-                   class="px-3.5 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+                   class="px-3 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
                     Hubungi
                 </a>
             </nav>
@@ -112,9 +122,10 @@ $currentUser = Auth::user();
 
         <!-- Mobile Navigation Menu (Scrollable Bar) -->
         <div class="md:hidden flex items-center gap-1 px-4 py-2 border-t border-slate-100 overflow-x-auto text-xs bg-slate-50/90 no-scrollbar">
-            <a href="<?= url('/') ?>" class="px-3 py-1 rounded-full font-bold whitespace-nowrap bg-slate-900 text-white">Utama</a>
+            <a href="<?= url('/') ?>" class="px-3 py-1 rounded-full font-bold whitespace-nowrap <?= $isHome ? 'bg-slate-900 text-white' : 'text-slate-600 hover:text-slate-900' ?>">Utama</a>
+            <a href="<?= url('/tickets/create') ?>" class="px-3 py-1 rounded-full font-bold whitespace-nowrap <?= $isCreate ? 'bg-slate-900 text-white' : 'text-slate-600 hover:text-slate-900' ?>">Permohonan Baru</a>
+            <a href="<?= url('/track') ?>" class="px-3 py-1 rounded-full font-bold whitespace-nowrap <?= $isTrack ? 'bg-slate-900 text-white' : 'text-slate-600 hover:text-slate-900' ?>">Semak Status</a>
             <a href="<?= url('/#perkhidmatan') ?>" class="px-3 py-1 rounded-full font-medium text-slate-600 whitespace-nowrap hover:text-slate-900">Perkhidmatan</a>
-            <a href="<?= url('/#panduan') ?>" class="px-3 py-1 rounded-full font-medium text-slate-600 whitespace-nowrap hover:text-slate-900">Panduan</a>
             <a href="<?= url('/#faq') ?>" class="px-3 py-1 rounded-full font-medium text-slate-600 whitespace-nowrap hover:text-slate-900">Soalan Lazim</a>
             <a href="<?= url('/#hubungi') ?>" class="px-3 py-1 rounded-full font-medium text-slate-600 whitespace-nowrap hover:text-slate-900">Hubungi</a>
         </div>

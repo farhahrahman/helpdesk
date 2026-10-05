@@ -215,59 +215,6 @@ $currentUser = Auth::user();
     </div>
 </section>
 
-<!-- 3. Section "PANDUAN PERMOHONAN" (3 Steps) -->
-<section id="panduan" class="py-16 sm:py-20 bg-slate-50/70 border-b border-slate-200/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-            <div class="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-blue-700 mb-2">
-                <span class="w-2 h-2 rounded-full bg-blue-600"></span>
-                Aliran Kerja Ringkas
-            </div>
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-                Panduan Permohonan Mudah (3 Langkah)
-            </h2>
-            <p class="text-slate-600 text-xs sm:text-sm mt-3 font-medium">
-                Urusan pantas, telus dan teratur tanpa perlu mendaftar akaun baru.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Step 1 -->
-            <div class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm relative">
-                <div class="w-10 h-10 rounded-xl bg-blue-600 text-white font-black text-base flex items-center justify-center mb-4 shadow-md shadow-blue-600/20">
-                    1
-                </div>
-                <h3 class="font-bold text-base text-slate-900 leading-snug">Pilih Servis & Lengkapkan Borang</h3>
-                <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-                    Pilih perkhidmatan yang diperlukan (laptop, bilik mesyuarat, liputan media), masukkan maklumat pemohon, tarikh penggunaan serta peranti yang dimohon.
-                </p>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm relative">
-                <div class="w-10 h-10 rounded-xl bg-blue-600 text-white font-black text-base flex items-center justify-center mb-4 shadow-md shadow-blue-600/20">
-                    2
-                </div>
-                <h3 class="font-bold text-base text-slate-900 leading-snug">Terima No. Rujukan Unik</h3>
-                <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-                    Sistem menjana No. Tiket rasmi (cth: <span class="font-mono font-bold text-slate-900">ICTBKP/2026/08/0001</span>) serta-merta tanpa perlu login atau kata laluan.
-                </p>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-sm relative">
-                <div class="w-10 h-10 rounded-xl bg-blue-600 text-white font-black text-base flex items-center justify-center mb-4 shadow-md shadow-blue-600/20">
-                    3
-                </div>
-                <h3 class="font-bold text-base text-slate-900 leading-snug">Semakan Status & Pengambilan</h3>
-                <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-                    Pantau keputusan kelulusan pada bila-bila masa, cetak slip permohonan rasmi dan hadir ke Kaunter ICT BKP bagi urusan pengambilan aset.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- 4. Section "SOALAN LAZIM (FAQ)" -->
 <section id="faq" class="py-16 sm:py-20 bg-white border-b border-slate-200/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
