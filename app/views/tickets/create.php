@@ -104,15 +104,15 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                             </div>
                         </label>
 
-                        <!-- 5. Isu Sistem Kuarters -->
+                        <!-- 5. Isu Sistem e-Kuarters -->
                         <label data-cat="ADUAN_KUARTERS" class="category-card group relative flex items-center gap-2.5 p-3 rounded-2xl border cursor-pointer transition-all <?= ($selectedCategory === 'ADUAN_KUARTERS') ? 'bg-[#1d3d75] border-[#1d3d75] text-white shadow-lg shadow-blue-950/15' : 'bg-white border-slate-200/90 text-slate-700 hover:border-slate-300 hover:bg-slate-50/80 shadow-xs' ?>">
                             <input type="radio" name="category" value="ADUAN_KUARTERS" <?= ($selectedCategory === 'ADUAN_KUARTERS') ? 'checked' : '' ?> onchange="switchCategoryView('ADUAN_KUARTERS')" class="sr-only">
                             <div class="card-icon w-8 h-8 rounded-xl <?= ($selectedCategory === 'ADUAN_KUARTERS') ? 'bg-white/15 text-white' : 'bg-slate-100 text-slate-700' ?> flex items-center justify-center shrink-0 text-sm">
                                 🏢
                             </div>
                             <div class="min-w-0 flex-1">
-                                <span class="card-title text-xs font-bold <?= ($selectedCategory === 'ADUAN_KUARTERS') ? 'text-white' : 'text-slate-900' ?> block leading-tight truncate">Isu Sistem Kuarters</span>
-                                <span class="card-sub text-[10px] <?= ($selectedCategory === 'ADUAN_KUARTERS') ? 'text-blue-100/80' : 'text-slate-500' ?> block truncate font-medium mt-0.5">e-Kuarters & Fasiliti</span>
+                                <span class="card-title text-xs font-bold <?= ($selectedCategory === 'ADUAN_KUARTERS') ? 'text-white' : 'text-slate-900' ?> block leading-tight truncate">Isu Sistem e-Kuarters</span>
+                                <span class="card-sub text-[10px] <?= ($selectedCategory === 'ADUAN_KUARTERS') ? 'text-blue-100/80' : 'text-slate-500' ?> block truncate font-medium mt-0.5">Permohonan & Ralat Sistem</span>
                             </div>
                         </label>
                     </div>
@@ -275,12 +275,12 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                             </div>
                         </div>
 
-                        <!-- 5. Langkah 2: Isu Sistem Kuarters (Maklumat Pemohon & Status Kuarters) -->
+                        <!-- 5. Langkah 2: Isu Sistem e-Kuarters (Maklumat Pemohon & Akaun e-Kuarters) -->
                         <div id="section-kuarters" class="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-white space-y-3.5 shadow-2xs <?= ($selectedCategory === 'ADUAN_KUARTERS') ? '' : 'hidden' ?>">
                             <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
                                 <div class="flex items-center gap-2">
                                     <span class="w-6 h-6 rounded-lg bg-[#1d3d75] text-white text-[11px] font-black flex items-center justify-center shadow-xs">2</span>
-                                    <span class="text-xs font-bold text-slate-900 uppercase tracking-wide">Maklumat Pemohon & Status Kuarters</span>
+                                    <span class="text-xs font-bold text-slate-900 uppercase tracking-wide">Maklumat Pemohon & Akaun e-Kuarters</span>
                                 </div>
                                 <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-bold border border-slate-200/60">Langkah 2</span>
                             </div>
@@ -296,14 +296,14 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                                             <input type="radio" name="kuarters_resident_status" id="status_pemohon" value="PEMOHON" checked onchange="toggleKuartersAddress(this.value)" class="text-[#1d3d75] focus:ring-[#1d3d75]">
                                             <div class="min-w-0">
                                                 <span class="text-xs font-bold text-slate-900 block leading-tight">Pemohon Kuarters</span>
-                                                <span class="text-[10px] text-slate-500 block leading-tight mt-0.5">Belum menduduki</span>
+                                                <span class="text-[10px] text-slate-500 block leading-tight mt-0.5">Sedang memohon / Belum menduduki</span>
                                             </div>
                                         </label>
                                         <label class="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-100 cursor-pointer transition-all has-[:checked]:border-[#1d3d75] has-[:checked]:bg-blue-50/50 has-[:checked]:ring-1 has-[:checked]:ring-[#1d3d75]">
                                             <input type="radio" name="kuarters_resident_status" id="status_penghuni" value="PENGHUNI_SEDIA_ADA" onchange="toggleKuartersAddress(this.value)" class="text-[#1d3d75] focus:ring-[#1d3d75]">
                                             <div class="min-w-0">
                                                 <span class="text-xs font-bold text-slate-900 block leading-tight">Penghuni Sedia Ada</span>
-                                                <span class="text-[10px] text-slate-500 block leading-tight mt-0.5">Sedang menduduki</span>
+                                                <span class="text-[10px] text-slate-500 block leading-tight mt-0.5">Sedang menduduki kuarters</span>
                                             </div>
                                         </label>
                                     </div>
@@ -737,12 +737,12 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                             </div>
                         </div>
 
-                        <!-- 5. Langkah 3: Aduan Sistem Kuarters (Keterangan Isu & Masalah Kuarters) -->
+                        <!-- 5. Langkah 3: Aduan Sistem e-Kuarters (Keterangan Isu & Ralat Sistem) -->
                         <div id="step3-kuarters" class="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-white space-y-3.5 shadow-2xs <?= ($selectedCategory === 'ADUAN_KUARTERS') ? '' : 'hidden' ?>">
                             <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
                                 <div class="flex items-center gap-2">
                                     <span class="w-6 h-6 rounded-lg bg-[#1d3d75] text-white text-[11px] font-black flex items-center justify-center shadow-xs">3</span>
-                                    <span class="text-xs font-bold text-slate-900 uppercase tracking-wide">Keterangan Isu & Masalah Kuarters</span>
+                                    <span class="text-xs font-bold text-slate-900 uppercase tracking-wide">Keterangan Isu & Ralat Sistem e-Kuarters</span>
                                 </div>
                                 <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-bold border border-slate-200/60">Langkah 3</span>
                             </div>
@@ -751,18 +751,18 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                                 <!-- 1. Tajuk Ringkas Aduan Kuarters -->
                                 <div>
                                     <label class="block text-xs font-semibold text-slate-700 mb-1">
-                                        Tajuk Ringkas Isu / Aduan Kuarters <span class="text-rose-500">*</span>
+                                        Tajuk Ringkas Masalah Sistem e-Kuarters <span class="text-rose-500">*</span>
                                     </label>
                                     <input type="text" name="kuarters_title" id="kuarters_title"
-                                           placeholder="Cth: Kerosakan Paip Utama Bocor / Masalah Log Masuk Sistem e-Kuarters" 
+                                           placeholder="Cth: Ralat muat naik lampiran dokumen / Borang tidak boleh submit" 
                                            class="w-full px-3 py-2 bg-slate-50/70 border border-slate-200 focus:bg-white focus:border-[#1d3d75] rounded-xl text-xs font-medium outline-none">
                                 </div>
 
-                                <!-- 2. Kategori Isu / Kerosakan & Tarikh Aduan -->
+                                <!-- 2. Kategori Isu / Ralat Sistem & Tarikh Aduan -->
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                     <div>
                                         <label class="block text-xs font-semibold text-slate-700 mb-1">
-                                            Jenis Masalah / Kategori Aduan <span class="text-rose-500">*</span>
+                                            Jenis Ralat / Kategori Masalah Sistem <span class="text-rose-500">*</span>
                                         </label>
                                         <select name="kuarters_complaint_type" id="kuarters_complaint_type" class="w-full px-3 py-2 bg-slate-50/70 border border-slate-200 focus:bg-white focus:border-[#1d3d75] rounded-xl text-xs font-medium outline-none">
                                             <?php foreach ($kuartersComplaintList as $kKey => $k): ?>
@@ -772,7 +772,7 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                                     </div>
                                     <div>
                                         <label class="block text-xs font-semibold text-slate-700 mb-1">
-                                            Tarikh Laporan / Aduan <span class="text-rose-500">*</span>
+                                            Tarikh Isu / Ralat Berlaku <span class="text-rose-500">*</span>
                                         </label>
                                         <input type="date" name="kuarters_date" id="kuarters_date" value="<?= $today ?>" class="w-full px-3 py-2 bg-slate-50/70 border border-slate-200 focus:bg-white focus:border-[#1d3d75] rounded-xl text-xs font-bold text-slate-900 outline-none">
                                     </div>
@@ -784,26 +784,26 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                                         Tahap Urgensi / Keutamaan Tindakan
                                     </label>
                                     <select name="kuarters_urgency" id="kuarters_urgency" class="w-full px-3 py-2 bg-slate-50/70 border border-slate-200 focus:bg-white focus:border-[#1d3d75] rounded-xl text-xs outline-none font-medium">
-                                        <option value="BIASA">Biasa (Tindakan berjadual / kerosakan kecil)</option>
-                                        <option value="SEGERA">Segera (Menjejaskan keselesaan / bekalan harian)</option>
-                                        <option value="KECEMASAN">Kecemasan / Kritikal (Kebocoran besar, litar pintas, bahaya keselamatan)</option>
+                                        <option value="BIASA">Biasa (Pertanyaan am / bantuan teknikal modul)</option>
+                                        <option value="SEGERA">Segera (Menjejaskan tarikh tutup permohonan / urusan rasmi)</option>
+                                        <option value="KECEMASAN">Kritikal (Sistem tidak boleh diakses langsung / ralat genting)</option>
                                     </select>
                                 </div>
 
                                 <!-- 4. Keterangan Terperinci Masalah -->
                                 <div>
                                     <label class="block text-xs font-semibold text-slate-700 mb-1">
-                                        Keterangan Terperinci Masalah Kuarters <span class="text-rose-500">*</span>
+                                        Keterangan Terperinci Ralat / Masalah Sistem <span class="text-rose-500">*</span>
                                     </label>
                                     <textarea name="kuarters_problem_description" id="kuarters_problem_description" rows="3"
-                                              placeholder="Sila terangkan secara spesifik masalah kerosakan kuarters atau isu sistem e-Kuarters yang dihadapi..." 
+                                              placeholder="Sila terangkan mesej ralat (error message) yang dipaparkan, modul terlibat (cth: modul permohonan, muat naik fail), atau tindakan yang cuba dibuat semasa ralat berlaku..." 
                                               class="w-full px-3 py-2 bg-slate-50/70 border border-slate-200 focus:bg-white focus:border-[#1d3d75] rounded-xl text-xs outline-none leading-relaxed placeholder:text-slate-400"></textarea>
                                 </div>
 
-                                <!-- 5. Upload Gambar / Bukti Kerosakan (Clean Neutral Box) -->
+                                <!-- 5. Upload Tangkapan Skrin Ralat (Clean Neutral Box) -->
                                 <div>
                                     <label class="block text-xs font-semibold text-slate-700 mb-1">
-                                        Upload Gambar Bukti / Tangkapan Skrin (Pilihan)
+                                        Upload Tangkapan Skrin Ralat (Screenshot Error / Mesej Sistem) (Pilihan)
                                     </label>
                                     <div class="relative border-2 border-dashed border-slate-300 hover:border-[#1d3d75] rounded-xl p-3.5 bg-slate-50/50 hover:bg-white text-center transition-all cursor-pointer" onclick="document.getElementById('kuarters_photo').click()">
                                         <input type="file" name="kuarters_photo" id="kuarters_photo" accept="image/jpeg,image/png,image/webp,image/jpg" class="hidden" onchange="previewKuartersImage(this)">
@@ -812,14 +812,14 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                                             <div class="w-8 h-8 mx-auto rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-sm shadow-2xs">
                                                 📸
                                             </div>
-                                            <p class="text-xs font-bold text-slate-800">Klik untuk Pilih Gambar atau Tangkap Foto</p>
+                                            <p class="text-xs font-bold text-slate-800">Klik untuk Pilih Tangkapan Skrin Ralat (Screenshot)</p>
                                             <p class="text-[10px] text-slate-500">Format disokong: JPG, PNG, WebP (Maksimum 10MB)</p>
                                         </div>
 
                                         <!-- Image Live Preview Container -->
                                         <div id="kuarters_preview_box" class="hidden space-y-2">
                                             <div class="relative inline-block mx-auto">
-                                                <img id="kuarters_img_preview" src="" alt="Preview Gambar Kerosakan" class="max-h-28 rounded-lg border border-slate-300 shadow-sm mx-auto object-cover">
+                                                <img id="kuarters_img_preview" src="" alt="Preview Gambar Ralat" class="max-h-28 rounded-lg border border-slate-300 shadow-sm mx-auto object-cover">
                                                 <button type="button" onclick="event.stopPropagation(); removeKuartersImage();" class="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-rose-600 text-white font-bold text-xs flex items-center justify-center shadow hover:bg-rose-700">
                                                     &times;
                                                 </button>

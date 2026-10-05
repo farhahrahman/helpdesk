@@ -277,6 +277,14 @@ class TicketController extends BaseController
             if (!empty($data['kuarters_problem_description'])) {
                 $data['purpose'] = $data['kuarters_problem_description'];
             }
+            if (!empty($data['kuarters_complaint_type'])) {
+                $cTypes = app_config('services.kuarters_complaint_types', []);
+                $typeName = $cTypes[$data['kuarters_complaint_type']]['name'] ?? $data['kuarters_complaint_type'];
+                $data['purpose'] = "[Kategori Ralat: " . $typeName . "]\n\n" . ($data['purpose'] ?? '');
+            }
+            if (!empty($data['kuarters_urgency'])) {
+                $data['priority'] = $data['kuarters_urgency'];
+            }
 
             $residentStatus = $data['kuarters_resident_status'] ?? 'PEMOHON';
             $complex = trim((string)($data['kuarters_complex'] ?? ''));

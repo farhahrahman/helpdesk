@@ -43,10 +43,10 @@ return [
         ],
         'ADUAN_KUARTERS' => [
             'id' => 'ADUAN_KUARTERS',
-            'name' => 'Aduan Sistem Kuarters',
-            'description' => 'Aduan kerosakan fizikal, fasiliti kuarters, dan isu sistem aplikasi e-Kuarters Kerajaan Negeri Johor.',
+            'name' => 'Isu Sistem e-Kuarters',
+            'description' => 'Aduan teknikal sistem aplikasi e-Kuarters (ralat submit, ralat muat naik dokumen, masalah modul & akaun).',
             'icon' => 'home',
-            'badge' => 'amber',
+            'badge' => 'blue',
             'lead_time_days' => 1,
         ],
     ],
@@ -210,41 +210,41 @@ return [
         ],
     ],
 
-    // Senarai Jenis Kerosakan & Aduan Sistem Kuarters
+    // Senarai Jenis Isu & Masalah Sistem e-Kuarters
     'kuarters_complaint_types' => [
-        'KEROSAKAN_PAIP' => [
-            'id' => 'KEROSAKAN_PAIP',
-            'name' => 'Kerosakan Paip / Kebocoran Air / Sanitari / Tandas',
+        'RALAT_SUBMIT' => [
+            'id' => 'RALAT_SUBMIT',
+            'name' => 'Ralat Semasa Hantar / Borang Permohonan Tidak Boleh Submit',
             'icon' => '•',
         ],
-        'KEROSAKAN_ELEKTRIK' => [
-            'id' => 'KEROSAKAN_ELEKTRIK',
-            'name' => 'Kerosakan Pendawaian / Elektrik / DB Box / Lampu / Kipas',
+        'RALAT_ATTACHMENT' => [
+            'id' => 'RALAT_ATTACHMENT',
+            'name' => 'Ralat Muat Naik Dokumen / Lampiran Sokongan (Attachment Error)',
             'icon' => '•',
         ],
-        'STRUKTUR_BUMBUNG' => [
-            'id' => 'STRUKTUR_BUMBUNG',
-            'name' => 'Kerosakan Bumbung / Kebocoran Siling / Retakan Dinding',
+        'MASALAH_BORANG' => [
+            'id' => 'MASALAH_BORANG',
+            'name' => 'Masalah Mengisi Borang / Pilihan Kuarters / Ralat Modul Permohonan',
             'icon' => '•',
         ],
-        'PINTU_KUNCI_TINGKAP' => [
-            'id' => 'PINTU_KUNCI_TINGKAP',
-            'name' => 'Kerosakan Pintu Utama, Tombol Kunci, Tingkap & Gril',
+        'MASALAH_LOGIN' => [
+            'id' => 'MASALAH_LOGIN',
+            'name' => 'Masalah Log Masuk / Akaun Pengguna / Reset Kata Laluan e-Kuarters',
             'icon' => '•',
         ],
-        'SISTEM_EKUARTERS' => [
-            'id' => 'SISTEM_EKUARTERS',
-            'name' => 'Isu Sistem / Portal e-Kuarters (Akaun, Semakan, Kata Laluan)',
+        'RALAT_SISTEM' => [
+            'id' => 'RALAT_SISTEM',
+            'name' => 'Ralat Paparan / Halaman Kosong / Kod Ralat Sistem (500 / 404 / Bug)',
             'icon' => '•',
         ],
-        'FASILITI_AWAM' => [
-            'id' => 'FASILITI_AWAM',
-            'name' => 'Fasiliti Bersama Kuarters (Lif, Tangki Air, Pagar, Lampu Jalan Kawasan)',
+        'STATUS_PERMOHONAN' => [
+            'id' => 'STATUS_PERMOHONAN',
+            'name' => 'Masalah Semakan Status / Keputusan Permohonan Tidak Dikemas Kini',
             'icon' => '•',
         ],
-        'LAIN_LAIN_KUARTERS' => [
-            'id' => 'LAIN_LAIN_KUARTERS',
-            'name' => 'Lain-lain Kerosakan / Aduan Kuarters',
+        'LAIN_LAIN_SISTEM' => [
+            'id' => 'LAIN_LAIN_SISTEM',
+            'name' => 'Lain-lain Isu & Masalah Teknikal Sistem e-Kuarters',
             'icon' => '•',
         ],
     ],
