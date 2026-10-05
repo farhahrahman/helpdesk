@@ -87,18 +87,13 @@ $currentUser = Auth::user();
 <section id="perkhidmatan" class="py-16 sm:py-20 bg-white border-b border-slate-200/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Header -->
-        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 sm:mb-12">
-            <div>
-                <span class="text-xs font-extrabold uppercase tracking-widest text-slate-400 block mb-2">
-                    Perkhidmatan Utama
-                </span>
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-                    Pilih Perkhidmatan<br class="hidden sm:inline"> Mengikut <span class="text-amber-500">Keperluan Anda.</span>
-                </h2>
-            </div>
-            <p class="text-slate-500 text-xs sm:text-sm max-w-md font-medium leading-relaxed">
-                Kami menyediakan pelbagai perkhidmatan sokongan ICT dan perkhidmatan aset bagi memastikan urusan kerja anda berjalan lancar.
-            </p>
+        <div class="mb-10 sm:mb-12">
+            <span class="text-xs font-extrabold uppercase tracking-widest text-slate-400 block mb-2">
+                Perkhidmatan Utama
+            </span>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
+                Pilih Perkhidmatan Mengikut <span class="text-amber-500">Keperluan Anda.</span>
+            </h2>
         </div>
 
         <!-- 4-Column Card Grid (Matching Mockup Numbering 2, 3, 4, 5) -->
