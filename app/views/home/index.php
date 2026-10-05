@@ -5,14 +5,17 @@ $isLoggedIn = Auth::check();
 $currentUser = Auth::user();
 ?>
 
-<!-- 1. Hero Section (Mockup High-Fidelity UI) -->
+<!-- 1. Hero Section (Clean, Professional High-Fidelity UI) -->
 <section class="relative bg-white border-b border-slate-200/80 overflow-hidden">
-    <!-- Desktop Background Hero Image with Left Alpha Gradient Mask -->
-    <div class="hidden lg:block absolute right-0 top-0 bottom-0 w-7/12 pointer-events-none select-none overflow-hidden">
+    <!-- Desktop Background Hero Image with Smooth Left Alpha Gradient Mask -->
+    <div class="hidden lg:block absolute right-0 top-0 bottom-0 w-1/2 xl:w-7/12 pointer-events-none select-none overflow-hidden">
         <img src="<?= asset('images/hero-counter.png') ?>" 
              alt="Kaunter Perkhidmatan BKP SUKJ" 
-             class="h-full w-full object-cover object-left opacity-95">
+             class="h-full w-full object-cover object-right">
     </div>
+
+    <!-- Soft Gradient Mask for Ultra-Crisp Left Text Readability on all screens -->
+    <div class="hidden lg:block absolute inset-y-0 left-0 w-3/5 bg-gradient-to-r from-white via-white/90 to-transparent pointer-events-none z-[1]"></div>
 
     <!-- Mobile/Tablet Subtle Background Overlay -->
     <div class="lg:hidden absolute inset-0 pointer-events-none select-none opacity-10">
@@ -94,7 +97,7 @@ $currentUser = Auth::user();
     </div>
 </section>
 
-<!-- 2. Section "PERKHIDMATAN UTAMA" (4 Cards Grid) -->
+<!-- 2. Section "PERKHIDMATAN UTAMA" (4 Cards Grid with High-Resolution Photos) -->
 <section id="perkhidmatan" class="py-16 sm:py-20 bg-slate-50/70 border-b border-slate-200/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Header -->
@@ -117,12 +120,13 @@ $currentUser = Auth::user();
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
             <!-- Card 1: Pinjaman Laptop -->
-            <div class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col group">
-                <div class="relative h-40 overflow-hidden bg-slate-100">
+            <a href="<?= url('/tickets/create?category=PEMINJAMAN_ASET') ?>" 
+               class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col group block">
+                <div class="relative h-44 sm:h-48 overflow-hidden bg-slate-100">
                     <img src="<?= asset('images/service-laptop.jpg') ?>" 
                          alt="Pinjaman Laptop & Aset" 
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute bottom-3 left-4 w-9 h-9 rounded-xl bg-white shadow-md border border-slate-100 flex items-center justify-center text-lg">
+                    <div class="absolute bottom-3 left-4 w-10 h-10 rounded-xl bg-white/95 backdrop-blur-sm shadow-md border border-slate-200/80 flex items-center justify-center text-xl">
                         💻
                     </div>
                 </div>
@@ -136,24 +140,22 @@ $currentUser = Auth::user();
                         </p>
                     </div>
                     <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
-                        <a href="<?= url('/tickets/create?category=PEMINJAMAN_ASET') ?>" 
-                           class="text-xs font-bold text-blue-600 group-hover:text-blue-700 inline-flex items-center gap-1.5">
-                            <span>Mohon Sekarang</span>
-                            <span class="w-6 h-6 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white flex items-center justify-center transition-colors">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </span>
-                        </a>
+                        <span class="text-xs font-bold text-blue-600 group-hover:text-blue-700">Mohon Sekarang</span>
+                        <span class="w-7 h-7 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white flex items-center justify-center transition-colors">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </span>
                     </div>
                 </div>
-            </div>
+            </a>
 
             <!-- Card 2: Liputan Media -->
-            <div class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col group">
-                <div class="relative h-40 overflow-hidden bg-slate-100">
+            <a href="<?= url('/tickets/create?category=MEDIA_JURUKAMERA') ?>" 
+               class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col group block">
+                <div class="relative h-44 sm:h-48 overflow-hidden bg-slate-100">
                     <img src="<?= asset('images/service-media.jpg') ?>" 
                          alt="Liputan Media Rasmi" 
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute bottom-3 left-4 w-9 h-9 rounded-xl bg-white shadow-md border border-slate-100 flex items-center justify-center text-lg">
+                    <div class="absolute bottom-3 left-4 w-10 h-10 rounded-xl bg-white/95 backdrop-blur-sm shadow-md border border-slate-200/80 flex items-center justify-center text-xl">
                         📹
                     </div>
                 </div>
@@ -167,24 +169,22 @@ $currentUser = Auth::user();
                         </p>
                     </div>
                     <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
-                        <a href="<?= url('/tickets/create?category=MEDIA_JURUKAMERA') ?>" 
-                           class="text-xs font-bold text-blue-600 group-hover:text-blue-700 inline-flex items-center gap-1.5">
-                            <span>Mohon Sekarang</span>
-                            <span class="w-6 h-6 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white flex items-center justify-center transition-colors">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </span>
-                        </a>
+                        <span class="text-xs font-bold text-blue-600 group-hover:text-blue-700">Mohon Sekarang</span>
+                        <span class="w-7 h-7 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white flex items-center justify-center transition-colors">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </span>
                     </div>
                 </div>
-            </div>
+            </a>
 
             <!-- Card 3: Sokongan Mesyuarat -->
-            <div class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col group">
-                <div class="relative h-40 overflow-hidden bg-slate-100">
+            <a href="<?= url('/tickets/create?category=SOKONGAN_MESYUARAT') ?>" 
+               class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col group block">
+                <div class="relative h-44 sm:h-48 overflow-hidden bg-slate-100">
                     <img src="<?= asset('images/service-meeting.jpg') ?>" 
                          alt="Sokongan Mesyuarat" 
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute bottom-3 left-4 w-9 h-9 rounded-xl bg-white shadow-md border border-slate-100 flex items-center justify-center text-lg">
+                    <div class="absolute bottom-3 left-4 w-10 h-10 rounded-xl bg-white/95 backdrop-blur-sm shadow-md border border-slate-200/80 flex items-center justify-center text-xl">
                         🌐
                     </div>
                 </div>
@@ -198,24 +198,22 @@ $currentUser = Auth::user();
                         </p>
                     </div>
                     <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
-                        <a href="<?= url('/tickets/create?category=SOKONGAN_MESYUARAT') ?>" 
-                           class="text-xs font-bold text-blue-600 group-hover:text-blue-700 inline-flex items-center gap-1.5">
-                            <span>Mohon Sekarang</span>
-                            <span class="w-6 h-6 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white flex items-center justify-center transition-colors">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </span>
-                        </a>
+                        <span class="text-xs font-bold text-blue-600 group-hover:text-blue-700">Mohon Sekarang</span>
+                        <span class="w-7 h-7 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white flex items-center justify-center transition-colors">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </span>
                     </div>
                 </div>
-            </div>
+            </a>
 
             <!-- Card 4: Khidmat Teknikal ICT -->
-            <div class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col group">
-                <div class="relative h-40 overflow-hidden bg-slate-100">
+            <a href="<?= url('/tickets/create?category=LAIN_LAIN') ?>" 
+               class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col group block">
+                <div class="relative h-44 sm:h-48 overflow-hidden bg-slate-100">
                     <img src="<?= asset('images/service-technical.jpg') ?>" 
                          alt="Khidmat Teknikal ICT" 
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute bottom-3 left-4 w-9 h-9 rounded-xl bg-white shadow-md border border-slate-100 flex items-center justify-center text-lg">
+                    <div class="absolute bottom-3 left-4 w-10 h-10 rounded-xl bg-white/95 backdrop-blur-sm shadow-md border border-slate-200/80 flex items-center justify-center text-xl">
                         🛠️
                     </div>
                 </div>
@@ -229,16 +227,13 @@ $currentUser = Auth::user();
                         </p>
                     </div>
                     <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
-                        <a href="<?= url('/tickets/create?category=LAIN_LAIN') ?>" 
-                           class="text-xs font-bold text-blue-600 group-hover:text-blue-700 inline-flex items-center gap-1.5">
-                            <span>Mohon Sekarang</span>
-                            <span class="w-6 h-6 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white flex items-center justify-center transition-colors">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </span>
-                        </a>
+                        <span class="text-xs font-bold text-blue-600 group-hover:text-blue-700">Mohon Sekarang</span>
+                        <span class="w-7 h-7 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white flex items-center justify-center transition-colors">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </span>
                     </div>
                 </div>
-            </div>
+            </a>
 
         </div>
     </div>
