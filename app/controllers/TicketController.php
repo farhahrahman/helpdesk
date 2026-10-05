@@ -416,7 +416,7 @@ class TicketController extends BaseController
                 $this->redirect(
                     "/track?ref=" . urlencode($ticket['reference_no']),
                     'success',
-                    "Permohonan anda telah berjaya dihantar dengan No. Rujukan: {$ticket['reference_no']}! Sila simpan no. rujukan ini untuk semakan status, atau log masuk (kata laluan asas: 123456) untuk melihat sejarah permohonan."
+                    "Permohonan anda telah berjaya dihantar dengan No. Rujukan: {$ticket['reference_no']}! Sila simpan no. rujukan ini atau hantar salinan ke WhatsApp di bawah untuk semakan status kelak."
                 );
             }
         } catch (\Exception $e) {

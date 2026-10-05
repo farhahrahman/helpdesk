@@ -17,17 +17,20 @@ class TicketService
     private UserRepository $userRepo;
     private AuditService $audit;
     private JsonStorageEngine $engine;
+    private MailService $mailer;
 
     public function __construct(
         ?TicketRepository $ticketRepo = null,
         ?UserRepository $userRepo = null,
         ?AuditService $audit = null,
-        ?JsonStorageEngine $engine = null
+        ?JsonStorageEngine $engine = null,
+        ?MailService $mailer = null
     ) {
         $this->ticketRepo = $ticketRepo ?? new TicketRepository();
         $this->userRepo = $userRepo ?? new UserRepository();
         $this->audit = $audit ?? new AuditService();
         $this->engine = $engine ?? JsonStorageEngine::getInstance();
+        $this->mailer = $mailer ?? new MailService();
     }
 
     /**
@@ -127,6 +130,13 @@ class TicketService
             $created['id'],
             ['reference_no' => $refNo, 'category' => $category]
         );
+
+        // Hantar emel pengesahan permohonan ke peti masuk pemohon (secara selamat / fail-safe)
+        try {
+            $this->mailer->sendTicketConfirmation($created);
+        } catch (\Throwable $e) {
+            // Abaikan ralat emel jika pelayan belum menetapkan perkhidmatan mail
+        }
 
         return $created;
     }

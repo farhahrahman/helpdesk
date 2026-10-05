@@ -217,3 +217,41 @@ if (!function_exists('format_datetime')) {
         return format_date($dateStr, 'd M Y, h:i A');
     }
 }
+
+if (!function_exists('full_url')) {
+    /**
+     * Generate absolute URL with protocol and host
+     */
+    function full_url(string $path = ''): string
+    {
+        $isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+            || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
+        $scheme = $isHttps ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'] ?? 'helpdesk.hubdigitalplatform.com';
+        return $scheme . '://' . $host . url($path);
+    }
+}
+
+if (!function_exists('format_whatsapp_phone')) {
+    /**
+     * Clean and format phone number for WhatsApp wa.me link (standard international format for Malaysia)
+     */
+    function format_whatsapp_phone(?string $phone): string
+    {
+        if (empty($phone)) {
+            return '';
+        }
+        $digits = preg_replace('/[^0-9]/', '', $phone);
+        if ($digits === '') {
+            return '';
+        }
+        if (str_starts_with($digits, '0')) {
+            return '60' . substr($digits, 1);
+        }
+        if (str_starts_with($digits, '60')) {
+            return $digits;
+        }
+        return '60' . $digits;
+    }
+}
+
