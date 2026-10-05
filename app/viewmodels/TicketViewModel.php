@@ -27,7 +27,7 @@ class TicketViewModel
 
         $catKey = $ticket['category'] ?? 'PEMINJAMAN_ASET';
         $catConfig = $categories[$catKey] ?? [
-            'name' => $catKey,
+            'name' => ($catKey === 'ADUAN_KUARTERS' ? 'Isu Sistem e-Kuarters' : $catKey),
             'icon' => 'tag',
             'badge' => 'slate',
         ];

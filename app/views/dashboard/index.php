@@ -178,7 +178,8 @@ $role = $user['role'] ?? 'STAF';
                         </div>
                     </div>
 
-                    <!-- Aduan Sistem Kuarters -->
+                    <!-- Aduan Sistem Kuarters (Hanya paparkan jika terdapat rekod sedia ada) -->
+                    <?php if (!empty($category_counts['ADUAN_KUARTERS'])): ?>
                     <div class="space-y-1.5">
                         <div class="flex justify-between text-xs font-medium">
                             <span class="text-slate-700 flex items-center gap-1.5">
@@ -191,6 +192,7 @@ $role = $user['role'] ?? 'STAF';
                             <div class="h-full bg-amber-600 rounded-full" style="width: <?= ($metrics['total'] > 0) ? (($category_counts['ADUAN_KUARTERS'] ?? 0) / $metrics['total'] * 100) : 0 ?>%"></div>
                         </div>
                     </div>
+                    <?php endif; ?>
                 </div>
             </div>
 

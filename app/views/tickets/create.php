@@ -5,6 +5,9 @@ $isLoggedIn = Auth::check();
 $user = Auth::user();
 $today = date('Y-m-d');
 $selectedCategory = (string)($_GET['category'] ?? 'PEMINJAMAN_ASET');
+if ($selectedCategory === 'ADUAN_KUARTERS') {
+    $selectedCategory = 'PEMINJAMAN_ASET';
+}
 $unitsList = $units ?? app_config('units', []);
 $techSupportList = $technicalSupportTypes ?? app_config('services.technical_support_types', []);
 $kuartersComplaintList = $kuartersComplaintTypes ?? app_config('services.kuarters_complaint_types', []);
@@ -49,13 +52,13 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
             <form action="<?= url('/tickets') ?>" method="POST" enctype="multipart/form-data" id="ticket-application-form" class="space-y-5">
                 <?= csrf_field() ?>
 
-                <!-- LANGKAH 1: Kategori Ribbon (Horizontal Tabs Bar - 5 Kategori) -->
+                <!-- LANGKAH 1: Kategori Ribbon (Horizontal Tabs Bar - 4 Kategori) -->
                 <div>
                     <div class="flex items-center justify-between mb-2.5">
                         <span class="text-xs font-extrabold uppercase tracking-widest text-slate-400">Langkah 1: Pilih Kategori Perkhidmatan</span>
                         <span class="text-[11px] text-slate-500 font-medium hidden sm:inline">Pilih salah satu perkhidmatan di bawah</span>
                     </div>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3">
+                    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
                         <!-- 1. Peminjaman Aset -->
                         <label data-cat="PEMINJAMAN_ASET" class="category-card group relative flex items-center gap-2.5 p-3 rounded-2xl border cursor-pointer transition-all <?= ($selectedCategory === 'PEMINJAMAN_ASET') ? 'bg-[#1d3d75] border-[#1d3d75] text-white shadow-lg shadow-blue-950/15' : 'bg-white border-slate-200/90 text-slate-700 hover:border-slate-300 hover:bg-slate-50/80 shadow-xs' ?>">
                             <input type="radio" name="category" value="PEMINJAMAN_ASET" <?= ($selectedCategory === 'PEMINJAMAN_ASET') ? 'checked' : '' ?> onchange="switchCategoryView('PEMINJAMAN_ASET')" class="sr-only">
@@ -104,7 +107,7 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                             </div>
                         </label>
 
-                        <!-- 5. Isu Sistem e-Kuarters -->
+                        <?php if (false): // 5. Isu Sistem e-Kuarters (Disembunyikan buat sementara waktu kerana baharu) ?>
                         <label data-cat="ADUAN_KUARTERS" class="category-card group relative flex items-center gap-2.5 p-3 rounded-2xl border cursor-pointer transition-all <?= ($selectedCategory === 'ADUAN_KUARTERS') ? 'bg-[#1d3d75] border-[#1d3d75] text-white shadow-lg shadow-blue-950/15' : 'bg-white border-slate-200/90 text-slate-700 hover:border-slate-300 hover:bg-slate-50/80 shadow-xs' ?>">
                             <input type="radio" name="category" value="ADUAN_KUARTERS" <?= ($selectedCategory === 'ADUAN_KUARTERS') ? 'checked' : '' ?> onchange="switchCategoryView('ADUAN_KUARTERS')" class="sr-only">
                             <div class="card-icon w-8 h-8 rounded-xl <?= ($selectedCategory === 'ADUAN_KUARTERS') ? 'bg-white/15 text-white' : 'bg-slate-100 text-slate-700' ?> flex items-center justify-center shrink-0 text-sm">
@@ -115,6 +118,7 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                                 <span class="card-sub text-[10px] <?= ($selectedCategory === 'ADUAN_KUARTERS') ? 'text-blue-100/80' : 'text-slate-500' ?> block truncate font-medium mt-0.5">Permohonan & Ralat Sistem</span>
                             </div>
                         </label>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -275,7 +279,8 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                             </div>
                         </div>
 
-                        <!-- 5. Langkah 2: Isu Sistem e-Kuarters (Maklumat Pemohon & Akaun e-Kuarters) -->
+                        <!-- 5. Langkah 2: Isu Sistem e-Kuarters (Disembunyikan buat sementara waktu) -->
+                        <?php if (false): ?>
                         <div id="section-kuarters" class="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-white space-y-3.5 shadow-2xs <?= ($selectedCategory === 'ADUAN_KUARTERS') ? '' : 'hidden' ?>">
                             <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
                                 <div class="flex items-center gap-2">
@@ -393,6 +398,7 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
                     </div>
 
                     <!-- ========================================================================= -->
@@ -737,7 +743,8 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                             </div>
                         </div>
 
-                        <!-- 5. Langkah 3: Aduan Sistem e-Kuarters (Keterangan Isu & Ralat Sistem) -->
+                        <!-- 5. Langkah 3: Aduan Sistem e-Kuarters (Disembunyikan buat sementara waktu) -->
+                        <?php if (false): ?>
                         <div id="step3-kuarters" class="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-white space-y-3.5 shadow-2xs <?= ($selectedCategory === 'ADUAN_KUARTERS') ? '' : 'hidden' ?>">
                             <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
                                 <div class="flex items-center gap-2">
@@ -809,27 +816,28 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                                         <input type="file" name="kuarters_photo" id="kuarters_photo" accept="image/jpeg,image/png,image/webp,image/jpg" class="hidden" onchange="previewKuartersImage(this)">
                                         
                                         <div id="kuarters_upload_prompt" class="space-y-1">
-                                            <div class="w-8 h-8 mx-auto rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-sm shadow-2xs">
-                                                📸
-                                            </div>
-                                            <p class="text-xs font-bold text-slate-800">Klik untuk Pilih Tangkapan Skrin Ralat (Screenshot)</p>
-                                            <p class="text-[10px] text-slate-500">Format disokong: JPG, PNG, WebP (Maksimum 10MB)</p>
+                                             <div class="w-8 h-8 mx-auto rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-sm shadow-2xs">
+                                                 📸
+                                             </div>
+                                             <p class="text-xs font-bold text-slate-800">Klik untuk Pilih Tangkapan Skrin Ralat (Screenshot)</p>
+                                             <p class="text-[10px] text-slate-500">Format disokong: JPG, PNG, WebP (Maksimum 10MB)</p>
                                         </div>
 
                                         <!-- Image Live Preview Container -->
                                         <div id="kuarters_preview_box" class="hidden space-y-2">
-                                            <div class="relative inline-block mx-auto">
-                                                <img id="kuarters_img_preview" src="" alt="Preview Gambar Ralat" class="max-h-28 rounded-lg border border-slate-300 shadow-sm mx-auto object-cover">
-                                                <button type="button" onclick="event.stopPropagation(); removeKuartersImage();" class="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-rose-600 text-white font-bold text-xs flex items-center justify-center shadow hover:bg-rose-700">
-                                                    &times;
-                                                </button>
-                                            </div>
-                                            <p id="kuarters_file_name" class="text-[10px] font-mono text-slate-600 truncate"></p>
+                                             <div class="relative inline-block mx-auto">
+                                                 <img id="kuarters_img_preview" src="" alt="Preview Gambar Ralat" class="max-h-28 rounded-lg border border-slate-300 shadow-sm mx-auto object-cover">
+                                                 <button type="button" onclick="event.stopPropagation(); removeKuartersImage();" class="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-rose-600 text-white font-bold text-xs flex items-center justify-center shadow hover:bg-rose-700">
+                                                     &times;
+                                                 </button>
+                                             </div>
+                                             <p id="kuarters_file_name" class="text-[10px] font-mono text-slate-600 truncate"></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
 
                         <!-- Submission Action Button (Frontpage Corporate Theme) -->
                         <div class="pt-1">

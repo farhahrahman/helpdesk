@@ -41,6 +41,7 @@ return [
             'badge' => 'emerald',
             'lead_time_days' => 1,
         ],
+        /* Disembunyikan buat sementara waktu kerana modul baharu
         'ADUAN_KUARTERS' => [
             'id' => 'ADUAN_KUARTERS',
             'name' => 'Isu Sistem e-Kuarters',
@@ -49,6 +50,7 @@ return [
             'badge' => 'blue',
             'lead_time_days' => 1,
         ],
+        */
     ],
 
     // Senarai Rasmi Peralatan ICT untuk Peminjaman (Lengkap Jenis, No. Siri & Gambar)
