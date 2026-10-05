@@ -259,9 +259,9 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                                         Tahap Keutamaan / Urgensi <span class="text-rose-500">*</span>
                                     </label>
                                     <select name="priority" class="w-full px-3 py-2 bg-slate-50/70 border border-slate-200 focus:bg-white focus:border-[#1d3d75] rounded-xl text-xs outline-none font-medium">
-                                        <option value="BIASA">Biasa (Tindakan dalam 24 Jam)</option>
-                                        <option value="SEGERA">Segera (Tindakan Hari Ini / Menjejaskan Tugasan)</option>
-                                        <option value="KRITIKAL">Kritikal (Kecemasan / Mesyuarat Penting)</option>
+                                        <option value="BIASA">Biasa</option>
+                                        <option value="SEGERA">Segera</option>
+                                        <option value="KRITIKAL">Kritikal</option>
                                     </select>
                                 </div>
 
@@ -784,9 +784,9 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                                         Tahap Urgensi / Keutamaan Tindakan
                                     </label>
                                     <select name="kuarters_urgency" id="kuarters_urgency" class="w-full px-3 py-2 bg-slate-50/70 border border-slate-200 focus:bg-white focus:border-[#1d3d75] rounded-xl text-xs outline-none font-medium">
-                                        <option value="BIASA">Biasa (Pertanyaan am / bantuan teknikal modul)</option>
-                                        <option value="SEGERA">Segera (Menjejaskan tarikh tutup permohonan / urusan rasmi)</option>
-                                        <option value="KECEMASAN">Kritikal (Sistem tidak boleh diakses langsung / ralat genting)</option>
+                                        <option value="BIASA">Biasa</option>
+                                        <option value="SEGERA">Segera</option>
+                                        <option value="KECEMASAN">Kritikal</option>
                                     </select>
                                 </div>
 
