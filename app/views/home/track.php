@@ -24,10 +24,10 @@ $ticketFound = !empty($ticket);
                 </div>
                 <input type="text" name="ref" value="<?= e($refNo ?? '') ?>" required 
                        placeholder="Cth: ICTBKP/2026/08/0001 atau 0001" 
-                       class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-300 text-slate-900 rounded-2xl placeholder-slate-400 font-mono font-bold text-xs sm:text-sm outline-none focus:border-blue-500 focus:bg-white transition-all">
+                       class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-300 text-slate-900 rounded-2xl placeholder-slate-400 font-mono font-bold text-xs sm:text-sm outline-none focus:border-[#1d3d75] focus:bg-white transition-all">
             </div>
             <button type="submit" 
-                    class="px-6 py-3 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold text-xs sm:text-sm rounded-2xl shadow-md transition-all flex items-center justify-center gap-2">
+                    class="px-6 py-3 bg-[#1d3d75] hover:bg-[#163060] active:bg-[#0f2347] text-white font-bold text-xs sm:text-sm rounded-2xl shadow-md transition-all flex items-center justify-center gap-2">
                 <span>Cari Status</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </button>
@@ -35,21 +35,46 @@ $ticketFound = !empty($ticket);
     </div>
 
     <?php if (!$ticketFound): ?>
-    <!-- Not Found State -->
-    <div class="bg-white rounded-3xl p-12 text-center text-slate-700 shadow-md border border-slate-200">
-        <div class="w-16 h-16 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+        <?php if (!empty($refNo)): ?>
+        <!-- Keadaan 1: Nombor rujukan telah dicari tetapi tiada rekod sepadan -->
+        <div class="bg-white rounded-3xl p-8 sm:p-12 text-center text-slate-700 shadow-md border border-slate-200/90">
+            <div class="w-16 h-16 rounded-2xl bg-amber-50 text-amber-600 border border-amber-200/70 flex items-center justify-center mx-auto mb-4 shadow-2xs">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900">Maaf, Rekod Permohonan Tidak Ditemui</h2>
+            <p class="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto mt-2.5 leading-relaxed">
+                Dukacita dimaklumkan, kami tidak menemui sebarang permohonan bagi nombor rujukan <span class="font-mono font-bold text-[#1d3d75] bg-slate-100 px-2 py-0.5 rounded border border-slate-200"><?= e($refNo) ?></span>. Sila pastikan nombor rujukan dimasukkan dengan tepat, atau anda dialu-alukan untuk membuat permohonan baharu.
+            </p>
+            <div class="mt-6 flex flex-wrap justify-center items-center gap-3">
+                <a href="<?= url('/tickets/create') ?>" class="px-5 py-2.5 bg-[#1d3d75] hover:bg-[#163060] text-white font-bold text-xs rounded-xl shadow transition-colors">
+                    + Buat Permohonan Baharu
+                </a>
+                <a href="<?= url('/track') ?>" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl border border-slate-200 transition-colors">
+                    Semak Semula
+                </a>
+            </div>
         </div>
-        <h2 class="text-lg font-bold text-slate-900">Rekod Permohonan Tidak Dijumpai</h2>
-        <p class="text-xs text-slate-500 max-w-md mx-auto mt-2 leading-relaxed">
-            Tiada permohonan yang sepadan dengan nombor rujukan <strong class="font-mono text-slate-900 font-bold"><?= e($refNo ?? '') ?></strong>. Sila semak semula No. Tiket anda atau buat permohonan baru.
-        </p>
-        <div class="mt-6 flex justify-center gap-3">
-            <a href="<?= url('/tickets/create') ?>" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow">
-                + Buat Permohonan Baru
-            </a>
+        <?php else: ?>
+        <!-- Keadaan 2: Pengguna baru membuka halaman semakan (belum memasukkan nombor rujukan) -->
+        <div class="bg-white rounded-3xl p-8 sm:p-12 text-center text-slate-700 shadow-md border border-slate-200/90">
+            <div class="w-16 h-16 rounded-2xl bg-blue-50 text-[#1d3d75] border border-blue-200/70 flex items-center justify-center mx-auto mb-4 shadow-2xs">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                </svg>
+            </div>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900">Sila Masukkan Nombor Rujukan Tiket Anda</h2>
+            <p class="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto mt-2.5 leading-relaxed">
+                Sila masukkan nombor rujukan tiket (contoh: <span class="font-mono font-bold text-[#1d3d75]">ICTBKP/2026/08/0001</span> atau <span class="font-mono font-bold text-[#1d3d75]">0001</span>) pada ruangan carian di atas untuk menyemak status permohonan dan kelulusan terkini.
+            </p>
+            <div class="mt-6 flex justify-center gap-3">
+                <a href="<?= url('/tickets/create') ?>" class="px-5 py-2.5 bg-[#1d3d75] hover:bg-[#163060] text-white font-bold text-xs rounded-xl shadow transition-colors">
+                    + Buat Permohonan Baharu
+                </a>
+            </div>
         </div>
-    </div>
+        <?php endif; ?>
     <?php else: ?>
     <!-- Ticket Result Details Card -->
     <div class="bg-white text-slate-900 rounded-3xl p-6 sm:p-10 shadow-lg border border-slate-200 space-y-8">

@@ -432,7 +432,7 @@ class TicketController extends BaseController
     {
         $ticket = $this->ticketRepo->find($id);
         if (!$ticket) {
-            $this->abort(404, 'Permohonan tidak dijumpai.');
+            $this->abort(404, 'Maklumat permohonan tidak ditemui.');
         }
 
         $user = Auth::user();
@@ -476,7 +476,7 @@ class TicketController extends BaseController
     {
         $ticket = $this->ticketRepo->find($id);
         if (!$ticket) {
-            $this->abort(404, 'Permohonan tidak dijumpai.');
+            $this->abort(404, 'Maklumat permohonan tidak ditemui.');
         }
 
         $presented = TicketViewModel::present($ticket);
@@ -526,7 +526,7 @@ class TicketController extends BaseController
 
         $ticket = $this->ticketRepo->find($id);
         if (!$ticket) {
-            $this->redirect('/tickets', 'error', 'Rekod permohonan tidak dijumpai.');
+            $this->redirect('/tickets', 'error', 'Rekod permohonan tidak ditemui.');
         }
 
         $refNo = $ticket['reference_no'] ?? $id;
