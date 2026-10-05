@@ -214,37 +214,37 @@ return [
     'kuarters_complaint_types' => [
         'RALAT_SUBMIT' => [
             'id' => 'RALAT_SUBMIT',
-            'name' => 'Ralat Semasa Hantar / Borang Permohonan Tidak Boleh Submit',
+            'name' => 'Gagal Hantar / Submit',
             'icon' => '•',
         ],
         'RALAT_ATTACHMENT' => [
             'id' => 'RALAT_ATTACHMENT',
-            'name' => 'Ralat Muat Naik Dokumen / Lampiran Sokongan (Attachment Error)',
+            'name' => 'Ralat Muat Naik Lampiran',
             'icon' => '•',
         ],
         'MASALAH_BORANG' => [
             'id' => 'MASALAH_BORANG',
-            'name' => 'Masalah Mengisi Borang / Pilihan Kuarters / Ralat Modul Permohonan',
+            'name' => 'Ralat Pengisian Borang',
             'icon' => '•',
         ],
         'MASALAH_LOGIN' => [
             'id' => 'MASALAH_LOGIN',
-            'name' => 'Masalah Log Masuk / Akaun Pengguna / Reset Kata Laluan e-Kuarters',
+            'name' => 'Log Masuk / Kata Laluan',
             'icon' => '•',
         ],
         'RALAT_SISTEM' => [
             'id' => 'RALAT_SISTEM',
-            'name' => 'Ralat Paparan / Halaman Kosong / Kod Ralat Sistem (500 / 404 / Bug)',
+            'name' => 'Ralat Sistem (Kod 500 / 404)',
             'icon' => '•',
         ],
         'STATUS_PERMOHONAN' => [
             'id' => 'STATUS_PERMOHONAN',
-            'name' => 'Masalah Semakan Status / Keputusan Permohonan Tidak Dikemas Kini',
+            'name' => 'Semakan Status Permohonan',
             'icon' => '•',
         ],
         'LAIN_LAIN_SISTEM' => [
             'id' => 'LAIN_LAIN_SISTEM',
-            'name' => 'Lain-lain Isu & Masalah Teknikal Sistem e-Kuarters',
+            'name' => 'Lain-lain Isu Sistem',
             'icon' => '•',
         ],
     ],
