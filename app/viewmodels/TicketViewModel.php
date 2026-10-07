@@ -25,12 +25,24 @@ class TicketViewModel
             'icon' => 'help-circle',
         ];
 
-        $catKey = $ticket['category'] ?? 'PEMINJAMAN_ASET';
-        $catConfig = $categories[$catKey] ?? [
-            'name' => ($catKey === 'ADUAN_KUARTERS' ? 'Isu Sistem e-Kuarters' : $catKey),
-            'icon' => 'tag',
-            'badge' => 'slate',
+        $rawCat = $ticket['category'] ?? 'PEMINJAMAN_ASET';
+        $catKey = ($rawCat === 'LIPUTAN_MEDIA') ? 'MEDIA_JURUKAMERA' : $rawCat;
+
+        $catConfig = $categories[$catKey] ?? $categories[$rawCat] ?? [
+            'name' => ($rawCat === 'ADUAN_KUARTERS' ? 'Isu Sistem e-Kuarters' : 'Liputan Media & Fotografi'),
+            'icon' => 'camera',
+            'badge' => 'purple',
         ];
+
+        $catBadgeClasses = [
+            'PEMINJAMAN_ASET' => 'bg-blue-50 text-blue-700 border-blue-200',
+            'SOKONGAN_MESYUARAT' => 'bg-indigo-50 text-indigo-700 border-indigo-200',
+            'MEDIA_JURUKAMERA' => 'bg-purple-50 text-purple-700 border-purple-200',
+            'LIPUTAN_MEDIA' => 'bg-purple-50 text-purple-700 border-purple-200',
+            'LAIN_LAIN' => 'bg-emerald-50 text-emerald-700 border-emerald-200',
+            'ADUAN_KUARTERS' => 'bg-amber-50 text-amber-800 border-amber-200',
+        ];
+        $categoryBadgeClass = $catBadgeClasses[$rawCat] ?? $catBadgeClasses[$catKey] ?? 'bg-slate-100 text-slate-700 border-slate-200';
 
         $unitKey = $ticket['unit'] ?? 'PENTADBIRAN';
         $unitConfig = $units[$unitKey] ?? [
@@ -89,6 +101,7 @@ class TicketViewModel
             'status_icon' => $statusConfig['icon'],
             'category_name' => $catConfig['name'],
             'category_icon' => $catConfig['icon'],
+            'category_badge_class' => $categoryBadgeClass,
             'unit_short_name' => $unitConfig['short_name'] ?? $unitKey,
             'unit_badge_color' => $unitConfig['badge_color'] ?? 'slate',
             'equipment_names' => $requestedEquipments,

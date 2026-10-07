@@ -96,7 +96,7 @@ $role = $user['role'] ?? 'STAF';
                             <span class="text-[11px] text-slate-500"><?= e($t['formatted_created_at']) ?></span>
                         </td>
                         <td class="py-4 px-4 min-w-[240px]">
-                            <span class="inline-block px-2 py-0.5 text-[10px] font-semibold rounded bg-blue-50 text-blue-700 border border-blue-100 mb-1">
+                            <span class="inline-block px-2.5 py-0.5 text-[10px] font-bold rounded-md border mb-1 <?= $t['category_badge_class'] ?? 'bg-blue-50 text-blue-700 border-blue-100' ?>">
                                 <?= e($t['category_name']) ?>
                             </span>
                             <p class="font-bold text-slate-900 line-clamp-1"><?= e($t['title']) ?></p>

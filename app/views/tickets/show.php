@@ -243,7 +243,7 @@ $statusKey = $ticket['status'] ?? '';
             </div>
             <?php endif; ?>
 
-            <?php if ($ticket['category'] === 'MEDIA_JURUKAMERA'): ?>
+            <?php if ($ticket['category'] === 'MEDIA_JURUKAMERA' || $ticket['category'] === 'LIPUTAN_MEDIA'): ?>
             <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
                 <div class="border-b border-slate-100 pb-3">
                     <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Skop Liputan Media & Fotografi</h2>

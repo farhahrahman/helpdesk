@@ -78,6 +78,9 @@ class DashboardViewModel
         ];
         foreach ($allTickets as $t) {
             $c = $t['category'] ?? 'PEMINJAMAN_ASET';
+            if ($c === 'LIPUTAN_MEDIA') {
+                $c = 'MEDIA_JURUKAMERA';
+            }
             if (isset($catCounts[$c])) {
                 $catCounts[$c]++;
             }

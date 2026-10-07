@@ -90,7 +90,12 @@ class TicketRepository extends BaseRepository
         }
 
         if (!empty($filters['category'])) {
-            $q->where('category', $filters['category']);
+            $catFilter = $filters['category'];
+            if ($catFilter === 'MEDIA_JURUKAMERA' || $catFilter === 'LIPUTAN_MEDIA') {
+                $q->whereIn('category', ['MEDIA_JURUKAMERA', 'LIPUTAN_MEDIA']);
+            } else {
+                $q->where('category', $catFilter);
+            }
         }
 
         if (!empty($filters['status'])) {
@@ -107,7 +112,14 @@ class TicketRepository extends BaseRepository
             $all = $this->engine->read($this->collection);
             $filtered = array_filter($all, function ($item) use ($search, $filters) {
                 if (!empty($filters['unit']) && ($item['unit'] ?? '') !== $filters['unit']) return false;
-                if (!empty($filters['category']) && ($item['category'] ?? '') !== $filters['category']) return false;
+                if (!empty($filters['category'])) {
+                    $itemCat = $item['category'] ?? '';
+                    if ($filters['category'] === 'MEDIA_JURUKAMERA' || $filters['category'] === 'LIPUTAN_MEDIA') {
+                        if (!in_array($itemCat, ['MEDIA_JURUKAMERA', 'LIPUTAN_MEDIA'])) return false;
+                    } elseif ($itemCat !== $filters['category']) {
+                        return false;
+                    }
+                }
                 if (!empty($filters['status']) && ($item['status'] ?? '') !== $filters['status']) return false;
                 if (!empty($filters['user_id']) && ($item['user_id'] ?? '') !== $filters['user_id']) return false;
 

@@ -27,7 +27,15 @@ return [
         ],
         'MEDIA_JURUKAMERA' => [
             'id' => 'MEDIA_JURUKAMERA',
-            'name' => 'Khidmat Media, Fotografi & Videografi',
+            'name' => 'Liputan Media & Fotografi',
+            'description' => 'Permohonan jurugambar / juruvideo bagi majlis, kursus, bengkel atau liputan program rasmi BKP.',
+            'icon' => 'camera',
+            'badge' => 'purple',
+            'lead_time_days' => 3,
+        ],
+        'LIPUTAN_MEDIA' => [
+            'id' => 'LIPUTAN_MEDIA',
+            'name' => 'Liputan Media & Fotografi',
             'description' => 'Permohonan jurugambar / juruvideo bagi majlis, kursus, bengkel atau liputan program rasmi BKP.',
             'icon' => 'camera',
             'badge' => 'purple',
