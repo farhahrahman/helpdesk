@@ -353,7 +353,7 @@
                 📞 <strong>Talian ICT:</strong> <a href="tel:0105528875" class="text-blue-600 font-bold underline">010-5528875</a><br>
                 📧 <strong>Emel:</strong> <a href="mailto:farhah@johor.gov.my" class="text-blue-600 font-bold underline">farhah@johor.gov.my</a><br>
                 🏢 <strong>Lokasi:</strong> Seksyen ICT, Bahagian Khidmat Pengurusan, Pejabat Setiausaha Kerajaan Negeri Johor.<br>
-                🕒 <strong>Waktu Operasi:</strong> Ahad - Rabu (8.00 AM - 5.00 PM) | Khamis (8.00 AM - 3.30 PM).`;
+                🕒 <strong>Waktu Operasi:</strong> Isnin - Khamis (8.00 AM - 5.00 PM) | Jumaat (8.00 AM - 12.30 PM & 2.45 PM - 5.00 PM).`;
         }
 
         // 8. Ucapan Terima Kasih

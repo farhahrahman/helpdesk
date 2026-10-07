@@ -301,7 +301,7 @@ $currentUser = Auth::user();
                         </div>
                         <div class="flex items-center gap-2 bg-white/10 px-4 py-2.5 rounded-xl border border-white/10">
                             <span class="text-emerald-400 text-base">⏰</span>
-                            <span>Ahad - Rabu (8:00 AM - 5:00 PM) | Khamis (8:00 AM - 3:30 PM)</span>
+                            <span>Isnin - Khamis (8:00 AM - 5:00 PM) | Jumaat (8:00 AM - 12:30 PM & 2:45 PM - 5:00 PM)</span>
                         </div>
                     </div>
                 </div>
