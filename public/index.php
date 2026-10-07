@@ -57,6 +57,8 @@ $router->get('/tickets/{id}', 'TicketController@show', ['auth']);
 $router->get('/tickets/{id}/print', 'TicketController@printSlip');
 $router->post('/tickets/{id}/cancel', 'TicketController@cancel', ['auth', 'csrf']);
 $router->post('/tickets/{id}/delete', 'TicketController@delete', ['auth', 'admin', 'csrf']);
+$router->post('/tickets/{id}/notes', 'TicketController@addNote', ['auth', 'admin', 'csrf']);
+$router->post('/tickets/{id}/notes/{noteId}/delete', 'TicketController@deleteNote', ['auth', 'admin', 'csrf']);
 
 // Approvals & Workflow
 $router->get('/approvals', 'ApprovalController@index', ['auth']);

@@ -538,4 +538,90 @@ class TicketController extends BaseController
             $this->redirect('/tickets', 'error', 'Gagal memadam permohonan.');
         }
     }
+
+    /**
+     * Add ICTBKP Admin Note
+     */
+    public function addNote(Request $request, string $id): void
+    {
+        $user = Auth::user();
+
+        if (($user['role'] ?? '') !== 'ADMIN' && ($user['email'] ?? '') !== 'farhah@johor.gov.my') {
+            $this->abort(403, 'Akses dinafikan. Hanya Pentadbir ICTBKP dibenarkan mencatat nota.');
+        }
+
+        $ticket = $this->ticketRepo->find($id);
+        if (!$ticket) {
+            $this->redirect('/tickets', 'error', 'Rekod permohonan tidak ditemui.');
+        }
+
+        $content = trim((string) $request->input('note', ''));
+        if ($content === '') {
+            $this->redirect("/tickets/{$id}", 'error', 'Sila masukkan teks nota catatan sebelum menyimpan.');
+        }
+
+        $notes = $ticket['ict_notes'] ?? [];
+        $newNote = [
+            'id' => 'NOTE-' . strtoupper(substr(bin2hex(random_bytes(4)), 0, 8)),
+            'content' => $content,
+            'user_id' => $user['id'] ?? 'USR-ADMIN',
+            'user_name' => $user['name'] ?? 'Pentadbir ICT',
+            'user_email' => $user['email'] ?? '',
+            'created_at' => date('c'),
+        ];
+
+        $notes[] = $newNote;
+
+        $this->ticketRepo->update($id, [
+            'ict_notes' => $notes,
+            'latest_ict_note' => $content,
+            'updated_at' => date('c'),
+        ]);
+
+        $this->auditService->log(
+            'TICKET_NOTE_ADDED',
+            "Nota Catatan ICTBKP ditambah oleh {$user['name']}: \"{$content}\"",
+            $id,
+            ['note_id' => $newNote['id'], 'reference_no' => $ticket['reference_no'] ?? $id]
+        );
+
+        $this->redirect("/tickets/{$id}", 'success', 'Nota catatan ICTBKP telah berjaya disimpan.');
+    }
+
+    /**
+     * Delete ICTBKP Admin Note
+     */
+    public function deleteNote(Request $request, string $id, string $noteId): void
+    {
+        $user = Auth::user();
+
+        if (($user['role'] ?? '') !== 'ADMIN' && ($user['email'] ?? '') !== 'farhah@johor.gov.my') {
+            $this->abort(403, 'Akses dinafikan.');
+        }
+
+        $ticket = $this->ticketRepo->find($id);
+        if (!$ticket) {
+            $this->redirect('/tickets', 'error', 'Rekod permohonan tidak ditemui.');
+        }
+
+        $notes = $ticket['ict_notes'] ?? [];
+        $filtered = array_values(array_filter($notes, fn($n) => ($n['id'] ?? '') !== $noteId));
+
+        $latest = !empty($filtered) ? end($filtered)['content'] : null;
+
+        $this->ticketRepo->update($id, [
+            'ict_notes' => $filtered,
+            'latest_ict_note' => $latest,
+            'updated_at' => date('c'),
+        ]);
+
+        $this->auditService->log(
+            'TICKET_NOTE_DELETED',
+            "Nota Catatan ICTBKP telah dipadam oleh {$user['name']}",
+            $id,
+            ['note_id' => $noteId, 'reference_no' => $ticket['reference_no'] ?? $id]
+        );
+
+        $this->redirect("/tickets/{$id}", 'info', 'Nota catatan ICTBKP telah dipadam.');
+    }
 }

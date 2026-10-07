@@ -101,6 +101,12 @@ $role = $user['role'] ?? 'STAF';
                             </span>
                             <p class="font-bold text-slate-900 line-clamp-1"><?= e($t['title']) ?></p>
                             <p class="text-xs text-slate-500 line-clamp-1"><?= e($t['location']) ?></p>
+                            <?php if (!empty($t['latest_ict_note'])): ?>
+                            <div class="mt-1.5 flex items-center gap-1.5 text-[11px] text-indigo-700 bg-indigo-50/90 px-2 py-0.5 rounded-md border border-indigo-100 max-w-fit" title="<?= e($t['latest_ict_note']) ?>">
+                                <span class="font-bold shrink-0">📝 Nota ICT:</span>
+                                <span class="truncate max-w-[220px] sm:max-w-[280px]"><?= e($t['latest_ict_note']) ?></span>
+                            </div>
+                            <?php endif; ?>
                         </td>
                         <td class="py-4 px-4 whitespace-nowrap">
                             <p class="font-medium text-slate-900 text-xs"><?= e($t['applicant_name']) ?></p>

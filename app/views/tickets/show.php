@@ -65,6 +65,11 @@ $statusKey = $ticket['status'] ?? '';
             <?php endif; ?>
 
             <?php if (($user['role'] ?? '') === 'ADMIN' || ($user['email'] ?? '') === 'farhah@johor.gov.my'): ?>
+            <a href="#nota-catatan-ictbkp" 
+               class="inline-flex items-center gap-1.5 px-3.5 py-2.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold rounded-xl border border-indigo-200 shadow-2xs transition-colors" title="Lihat dan catat nota perkembangan ICTBKP">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                <span>Nota ICTBKP (<?= count($ticket['ict_notes'] ?? []) ?>)</span>
+            </a>
             <button onclick="openModal('delete-ticket-modal')" 
                     class="px-3.5 py-2.5 bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white text-xs font-bold rounded-xl shadow-xs transition-all flex items-center gap-1.5" title="Padam Permohonan Secara Kekal">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
@@ -331,6 +336,84 @@ $statusKey = $ticket['status'] ?? '';
                     </div>
                     <?php endif; ?>
                 </div>
+            </div>
+            <?php endif; ?>
+
+            <!-- NOTA CATATAN ICTBKP (Khas Pentadbir ICT) -->
+            <?php if (($user['role'] ?? '') === 'ADMIN' || ($user['email'] ?? '') === 'farhah@johor.gov.my' || !empty($ticket['ict_notes'])): ?>
+            <div id="nota-catatan-ictbkp" class="bg-white p-6 rounded-2xl border border-indigo-200/90 shadow-sm space-y-4 relative overflow-hidden">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-500"></div>
+
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-9 h-9 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-700 font-bold text-sm">
+                            📝
+                        </div>
+                        <div>
+                            <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                                <span>Nota Catatan ICTBKP</span>
+                                <span class="px-2 py-0.5 text-[10px] font-extrabold bg-indigo-100 text-indigo-800 rounded-full border border-indigo-200">
+                                    Dalaman ICT
+                                </span>
+                            </h2>
+                            <p class="text-[11px] text-slate-500">Catatan perkembangan, log semakan teknikal, dan status tugasan Seksyen ICT</p>
+                        </div>
+                    </div>
+                    <span class="text-xs text-slate-500 font-mono font-bold bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">
+                        <?= count($ticket['ict_notes'] ?? []) ?> Rekod
+                    </span>
+                </div>
+
+                <!-- Senarai Catatan Sedia Ada -->
+                <?php if (!empty($ticket['ict_notes'])): ?>
+                <div class="space-y-3">
+                    <?php foreach (array_reverse($ticket['ict_notes']) as $note): ?>
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/90 hover:border-indigo-300 transition-colors group">
+                        <div class="flex items-start justify-between gap-2 mb-1.5">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
+                                <span class="font-bold text-xs text-slate-900"><?= e($note['user_name'] ?? 'Pentadbir ICT') ?></span>
+                                <span class="text-[11px] text-slate-400">&bull; <?= format_datetime($note['created_at']) ?></span>
+                            </div>
+                            <?php if (($user['role'] ?? '') === 'ADMIN' || ($user['email'] ?? '') === 'farhah@johor.gov.my'): ?>
+                            <form action="<?= url('/tickets/' . $ticket['id'] . '/notes/' . $note['id'] . '/delete') ?>" method="POST" onsubmit="return confirm('Padam catatan ini?');" class="opacity-0 group-hover:opacity-100 transition-opacity">
+                                <?= csrf_field() ?>
+                                <button type="submit" class="text-rose-500 hover:text-rose-700 text-xs p-1 rounded hover:bg-rose-50 cursor-pointer" title="Padam Catatan">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                                </button>
+                            </form>
+                            <?php endif; ?>
+                        </div>
+                        <p class="text-xs text-slate-700 leading-relaxed pl-3.5 border-l-2 border-indigo-300 whitespace-pre-line">
+                            <?= e($note['content']) ?>
+                        </p>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+                <?php else: ?>
+                <div class="text-center py-5 bg-slate-50/70 rounded-xl border border-dashed border-slate-200 text-slate-500 text-xs">
+                    <span class="block text-xl mb-1">📝</span>
+                    Belum ada nota catatan ICTBKP bagi permohonan ini.
+                </div>
+                <?php endif; ?>
+
+                <!-- Borang Tambah Catatan Baru (Admin Sahaja) -->
+                <?php if (($user['role'] ?? '') === 'ADMIN' || ($user['email'] ?? '') === 'farhah@johor.gov.my'): ?>
+                <form action="<?= url('/tickets/' . $ticket['id'] . '/notes') ?>" method="POST" class="pt-3 border-t border-slate-100 space-y-2">
+                    <?= csrf_field() ?>
+                    <label class="block text-xs font-bold text-slate-800 uppercase tracking-wider">
+                        + Tambah Catatan ICTBKP Baru
+                    </label>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <textarea name="note" rows="2" required placeholder="Tulis catatan di sini (cth: Telah menghubungi pemohon, peralatan sedia di bilik mesyuarat, semakan teknikal selesai...)"
+                                  class="flex-1 p-3 text-xs bg-slate-50 border border-slate-300 rounded-xl outline-none focus:bg-white focus:border-indigo-500 transition-all"></textarea>
+                        <button type="submit" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-bold text-xs rounded-xl shadow-xs hover:shadow transition-all shrink-0 self-end sm:self-auto flex items-center justify-center gap-1.5 cursor-pointer">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <span>Simpan Nota</span>
+                        </button>
+                    </div>
+                </form>
+                <?php endif; ?>
             </div>
             <?php endif; ?>
 
