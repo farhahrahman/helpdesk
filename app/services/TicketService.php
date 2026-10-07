@@ -187,11 +187,11 @@ class TicketService
     }
 
     /**
-     * Delete ticket permanently (Khusus farhah@johor.gov.my sahaja)
+     * Delete ticket permanently (Pentadbir Sistem)
      */
     public function deleteTicket(string $id, array $user): bool
     {
-        if (($user['email'] ?? '') !== 'farhah@johor.gov.my') {
+        if (($user['role'] ?? '') !== 'ADMIN' && ($user['email'] ?? '') !== 'farhah@johor.gov.my') {
             return false;
         }
 

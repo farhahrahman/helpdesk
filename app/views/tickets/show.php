@@ -64,9 +64,9 @@ $statusKey = $ticket['status'] ?? '';
             </button>
             <?php endif; ?>
 
-            <?php if (($user['email'] ?? '') === 'farhah@johor.gov.my'): ?>
+            <?php if (($user['role'] ?? '') === 'ADMIN' || ($user['email'] ?? '') === 'farhah@johor.gov.my'): ?>
             <button onclick="openModal('delete-ticket-modal')" 
-                    class="px-3.5 py-2.5 bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white text-xs font-bold rounded-xl shadow-sm transition-all flex items-center gap-1.5" title="Padam Permohonan (Khusus Pentadbir Farhah)">
+                    class="px-3.5 py-2.5 bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white text-xs font-bold rounded-xl shadow-xs transition-all flex items-center gap-1.5" title="Padam Permohonan Secara Kekal">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                 <span>Padam Permohonan</span>
             </button>
@@ -619,8 +619,8 @@ $statusKey = $ticket['status'] ?? '';
     </div>
 </div>
 
-<?php if (($user['email'] ?? '') === 'farhah@johor.gov.my'): ?>
-<!-- Modal: Padam Permohonan Secara Kekal (Khusus Pentadbir Farhah) -->
+<?php if (($user['role'] ?? '') === 'ADMIN' || ($user['email'] ?? '') === 'farhah@johor.gov.my'): ?>
+<!-- Modal: Padam Permohonan Secara Kekal -->
 <div id="delete-ticket-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
     <div class="bg-white max-w-md w-full rounded-2xl p-6 shadow-2xl border border-rose-200 space-y-4">
         <div class="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto">

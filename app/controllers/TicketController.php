@@ -514,14 +514,14 @@ class TicketController extends BaseController
     }
 
     /**
-     * Delete Ticket Permanently (Khusus farhah@johor.gov.my sahaja)
+     * Delete Ticket Permanently (Pentadbir Sistem)
      */
     public function delete(Request $request, string $id): void
     {
         $user = Auth::user();
 
-        if (($user['email'] ?? '') !== 'farhah@johor.gov.my') {
-            $this->abort(403, 'Akses dinafikan. Hanya Pentadbir Khas (farhah@johor.gov.my) dibenarkan memadam rekod permohonan.');
+        if (($user['role'] ?? '') !== 'ADMIN' && ($user['email'] ?? '') !== 'farhah@johor.gov.my') {
+            $this->abort(403, 'Akses dinafikan. Hanya Pentadbir dibenarkan memadam rekod permohonan.');
         }
 
         $ticket = $this->ticketRepo->find($id);
