@@ -5,331 +5,342 @@ $isLoggedIn = Auth::check();
 $currentUser = Auth::user();
 ?>
 
-<!-- 1. Hero Section (Matching User Mockup Layout) -->
-<section class="relative bg-white border-b border-slate-200/80 overflow-hidden min-h-[500px] lg:min-h-[560px] flex items-center">
-    <!-- Desktop Background Hero Image with Left Alpha Gradient Mask -->
-    <div class="hidden lg:block absolute right-0 top-0 bottom-0 w-7/12 xl:w-2/3 pointer-events-none select-none overflow-hidden">
-        <img src="<?= asset('images/hero-counter.png') ?>" 
-             alt="Kaunter Perkhidmatan BKP SUKJ" 
-             class="h-full w-full object-cover object-right">
+<!-- Single Viewport Main Container (Fits in 1 Screen on Desktop) -->
+<div class="flex-1 flex flex-col justify-center relative overflow-hidden bg-white">
+    <!-- Desktop Background Accent Image with Mask -->
+    <div class="hidden lg:block absolute right-0 top-0 bottom-0 w-1/2 pointer-events-none select-none overflow-hidden opacity-[0.07]">
+        <img src="<?= asset('images/hero-counter.png') ?>" alt="BKP SUKJ" class="h-full w-full object-cover object-right">
     </div>
+    <div class="hidden lg:block absolute inset-y-0 right-1/3 w-32 bg-gradient-to-r from-white to-transparent pointer-events-none z-[1]"></div>
 
-    <!-- Soft Left White Gradient Mask to blend seamlessly behind text -->
-    <div class="hidden lg:block absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-white via-white/95 to-transparent pointer-events-none z-[1]"></div>
-
-    <!-- Mobile/Tablet Subtle Background Overlay -->
-    <div class="lg:hidden absolute inset-0 pointer-events-none select-none opacity-15">
-        <img src="<?= asset('images/hero-counter.png') ?>" 
-             alt="Kaunter Perkhidmatan BKP SUKJ" 
-             class="h-full w-full object-cover object-right">
-    </div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 relative z-10 w-full">
-        <div class="max-w-xl lg:max-w-2xl space-y-6">
-            <!-- Top Tagline Pill -->
-            <div>
-                <span class="text-xs font-extrabold uppercase tracking-widest text-slate-400">
-                    Satu Platform
-                </span>
-            </div>
-
-            <!-- Main Headline (Matching Mockup) -->
-            <h1 class="text-3xl sm:text-5xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.15]">
-                Sokongan ICT<br>dan Perkhidmatan Aset<br><span class="text-amber-500">Lebih Mudah.</span>
-            </h1>
-
-            <!-- Description Paragraph (Matching Mockup) -->
-            <p class="text-slate-600 text-xs sm:text-sm lg:text-base leading-relaxed font-normal max-w-xl">
-                Permohonan, aduan dan sokongan teknikal ICT BKP termasuk perkhidmatan aset, media dan mesyuarat dalam satu platform yang ringkas dan tersusun.
-            </p>
-
-            <!-- Two Action Cards (Matching Mockup Side-by-Side) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 max-w-2xl">
-                <!-- Card 1: Blue Card "Buat Permohonan Baru" -->
-                <a href="<?= url('/tickets/create') ?>" 
-                   class="group p-5 rounded-2xl bg-[#1d3d75] hover:bg-[#163060] text-white shadow-xl shadow-blue-950/15 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-between gap-4 border border-blue-900/40">
-                    <div class="flex items-center gap-3.5 min-w-0">
-                        <div class="w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white shrink-0 group-hover:bg-white group-hover:text-blue-900 transition-colors">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                        </div>
-                        <div class="min-w-0">
-                            <h3 class="font-bold text-base text-white leading-tight">Buat Permohonan Baru</h3>
-                            <p class="text-[11px] text-blue-100/80 mt-1 leading-snug">Hantar permohonan, aduan atau sokongan teknikal ICT.</p>
-                        </div>
-                    </div>
-                    <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white shrink-0 group-hover:bg-white group-hover:text-blue-900 transition-all">
-                        <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                    </div>
-                </a>
-
-                <!-- Card 2: White Card "Semak Status Permohonan" -->
-                <a href="<?= url('/track') ?>" 
-                   class="group p-5 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 hover:border-blue-300 text-slate-900 shadow-xl shadow-slate-900/5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-between gap-4">
-                    <div class="flex items-center gap-3.5 min-w-0">
-                        <div class="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                        </div>
-                        <div class="min-w-0">
-                            <h3 class="font-bold text-base text-slate-900 leading-tight">Semak Status Permohonan</h3>
-                            <p class="text-[11px] text-slate-500 mt-1 leading-snug">Lihat perkembangan tiket anda dengan cepat.</p>
-                        </div>
-                    </div>
-                    <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                        <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 2. Section "PERKHIDMATAN UTAMA" (Matching User Mockup Grid) -->
-<section id="perkhidmatan" class="py-16 sm:py-20 bg-white border-b border-slate-200/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Section Header -->
-        <div class="mb-10 sm:mb-12">
-            <span class="text-xs font-extrabold uppercase tracking-widest text-slate-400 block mb-2">
-                Perkhidmatan Utama
-            </span>
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-                Pilih Perkhidmatan Mengikut <span class="text-amber-500">Keperluan Anda.</span>
-            </h2>
-        </div>
-
-        <!-- 4-Column Card Grid (Matching Mockup Numbering 2, 3, 4, 5) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Main Content Area -->
+    <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-3 xl:py-6 flex-1 flex flex-col justify-center relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 xl:gap-8 items-center">
             
-            <!-- Card 1: Pinjaman Laptop (Mockup #2) -->
-            <a href="<?= url('/tickets/create?category=PEMINJAMAN_ASET') ?>" 
-               class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col group block">
-                <div class="relative h-44 sm:h-48 overflow-hidden bg-slate-100">
-                    <img src="<?= asset('images/service-laptop.jpg') ?>" 
-                         alt="Pinjaman Laptop & Aset" 
-                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute bottom-3 left-4 w-9 h-9 rounded-full bg-white shadow-md border border-slate-100 flex items-center justify-center text-blue-600">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                    </div>
+            <!-- Left Column: Headline, Actions & Instant Ticket Tracker (7 Cols) -->
+            <div class="lg:col-span-7 space-y-3.5 xl:space-y-4">
+                
+                <!-- Tagline Badge -->
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200/80 text-[11px] font-extrabold text-[#1d3d75] shadow-2xs">
+                    <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+                    <span>PORTAL SEHENTI &bull; SEKSYEN ICT BKP</span>
                 </div>
-                <div class="p-5 flex-1 flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-bold text-base text-slate-900 group-hover:text-blue-600 transition-colors">
-                            Pinjaman Laptop
-                        </h3>
-                        <p class="text-xs text-slate-500 mt-2 leading-relaxed font-normal">
-                            Permohonan pinjaman peralatan ICT seperti komputer riba.
-                        </p>
-                    </div>
-                    <div class="pt-4 mt-4 flex items-center justify-end">
-                        <div class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-blue-600 text-slate-600 group-hover:text-white flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                        </div>
-                    </div>
-                </div>
-            </a>
 
-            <!-- Card 2: Liputan Media (Mockup #3) -->
-            <a href="<?= url('/tickets/create?category=MEDIA_JURUKAMERA') ?>" 
-               class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col group block">
-                <div class="relative h-44 sm:h-48 overflow-hidden bg-slate-100">
-                    <img src="<?= asset('images/service-media.jpg') ?>" 
-                         alt="Liputan Media Rasmi" 
-                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute bottom-3 left-4 w-9 h-9 rounded-full bg-white shadow-md border border-slate-100 flex items-center justify-center text-blue-600">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                    </div>
-                </div>
-                <div class="p-5 flex-1 flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-bold text-base text-slate-900 group-hover:text-blue-600 transition-colors">
-                            Liputan Media
-                        </h3>
-                        <p class="text-xs text-slate-500 mt-2 leading-relaxed font-normal">
-                            Permohonan penggambaran, video dan liputan program rasmi.
-                        </p>
-                    </div>
-                    <div class="pt-4 mt-4 flex items-center justify-end">
-                        <div class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-blue-600 text-slate-600 group-hover:text-white flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                        </div>
-                    </div>
-                </div>
-            </a>
+                <!-- Main Headline -->
+                <h1 class="text-2xl sm:text-4xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-black text-slate-900 tracking-tight leading-[1.16]">
+                    Sokongan ICT &amp; Perkhidmatan Aset<br>
+                    <span class="text-amber-500">Lebih Mudah &amp; Teratur.</span>
+                </h1>
 
-            <!-- Card 3: Sokongan Mesyuarat (Mockup #4) -->
-            <a href="<?= url('/tickets/create?category=SOKONGAN_MESYUARAT') ?>" 
-               class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col group block">
-                <div class="relative h-44 sm:h-48 overflow-hidden bg-slate-100">
-                    <img src="<?= asset('images/service-meeting.jpg') ?>" 
-                         alt="Sokongan Mesyuarat" 
-                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute bottom-3 left-4 w-9 h-9 rounded-full bg-white shadow-md border border-slate-100 flex items-center justify-center text-blue-600">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-                    </div>
-                </div>
-                <div class="p-5 flex-1 flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-bold text-base text-slate-900 group-hover:text-blue-600 transition-colors">
-                            Sokongan Mesyuarat
-                        </h3>
-                        <p class="text-xs text-slate-500 mt-2 leading-relaxed font-normal">
-                            Permohonan peralatan dan sokongan teknikal mesyuarat.
-                        </p>
-                    </div>
-                    <div class="pt-4 mt-4 flex items-center justify-end">
-                        <div class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-blue-600 text-slate-600 group-hover:text-white flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                        </div>
-                    </div>
-                </div>
-            </a>
+                <!-- Subtitle Description -->
+                <p class="text-slate-600 text-xs sm:text-sm lg:text-[12.5px] xl:text-sm leading-relaxed max-w-xl">
+                    Permohonan pinjaman aset, liputan media rasmi, sokongan teknikal mesyuarat dan aduan ICT Bahagian Khidmat Pengurusan dalam satu platform pantas tanpa perlu login.
+                </p>
 
-            <!-- Card 4: Khidmat Teknikal ICT (Mockup #5) -->
-            <a href="<?= url('/tickets/create?category=LAIN_LAIN') ?>" 
-               class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col group block">
-                <div class="relative h-44 sm:h-48 overflow-hidden bg-slate-100">
-                    <img src="<?= asset('images/service-technical.jpg') ?>" 
-                         alt="Khidmat Teknikal ICT" 
-                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    <div class="absolute bottom-3 left-4 w-9 h-9 rounded-full bg-white shadow-md border border-slate-100 flex items-center justify-center text-amber-600">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/></svg>
-                    </div>
-                </div>
-                <div class="p-5 flex-1 flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-bold text-base text-slate-900 group-hover:text-blue-600 transition-colors">
-                            Khidmat Teknikal ICT
-                        </h3>
-                        <p class="text-xs text-slate-500 mt-2 leading-relaxed font-normal">
-                            Aduan, penyelenggaraan dan sokongan teknikal ICT.
-                        </p>
-                    </div>
-                    <div class="pt-4 mt-4 flex items-center justify-end">
-                        <div class="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-blue-600 text-slate-600 group-hover:text-white flex items-center justify-center transition-colors">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                <!-- Dual Action Cards (Side-by-side) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 max-w-xl">
+                    
+                    <!-- Card 1: Buat Permohonan Baru (Royal Blue Card) -->
+                    <a href="<?= url('/tickets/create') ?>" 
+                       class="group p-4 rounded-2xl bg-[#1d3d75] hover:bg-[#163060] text-white shadow-lg shadow-blue-950/10 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 flex flex-col justify-between border border-blue-900/40">
+                        <div class="flex items-center justify-between mb-2.5">
+                            <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white group-hover:bg-white group-hover:text-blue-900 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                            </div>
+                            <div class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-blue-900 transition-all">
+                                <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </div>
                         </div>
+                        <div>
+                            <h3 class="font-extrabold text-sm sm:text-base text-white leading-tight">Buat Permohonan Baru</h3>
+                            <p class="text-[11px] text-blue-100/80 mt-1 leading-snug">Mohon laptop, media, mesyuarat atau aduan ICT segera.</p>
+                        </div>
+                    </a>
+
+                    <!-- Card 2: Semak Status Tiket Pantas (Live Input Box) -->
+                    <div class="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-md flex flex-col justify-between hover:border-blue-300 transition-all">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-xs sm:text-sm text-slate-900 leading-tight">Semak Status Tiket</h3>
+                                    <p class="text-[10px] text-slate-400">Jejak permohonan semasa</p>
+                                </div>
+                            </div>
+                        </div>
+                        <form action="<?= url('/track') ?>" method="GET" class="mt-1 flex items-center gap-1.5">
+                            <input type="text" name="ref" required placeholder="No. Tiket (cth: 0002)" 
+                                   class="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-mono font-bold text-slate-900 outline-none focus:bg-white focus:border-blue-500 transition-all">
+                            <button type="submit" class="px-3.5 py-1.5 bg-slate-900 hover:bg-[#1d3d75] text-white font-bold text-xs rounded-xl shadow-xs transition-colors shrink-0">
+                                Cari
+                            </button>
+                        </form>
                     </div>
+
                 </div>
-            </a>
+
+            </div>
+
+            <!-- Right Column: 4 Core Services Grid 2x2 (5 Cols) -->
+            <div class="lg:col-span-5 space-y-2.5">
+                <div class="flex items-center justify-between px-1">
+                    <span class="text-xs font-extrabold uppercase tracking-widest text-slate-400">
+                        Perkhidmatan Utama
+                    </span>
+                    <span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
+                        Pilih &amp; Mohon
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2.5 xl:gap-3">
+                    
+                    <!-- Service 1: Pinjaman Laptop & Aset -->
+                    <a href="<?= url('/tickets/create?category=PEMINJAMAN_ASET') ?>" 
+                       class="group bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col">
+                        <div class="relative h-20 sm:h-24 lg:h-20 xl:h-24 overflow-hidden bg-slate-100">
+                            <img src="<?= asset('images/service-laptop.jpg') ?>" alt="Pinjaman Laptop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent"></div>
+                            <span class="absolute bottom-2 left-2.5 text-white font-extrabold text-xs leading-tight drop-shadow-sm">Pinjaman Laptop</span>
+                        </div>
+                        <div class="p-2 flex items-center justify-between text-[11px] text-slate-500">
+                            <span class="truncate text-[10.5px]">Komputer &amp; Perkakasan</span>
+                            <span class="w-4 h-4 rounded-full bg-slate-100 group-hover:bg-[#1d3d75] group-hover:text-white flex items-center justify-center text-[9px] text-slate-700 shrink-0 transition-colors">&rarr;</span>
+                        </div>
+                    </a>
+
+                    <!-- Service 2: Liputan Media -->
+                    <a href="<?= url('/tickets/create?category=MEDIA_JURUKAMERA') ?>" 
+                       class="group bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col">
+                        <div class="relative h-20 sm:h-24 lg:h-20 xl:h-24 overflow-hidden bg-slate-100">
+                            <img src="<?= asset('images/service-media.jpg') ?>" alt="Liputan Media" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent"></div>
+                            <span class="absolute bottom-2 left-2.5 text-white font-extrabold text-xs leading-tight drop-shadow-sm">Liputan Media</span>
+                        </div>
+                        <div class="p-2 flex items-center justify-between text-[11px] text-slate-500">
+                            <span class="truncate text-[10.5px]">Fotografi &amp; Rakaman</span>
+                            <span class="w-4 h-4 rounded-full bg-slate-100 group-hover:bg-[#1d3d75] group-hover:text-white flex items-center justify-center text-[9px] text-slate-700 shrink-0 transition-colors">&rarr;</span>
+                        </div>
+                    </a>
+
+                    <!-- Service 3: Sokongan Mesyuarat -->
+                    <a href="<?= url('/tickets/create?category=SOKONGAN_MESYUARAT') ?>" 
+                       class="group bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col">
+                        <div class="relative h-20 sm:h-24 lg:h-20 xl:h-24 overflow-hidden bg-slate-100">
+                            <img src="<?= asset('images/service-meeting.jpg') ?>" alt="Sokongan Mesyuarat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent"></div>
+                            <span class="absolute bottom-2 left-2.5 text-white font-extrabold text-xs leading-tight drop-shadow-sm">Sokongan Mesyuarat</span>
+                        </div>
+                        <div class="p-2 flex items-center justify-between text-[11px] text-slate-500">
+                            <span class="truncate text-[10.5px]">Peralatan &amp; Online</span>
+                            <span class="w-4 h-4 rounded-full bg-slate-100 group-hover:bg-[#1d3d75] group-hover:text-white flex items-center justify-center text-[9px] text-slate-700 shrink-0 transition-colors">&rarr;</span>
+                        </div>
+                    </a>
+
+                    <!-- Service 4: Khidmat Teknikal ICT -->
+                    <a href="<?= url('/tickets/create?category=LAIN_LAIN') ?>" 
+                       class="group bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col">
+                        <div class="relative h-20 sm:h-24 lg:h-20 xl:h-24 overflow-hidden bg-slate-100">
+                            <img src="<?= asset('images/service-technical.jpg') ?>" alt="Khidmat Teknikal ICT" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent"></div>
+                            <span class="absolute bottom-2 left-2.5 text-white font-extrabold text-xs leading-tight drop-shadow-sm">Khidmat Teknikal</span>
+                        </div>
+                        <div class="p-2 flex items-center justify-between text-[11px] text-slate-500">
+                            <span class="truncate text-[10.5px]">Aduan &amp; Sistem</span>
+                            <span class="w-4 h-4 rounded-full bg-slate-100 group-hover:bg-[#1d3d75] group-hover:text-white flex items-center justify-center text-[9px] text-slate-700 shrink-0 transition-colors">&rarr;</span>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
 
         </div>
     </div>
-</section>
+</div>
 
-<!-- 4. Section "SOALAN LAZIM (FAQ)" -->
-<section id="faq" class="py-16 sm:py-20 bg-white border-b border-slate-200/80">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-            <div class="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-blue-700 mb-2">
-                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                Soalan Lazim
+<!-- =========================================================================
+     MODAL 1: SOALAN LAZIM (FAQ)
+     ========================================================================= -->
+<div id="faq-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in duration-200">
+        <!-- Modal Header -->
+        <div class="px-6 py-4 bg-[#1d3d75] text-white flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-amber-300 font-bold">
+                    ?
+                </div>
+                <div>
+                    <h3 class="font-extrabold text-sm sm:text-base leading-tight">Soalan Lazim (FAQ)</h3>
+                    <p class="text-[11px] text-blue-200">Panduan dan maklumat pantas permohonan ICT BKP</p>
+                </div>
             </div>
-            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
-                Kerap Ditanya (FAQ)
-            </h2>
-            <p class="text-slate-600 text-xs sm:text-sm mt-3 font-medium">
-                Maklumat penting bagi melancarkan urusan permohonan anda.
-            </p>
+            <button type="button" onclick="closeFaqModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer">
+                &times;
+            </button>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <!-- Modal Body (Scrollable inside modal only) -->
+        <div class="p-6 overflow-y-auto space-y-3.5 text-xs">
             <!-- FAQ 1 -->
-            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/90 shadow-sm">
-                <h4 class="font-bold text-sm text-slate-900 flex items-start gap-2.5">
-                    <span class="text-blue-600 font-extrabold shrink-0">Q.</span>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                <h4 class="font-bold text-slate-900 text-xs sm:text-sm flex items-start gap-2">
+                    <span class="text-blue-600 font-black">Q1.</span>
                     <span>Berapa hari sebelum program perlu hantar permohonan?</span>
                 </h4>
-                <p class="text-xs text-slate-600 mt-2.5 pl-5 leading-relaxed font-normal">
+                <p class="text-slate-600 mt-2 pl-5 leading-relaxed text-[11.5px]">
                     Permohonan disyorkan dihantar sekurang-kurangnya <strong>3 hingga 5 hari bekerja</strong> sebelum tarikh penggunaan bagi membolehkan pihak ICT menyemak ketersediaan aset dan membuat konfigurasi teknikal.
                 </p>
             </div>
 
             <!-- FAQ 2 -->
-            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/90 shadow-sm">
-                <h4 class="font-bold text-sm text-slate-900 flex items-start gap-2.5">
-                    <span class="text-blue-600 font-extrabold shrink-0">Q.</span>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                <h4 class="font-bold text-slate-900 text-xs sm:text-sm flex items-start gap-2">
+                    <span class="text-blue-600 font-black">Q2.</span>
                     <span>Adakah pemohon perlu mendaftar akaun pengguna baru?</span>
                 </h4>
-                <p class="text-xs text-slate-600 mt-2.5 pl-5 leading-relaxed font-normal">
+                <p class="text-slate-600 mt-2 pl-5 leading-relaxed text-[11.5px]">
                     <strong>Tidak perlu.</strong> Sistem Helpdesk ICT BKP direka bentuk untuk capaian mudah warga SUKJ tanpa login. Cukup sekadar memasukkan alamat emel rasmi <em>@johor.gov.my</em> semasa memohon.
                 </p>
             </div>
 
             <!-- FAQ 3 -->
-            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/90 shadow-sm">
-                <h4 class="font-bold text-sm text-slate-900 flex items-start gap-2.5">
-                    <span class="text-blue-600 font-extrabold shrink-0">Q.</span>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                <h4 class="font-bold text-slate-900 text-xs sm:text-sm flex items-start gap-2">
+                    <span class="text-blue-600 font-black">Q3.</span>
                     <span>Bagaimanakah cara menyemak status permohonan saya?</span>
                 </h4>
-                <p class="text-xs text-slate-600 mt-2.5 pl-5 leading-relaxed font-normal">
-                    Anda boleh memasukkan No. Tiket rujukan pada kotak <strong>'Semak Status Permohonan'</strong> di laman utama atau membuka halaman <a href="<?= url('/track') ?>" class="text-blue-600 underline font-semibold">Semak Status</a> pada bila-bila masa.
+                <p class="text-slate-600 mt-2 pl-5 leading-relaxed text-[11.5px]">
+                    Anda boleh memasukkan No. Tiket rujukan pada kotak <strong>'Semak Status Tiket'</strong> di muka depan atau membuka halaman Semak Status pada bila-bila masa.
                 </p>
             </div>
 
             <!-- FAQ 4 -->
-            <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/90 shadow-sm">
-                <h4 class="font-bold text-sm text-slate-900 flex items-start gap-2.5">
-                    <span class="text-blue-600 font-extrabold shrink-0">Q.</span>
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                <h4 class="font-bold text-slate-900 text-xs sm:text-sm flex items-start gap-2">
+                    <span class="text-blue-600 font-black">Q4.</span>
                     <span>Apakah yang perlu dibawa semasa mengambil peralatan?</span>
                 </h4>
-                <p class="text-xs text-slate-600 mt-2.5 pl-5 leading-relaxed font-normal">
+                <p class="text-slate-600 mt-2 pl-5 leading-relaxed text-[11.5px]">
                     Sila bawa slip permohonan bercetak atau tunjukkan No. Tiket bersama kad staf di Kaunter Khidmat Pelanggan Seksyen ICT, Aras 1, Bangunan Dato' Jaafar Muhammad.
                 </p>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- 5. Section "HUBUNGI KAMI" -->
-<section id="hubungi" class="py-16 sm:py-20 bg-slate-50/70">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="rounded-3xl bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
-            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-7 space-y-4">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-blue-200 text-xs font-bold uppercase tracking-wider">
-                        <span>Kaunter Khidmat Pelanggan</span>
-                    </div>
-                    <h3 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                        Seksyen ICT, Bahagian Khidmat Pengurusan
-                    </h3>
-                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-xl">
-                        Sebarang pertanyaan atau bantuan teknikal kecemasan bagi urusan majlis dan mesyuarat, sila hubungi talian hotline kami atau hadir terus ke kaunter perkhidmatan.
-                    </p>
-                    <div class="pt-2 flex flex-wrap items-center gap-4 text-xs font-semibold">
-                        <div class="flex items-center gap-2 bg-white/10 px-4 py-2.5 rounded-xl border border-white/10">
-                            <span class="text-amber-400 text-base">📍</span>
-                            <span>Aras 1, Bangunan Dato' Jaafar Muhammad, Kota Iskandar</span>
-                        </div>
-                        <div class="flex items-center gap-2 bg-white/10 px-4 py-2.5 rounded-xl border border-white/10">
-                            <span class="text-emerald-400 text-base">⏰</span>
-                            <span>Isnin - Khamis (8:00 AM - 5:00 PM) | Jumaat (8:00 AM - 12:30 PM & 2:45 PM - 5:00 PM)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-3 justify-center">
-                    <a href="tel:0105528875" 
-                       class="p-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 flex items-center gap-3.5 transition-all">
-                        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center shrink-0">
-                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                        </div>
-                        <div>
-                            <span class="text-[11px] text-slate-300 block font-medium">Talian Hotline ICT</span>
-                            <span class="text-base font-black text-white font-mono">010-5528875</span>
-                        </div>
-                    </a>
-
-                    <a href="mailto:farhah@johor.gov.my" 
-                       class="p-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 flex items-center gap-3.5 transition-all">
-                        <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center shrink-0">
-                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                        </div>
-                        <div>
-                            <span class="text-[11px] text-slate-300 block font-medium">Emel Rasmi Pegawai</span>
-                            <span class="text-sm font-bold text-white font-mono">farhah@johor.gov.my</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
+        <!-- Modal Footer -->
+        <div class="px-6 py-3 bg-slate-50 border-t border-slate-200 flex justify-end shrink-0">
+            <button type="button" onclick="closeFaqModal()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer">
+                Tutup
+            </button>
         </div>
     </div>
-</section>
+</div>
+
+<!-- =========================================================================
+     MODAL 2: HUBUNGI KAMI
+     ========================================================================= -->
+<div id="hubungi-modal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in duration-200">
+        <!-- Modal Header -->
+        <div class="px-6 py-4 bg-[#1d3d75] text-white flex items-center justify-between shrink-0">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-emerald-300 font-bold">
+                    📞
+                </div>
+                <div>
+                    <h3 class="font-extrabold text-sm sm:text-base leading-tight">Hubungi Seksyen ICT</h3>
+                    <p class="text-[11px] text-blue-200">Bahagian Khidmat Pengurusan &bull; Pejabat SUKJ</p>
+                </div>
+            </div>
+            <button type="button" onclick="closeHubungiModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer">
+                &times;
+            </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="p-6 overflow-y-auto space-y-3.5 text-xs">
+            <!-- Lokasi Pejabat -->
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+                <span class="text-xl">📍</span>
+                <div>
+                    <h4 class="font-bold text-slate-900 text-xs">Lokasi Kaunter</h4>
+                    <p class="text-slate-600 text-[11.5px] mt-0.5 leading-relaxed">
+                        Seksyen ICT, Bahagian Khidmat Pengurusan,<br>
+                        Aras 1, Bangunan Dato' Jaafar Muhammad, Pusat Pentadbiran Kerajaan Negeri Johor, Kota Iskandar, 79000 Iskandar Puteri, Johor.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Waktu Operasi -->
+            <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 flex items-start gap-3 text-amber-950">
+                <span class="text-xl">⏰</span>
+                <div>
+                    <h4 class="font-bold text-amber-900 text-xs">Waktu Operasi Rasmi</h4>
+                    <p class="text-slate-800 text-[11.5px] mt-0.5 font-semibold">Isnin – Khamis : 8:00 Pagi – 5:00 Petang</p>
+                    <p class="text-slate-800 text-[11.5px] font-semibold">Jumaat : 8:00 Pagi – 12:30 Tgh Hari | 2:45 Ptg – 5:00 Petang</p>
+                    <p class="text-amber-800 text-[10.5px] mt-0.5">Sabtu &amp; Ahad : Cuti Hujung Minggu Negeri Johor</p>
+                </div>
+            </div>
+
+            <!-- Talian & Emel -->
+            <div class="grid grid-cols-2 gap-3">
+                <a href="tel:0105528875" class="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 flex flex-col justify-between hover:bg-emerald-100/70 transition-colors">
+                    <div>
+                        <span class="text-[10px] font-bold text-emerald-800 uppercase">Talian Hotline</span>
+                        <div class="font-mono font-black text-sm text-emerald-950 mt-0.5">010-5528875</div>
+                    </div>
+                    <span class="text-[10.5px] text-emerald-700 font-semibold mt-2">Panggilan / WhatsApp &rarr;</span>
+                </a>
+
+                <a href="mailto:farhah@johor.gov.my" class="p-3.5 rounded-2xl bg-blue-50 border border-blue-200 flex flex-col justify-between hover:bg-blue-100/70 transition-colors">
+                    <div>
+                        <span class="text-[10px] font-bold text-blue-800 uppercase">Emel Rasmi</span>
+                        <div class="font-mono font-bold text-xs text-blue-950 mt-0.5 truncate" title="farhah@johor.gov.my">farhah@johor.gov.my</div>
+                    </div>
+                    <span class="text-[10.5px] text-blue-700 font-semibold mt-2">Hantar Emel &rarr;</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="px-6 py-3 bg-slate-50 border-t border-slate-200 flex justify-end shrink-0">
+            <button type="button" onclick="closeHubungiModal()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer">
+                Tutup
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+function openFaqModal() {
+    const m = document.getElementById('faq-modal');
+    if (m) m.classList.remove('hidden');
+}
+function closeFaqModal() {
+    const m = document.getElementById('faq-modal');
+    if (m) m.classList.add('hidden');
+}
+function openHubungiModal() {
+    const m = document.getElementById('hubungi-modal');
+    if (m) m.classList.remove('hidden');
+}
+function closeHubungiModal() {
+    const m = document.getElementById('hubungi-modal');
+    if (m) m.classList.add('hidden');
+}
+
+// Close on backdrop click
+window.addEventListener('click', function(e) {
+    const faq = document.getElementById('faq-modal');
+    const hubungi = document.getElementById('hubungi-modal');
+    if (e.target === faq) closeFaqModal();
+    if (e.target === hubungi) closeHubungiModal();
+});
+
+// Auto open modal if URL has ?modal=
+document.addEventListener('DOMContentLoaded', function() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('modal') === 'faq') openFaqModal();
+    if (params.get('modal') === 'hubungi') openHubungiModal();
+});
+</script>
