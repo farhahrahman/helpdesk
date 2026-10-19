@@ -99,13 +99,6 @@ return [
             'icon' => '☎️',
             'description' => 'Set telefon sambungan IP talian rasmi pejabat berserta kabel sambungan LAN',
         ],
-        'LAIN_LAIN' => [
-            'id' => 'LAIN_LAIN',
-            'name' => 'Lain-lain Perkakasan (DLL)',
-            'type_label' => 'Aksesori & Perkakasan Tambahan',
-            'icon' => '📦',
-            'description' => 'Aksesori tambahan seperti sambungan port LAN, monitor tambahan, webcam, dsb.',
-        ],
     ],
 
     // Senarai Rasmi Peralatan ICT untuk Peminjaman (Lengkap Jenis, No. Siri & Gambar)

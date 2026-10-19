@@ -172,13 +172,6 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                                 </label>
                                 <?php endforeach; ?>
                             </div>
-
-                            <!-- Other Custom Equipment -->
-                            <div class="pt-1">
-                                <label class="block text-[11px] font-semibold text-slate-700 mb-1">Perkakasan Tambahan Lain / Spesifikasi Khas (DLL)</label>
-                                <input type="text" name="hardware_other_notes" id="hardware_other_notes" placeholder="Cth: Sambungan port LAN, Monitor saiz 27 inci, Tetikus tanpa wayar, dsb." 
-                                       class="w-full px-3 py-2 bg-slate-50/70 border border-slate-200 focus:bg-white focus:border-[#1d3d75] rounded-xl text-xs outline-none transition-all placeholder:text-slate-400">
-                            </div>
                         </div>
 
                         <!-- 1. Langkah 2: Peminjaman Aset (Checklist Peralatan) -->
