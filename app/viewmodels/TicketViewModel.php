@@ -36,6 +36,7 @@ class TicketViewModel
 
         $catBadgeClasses = [
             'PEMINJAMAN_ASET' => 'bg-blue-50 text-blue-700 border-blue-200',
+            'PERMOHONAN_PERKAKASAN' => 'bg-teal-50 text-teal-700 border-teal-200',
             'SOKONGAN_MESYUARAT' => 'bg-indigo-50 text-indigo-700 border-indigo-200',
             'MEDIA_JURUKAMERA' => 'bg-purple-50 text-purple-700 border-purple-200',
             'LIPUTAN_MEDIA' => 'bg-purple-50 text-purple-700 border-purple-200',
@@ -51,10 +52,11 @@ class TicketViewModel
             'badge_color' => 'slate',
         ];
 
-        // Format equipment type names
+        // Format equipment / hardware type names
         $requestedEquipments = [];
+        $hardwareTypes = app_config('services.hardware_request_types', []);
         foreach ($ticket['requested_equipment_types'] ?? [] as $eqType) {
-            $requestedEquipments[] = $equipmentTypes[$eqType]['name'] ?? $eqType;
+            $requestedEquipments[] = $equipmentTypes[$eqType]['name'] ?? $hardwareTypes[$eqType]['name'] ?? $eqType;
         }
 
         $currentUser = Auth::user();

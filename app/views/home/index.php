@@ -96,60 +96,73 @@ $currentUser = Auth::user();
 
                 <div class="grid grid-cols-2 gap-2.5 xl:gap-3">
                     
-                    <!-- Service 1: Pinjaman Laptop & Aset -->
+                    <!-- Service 1: Permohonan Peralatan ICT -->
+                    <a href="<?= url('/tickets/create?category=PERMOHONAN_PERKAKASAN') ?>" 
+                       class="group bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col">
+                        <div class="relative h-20 sm:h-22 lg:h-18 xl:h-22 overflow-hidden bg-slate-100">
+                            <img src="<?= asset('images/service-hardware.jpg') ?>" alt="Permohonan Peralatan ICT" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent"></div>
+                            <span class="absolute bottom-2 left-2.5 text-white font-extrabold text-xs leading-tight drop-shadow-sm">Peralatan ICT</span>
+                        </div>
+                        <div class="p-2 flex items-center justify-between text-[11px] text-slate-500">
+                            <span class="truncate text-[10px]">Komputer, Laptop &amp; Pencetak</span>
+                            <span class="w-4 h-4 rounded-full bg-slate-100 group-hover:bg-[#1d3d75] group-hover:text-white flex items-center justify-center text-[9px] text-slate-700 shrink-0 transition-colors">&rarr;</span>
+                        </div>
+                    </a>
+
+                    <!-- Service 2: Pinjaman Laptop & Aset -->
                     <a href="<?= url('/tickets/create?category=PEMINJAMAN_ASET') ?>" 
                        class="group bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col">
-                        <div class="relative h-20 sm:h-24 lg:h-20 xl:h-24 overflow-hidden bg-slate-100">
+                        <div class="relative h-20 sm:h-22 lg:h-18 xl:h-22 overflow-hidden bg-slate-100">
                             <img src="<?= asset('images/service-laptop.jpg') ?>" alt="Pinjaman Laptop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent"></div>
                             <span class="absolute bottom-2 left-2.5 text-white font-extrabold text-xs leading-tight drop-shadow-sm">Pinjaman Laptop</span>
                         </div>
                         <div class="p-2 flex items-center justify-between text-[11px] text-slate-500">
-                            <span class="truncate text-[10.5px]">Komputer &amp; Perkakasan</span>
+                            <span class="truncate text-[10px]">Peminjaman Aset BKP</span>
                             <span class="w-4 h-4 rounded-full bg-slate-100 group-hover:bg-[#1d3d75] group-hover:text-white flex items-center justify-center text-[9px] text-slate-700 shrink-0 transition-colors">&rarr;</span>
                         </div>
                     </a>
 
-                    <!-- Service 2: Liputan Media -->
+                    <!-- Service 3: Liputan Media -->
                     <a href="<?= url('/tickets/create?category=MEDIA_JURUKAMERA') ?>" 
                        class="group bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col">
-                        <div class="relative h-20 sm:h-24 lg:h-20 xl:h-24 overflow-hidden bg-slate-100">
+                        <div class="relative h-20 sm:h-22 lg:h-18 xl:h-22 overflow-hidden bg-slate-100">
                             <img src="<?= asset('images/service-media.jpg') ?>" alt="Liputan Media" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent"></div>
                             <span class="absolute bottom-2 left-2.5 text-white font-extrabold text-xs leading-tight drop-shadow-sm">Liputan Media</span>
                         </div>
                         <div class="p-2 flex items-center justify-between text-[11px] text-slate-500">
-                            <span class="truncate text-[10.5px]">Fotografi &amp; Rakaman</span>
+                            <span class="truncate text-[10px]">Fotografi &amp; Rakaman</span>
                             <span class="w-4 h-4 rounded-full bg-slate-100 group-hover:bg-[#1d3d75] group-hover:text-white flex items-center justify-center text-[9px] text-slate-700 shrink-0 transition-colors">&rarr;</span>
                         </div>
                     </a>
 
-                    <!-- Service 3: Sokongan Mesyuarat -->
+                    <!-- Service 4: Sokongan Mesyuarat -->
                     <a href="<?= url('/tickets/create?category=SOKONGAN_MESYUARAT') ?>" 
                        class="group bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col">
-                        <div class="relative h-20 sm:h-24 lg:h-20 xl:h-24 overflow-hidden bg-slate-100">
+                        <div class="relative h-20 sm:h-22 lg:h-18 xl:h-22 overflow-hidden bg-slate-100">
                             <img src="<?= asset('images/service-meeting.jpg') ?>" alt="Sokongan Mesyuarat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent"></div>
                             <span class="absolute bottom-2 left-2.5 text-white font-extrabold text-xs leading-tight drop-shadow-sm">Sokongan Mesyuarat</span>
                         </div>
                         <div class="p-2 flex items-center justify-between text-[11px] text-slate-500">
-                            <span class="truncate text-[10.5px]">Peralatan &amp; Online</span>
+                            <span class="truncate text-[10px]">Peralatan &amp; Online</span>
                             <span class="w-4 h-4 rounded-full bg-slate-100 group-hover:bg-[#1d3d75] group-hover:text-white flex items-center justify-center text-[9px] text-slate-700 shrink-0 transition-colors">&rarr;</span>
                         </div>
                     </a>
 
-                    <!-- Service 4: Khidmat Teknikal ICT -->
+                    <!-- Service 5: Khidmat Teknikal ICT (Wide Horizontal Card) -->
                     <a href="<?= url('/tickets/create?category=LAIN_LAIN') ?>" 
-                       class="group bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col">
-                        <div class="relative h-20 sm:h-24 lg:h-20 xl:h-24 overflow-hidden bg-slate-100">
+                       class="col-span-2 group bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex items-center p-2 gap-3">
+                        <div class="relative w-14 h-11 rounded-xl overflow-hidden bg-slate-100 shrink-0">
                             <img src="<?= asset('images/service-technical.jpg') ?>" alt="Khidmat Teknikal ICT" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent"></div>
-                            <span class="absolute bottom-2 left-2.5 text-white font-extrabold text-xs leading-tight drop-shadow-sm">Khidmat Teknikal</span>
                         </div>
-                        <div class="p-2 flex items-center justify-between text-[11px] text-slate-500">
-                            <span class="truncate text-[10.5px]">Aduan &amp; Sistem</span>
-                            <span class="w-4 h-4 rounded-full bg-slate-100 group-hover:bg-[#1d3d75] group-hover:text-white flex items-center justify-center text-[9px] text-slate-700 shrink-0 transition-colors">&rarr;</span>
+                        <div class="min-w-0 flex-1">
+                            <span class="text-slate-900 font-extrabold text-xs block leading-tight">Khidmat Teknikal &amp; Aduan ICT</span>
+                            <span class="text-[10px] text-slate-500 truncate block mt-0.5">Bantuan perisian, rangkaian, pencetak &amp; sistem</span>
                         </div>
+                        <span class="w-5 h-5 rounded-full bg-slate-100 group-hover:bg-[#1d3d75] group-hover:text-white flex items-center justify-center text-[9px] text-slate-700 shrink-0 transition-colors mr-1">&rarr;</span>
                     </a>
 
                 </div>

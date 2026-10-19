@@ -162,10 +162,10 @@ $statusKey = $ticket['status'] ?? '';
             </div>
 
             <!-- Category Specific Card: Equipment, Meeting or Media -->
-            <?php if ($ticket['category'] === 'PEMINJAMAN_ASET'): ?>
+            <?php if ($ticket['category'] === 'PEMINJAMAN_ASET' || $ticket['category'] === 'PERMOHONAN_PERKAKASAN'): ?>
             <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
                 <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
-                    <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Peralatan Yang Dimohon & Diperuntukkan</h2>
+                    <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Peralatan / Perkakasan Yang Dimohon & Diperuntukkan</h2>
                     <span class="px-2.5 py-0.5 text-xs bg-blue-50 text-blue-700 font-semibold rounded-lg">Inventori ICT</span>
                 </div>
 
@@ -558,7 +558,7 @@ $statusKey = $ticket['status'] ?? '';
                 <form action="<?= url("/approvals/{$ticket['id']}/ict-approve") ?>" method="POST" class="space-y-4 text-xs">
                     <?= csrf_field() ?>
 
-                    <?php if ($ticket['category'] === 'PEMINJAMAN_ASET'): ?>
+                    <?php if ($ticket['category'] === 'PEMINJAMAN_ASET' || $ticket['category'] === 'PERMOHONAN_PERKAKASAN'): ?>
                     <div>
                         <label class="block font-bold text-slate-800 mb-1.5 uppercase tracking-wider text-[11px]">
                             Peruntukkan Aset Fizikal:

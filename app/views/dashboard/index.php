@@ -178,6 +178,20 @@ $role = $user['role'] ?? 'STAF';
                         </div>
                     </div>
 
+                    <!-- Permohonan Perkakasan ICT -->
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between text-xs font-medium">
+                            <span class="text-slate-700 flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-teal-500"></span>
+                                Permohonan Perkakasan (PC / Laptop / Printer / VoIP)
+                            </span>
+                            <span class="text-slate-900 font-bold"><?= $category_counts['PERMOHONAN_PERKAKASAN'] ?? 0 ?></span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                            <div class="h-full bg-teal-600 rounded-full" style="width: <?= ($metrics['total'] > 0) ? (($category_counts['PERMOHONAN_PERKAKASAN'] ?? 0) / $metrics['total'] * 100) : 0 ?>%"></div>
+                        </div>
+                    </div>
+
                     <!-- Aduan Sistem Kuarters (Hanya paparkan jika terdapat rekod sedia ada) -->
                     <?php if (!empty($category_counts['ADUAN_KUARTERS'])): ?>
                     <div class="space-y-1.5">

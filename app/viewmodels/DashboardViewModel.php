@@ -71,6 +71,7 @@ class DashboardViewModel
         // Category breakdown
         $catCounts = [
             'PEMINJAMAN_ASET' => 0,
+            'PERMOHONAN_PERKAKASAN' => 0,
             'SOKONGAN_MESYUARAT' => 0,
             'MEDIA_JURUKAMERA' => 0,
             'LAIN_LAIN' => 0,

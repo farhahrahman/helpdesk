@@ -9,6 +9,7 @@ if ($selectedCategory === 'ADUAN_KUARTERS') {
     $selectedCategory = 'PEMINJAMAN_ASET';
 }
 $unitsList = $units ?? app_config('units', []);
+$hardwareRequestList = $hardwareRequestTypes ?? app_config('services.hardware_request_types', []);
 $techSupportList = $technicalSupportTypes ?? app_config('services.technical_support_types', []);
 $kuartersComplaintList = $kuartersComplaintTypes ?? app_config('services.kuarters_complaint_types', []);
 $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_complexes', []);
@@ -52,14 +53,26 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
             <form action="<?= url('/tickets') ?>" method="POST" enctype="multipart/form-data" id="ticket-application-form" class="space-y-5">
                 <?= csrf_field() ?>
 
-                <!-- LANGKAH 1: Kategori Ribbon (Horizontal Tabs Bar - 4 Kategori) -->
+                <!-- LANGKAH 1: Kategori Ribbon (Horizontal Tabs Bar - 5 Kategori) -->
                 <div>
                     <div class="flex items-center justify-between mb-2.5">
                         <span class="text-xs font-extrabold uppercase tracking-widest text-slate-400">Langkah 1: Pilih Kategori Perkhidmatan</span>
                         <span class="text-[11px] text-slate-500 font-medium hidden sm:inline">Pilih salah satu perkhidmatan di bawah</span>
                     </div>
-                    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
-                        <!-- 1. Peminjaman Aset -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3">
+                        <!-- 1. Permohonan Peralatan ICT -->
+                        <label data-cat="PERMOHONAN_PERKAKASAN" class="category-card group relative flex items-center gap-2.5 p-3 rounded-2xl border cursor-pointer transition-all <?= ($selectedCategory === 'PERMOHONAN_PERKAKASAN') ? 'bg-[#1d3d75] border-[#1d3d75] text-white shadow-lg shadow-blue-950/15' : 'bg-white border-slate-200/90 text-slate-700 hover:border-slate-300 hover:bg-slate-50/80 shadow-xs' ?>">
+                            <input type="radio" name="category" value="PERMOHONAN_PERKAKASAN" <?= ($selectedCategory === 'PERMOHONAN_PERKAKASAN') ? 'checked' : '' ?> onchange="switchCategoryView('PERMOHONAN_PERKAKASAN')" class="sr-only">
+                            <div class="card-icon w-8 h-8 rounded-xl <?= ($selectedCategory === 'PERMOHONAN_PERKAKASAN') ? 'bg-white/15 text-white' : 'bg-slate-100 text-slate-700' ?> flex items-center justify-center shrink-0 text-sm">
+                                🖥️
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <span class="card-title text-xs font-bold <?= ($selectedCategory === 'PERMOHONAN_PERKAKASAN') ? 'text-white' : 'text-slate-900' ?> block leading-tight truncate">Peralatan ICT</span>
+                                <span class="card-sub text-[10px] <?= ($selectedCategory === 'PERMOHONAN_PERKAKASAN') ? 'text-blue-100/80' : 'text-slate-500' ?> block truncate font-medium mt-0.5">Komputer, Laptop &amp; Pencetak</span>
+                            </div>
+                        </label>
+
+                        <!-- 2. Peminjaman Aset -->
                         <label data-cat="PEMINJAMAN_ASET" class="category-card group relative flex items-center gap-2.5 p-3 rounded-2xl border cursor-pointer transition-all <?= ($selectedCategory === 'PEMINJAMAN_ASET') ? 'bg-[#1d3d75] border-[#1d3d75] text-white shadow-lg shadow-blue-950/15' : 'bg-white border-slate-200/90 text-slate-700 hover:border-slate-300 hover:bg-slate-50/80 shadow-xs' ?>">
                             <input type="radio" name="category" value="PEMINJAMAN_ASET" <?= ($selectedCategory === 'PEMINJAMAN_ASET') ? 'checked' : '' ?> onchange="switchCategoryView('PEMINJAMAN_ASET')" class="sr-only">
                             <div class="card-icon w-8 h-8 rounded-xl <?= ($selectedCategory === 'PEMINJAMAN_ASET') ? 'bg-white/15 text-white' : 'bg-slate-100 text-slate-700' ?> flex items-center justify-center shrink-0 text-sm">
@@ -71,7 +84,7 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                             </div>
                         </label>
 
-                        <!-- 2. Sokongan Mesyuarat -->
+                        <!-- 3. Sokongan Mesyuarat -->
                         <label data-cat="SOKONGAN_MESYUARAT" class="category-card group relative flex items-center gap-2.5 p-3 rounded-2xl border cursor-pointer transition-all <?= ($selectedCategory === 'SOKONGAN_MESYUARAT') ? 'bg-[#1d3d75] border-[#1d3d75] text-white shadow-lg shadow-blue-950/15' : 'bg-white border-slate-200/90 text-slate-700 hover:border-slate-300 hover:bg-slate-50/80 shadow-xs' ?>">
                             <input type="radio" name="category" value="SOKONGAN_MESYUARAT" <?= ($selectedCategory === 'SOKONGAN_MESYUARAT') ? 'checked' : '' ?> onchange="switchCategoryView('SOKONGAN_MESYUARAT')" class="sr-only">
                             <div class="card-icon w-8 h-8 rounded-xl <?= ($selectedCategory === 'SOKONGAN_MESYUARAT') ? 'bg-white/15 text-white' : 'bg-slate-100 text-slate-700' ?> flex items-center justify-center shrink-0 text-sm">
@@ -130,6 +143,44 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                     <!-- ========================================================================= -->
                     <div class="lg:col-span-6 space-y-4">
                         
+                        <!-- 0. Langkah 2: Permohonan Perkakasan ICT (Checklist Perkakasan) -->
+                        <div id="section-hardware" class="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-white space-y-3.5 shadow-2xs <?= ($selectedCategory === 'PERMOHONAN_PERKAKASAN') ? '' : 'hidden' ?>">
+                            <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded-lg bg-[#1d3d75] text-white text-[11px] font-black flex items-center justify-center shadow-xs">2</span>
+                                    <span class="text-xs font-bold text-slate-900 uppercase tracking-wide">Pilih Perkakasan Yang Dimohon <span class="text-rose-500">*</span></span>
+                                </div>
+                                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-bold border border-slate-200/60">Langkah 2</span>
+                            </div>
+
+                            <!-- 2-column checklist of hardware options -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-[380px] overflow-y-auto pr-1">
+                                <?php foreach ($hardwareRequestList as $hwKey => $hw): ?>
+                                <label class="flex items-start gap-2.5 p-3 rounded-xl border border-slate-200/90 bg-slate-50/50 hover:bg-slate-100/70 hover:border-slate-300 cursor-pointer transition-all has-[:checked]:border-[#1d3d75] has-[:checked]:bg-blue-50/40 has-[:checked]:ring-1 has-[:checked]:ring-[#1d3d75] shadow-2xs">
+                                    <input type="checkbox" name="requested_hardware_types[]" value="<?= $hwKey ?>" 
+                                           class="mt-1 w-3.5 h-3.5 text-[#1d3d75] rounded border-slate-300 focus:ring-[#1d3d75]">
+                                    
+                                    <div class="w-8 h-8 rounded-lg bg-white border border-slate-200/80 shadow-xs flex items-center justify-center text-sm shrink-0">
+                                        <?= $hw['icon'] ?? '🖥️' ?>
+                                    </div>
+
+                                    <div class="min-w-0 flex-1">
+                                        <span class="text-[11px] font-bold text-slate-900 block leading-tight truncate"><?= e($hw['name']) ?></span>
+                                        <span class="block text-[9px] font-medium text-slate-500 truncate mt-0.5"><?= e($hw['type_label']) ?></span>
+                                        <span class="text-[10px] text-slate-500 block leading-tight line-clamp-1 mt-0.5"><?= e($hw['description']) ?></span>
+                                    </div>
+                                </label>
+                                <?php endforeach; ?>
+                            </div>
+
+                            <!-- Other Custom Equipment -->
+                            <div class="pt-1">
+                                <label class="block text-[11px] font-semibold text-slate-700 mb-1">Perkakasan Tambahan Lain / Spesifikasi Khas (DLL)</label>
+                                <input type="text" name="hardware_other_notes" id="hardware_other_notes" placeholder="Cth: Sambungan port LAN, Monitor saiz 27 inci, Tetikus tanpa wayar, dsb." 
+                                       class="w-full px-3 py-2 bg-slate-50/70 border border-slate-200 focus:bg-white focus:border-[#1d3d75] rounded-xl text-xs outline-none transition-all placeholder:text-slate-400">
+                            </div>
+                        </div>
+
                         <!-- 1. Langkah 2: Peminjaman Aset (Checklist Peralatan) -->
                         <div id="section-equipment" class="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-white space-y-3.5 shadow-2xs <?= ($selectedCategory === 'PEMINJAMAN_ASET') ? '' : 'hidden' ?>">
                             <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
@@ -406,6 +457,84 @@ $kuartersComplexesList = $kuartersComplexes ?? app_config('services.kuarters_com
                     <!-- ========================================================================= -->
                     <div class="lg:col-span-6 space-y-4">
                         
+                        <!-- 0. Langkah 3: Permohonan Perkakasan ICT (Maklumat Pemohon & Penempatan) -->
+                        <div id="step3-hardware" class="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-white space-y-3.5 shadow-2xs <?= ($selectedCategory === 'PERMOHONAN_PERKAKASAN') ? '' : 'hidden' ?>">
+                            <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded-lg bg-[#1d3d75] text-white text-[11px] font-black flex items-center justify-center shadow-xs">3</span>
+                                    <span class="text-xs font-bold text-slate-900 uppercase tracking-wide">Maklumat Penempatan &amp; Pemohon</span>
+                                </div>
+                                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-bold border border-slate-200/60">Langkah 3</span>
+                            </div>
+
+                            <div class="space-y-3">
+                                <!-- 1. Justifikasi Keperluan -->
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">
+                                        Justifikasi &amp; Keperluan Perkakasan <span class="text-rose-500">*</span>
+                                    </label>
+                                    <textarea name="hardware_justification" id="hardware_justification" rows="3" 
+                                              placeholder="Sila nyatakan justifikasi permohonan perkakasan (cth: Penggantian PC pejabat rosak / Pegawai baru melapor diri / Penempatan talian VOIP)..." 
+                                              class="w-full px-3 py-2 bg-slate-50/70 border border-slate-200 focus:bg-white focus:border-[#1d3d75] rounded-xl text-xs outline-none leading-relaxed placeholder:text-slate-400"></textarea>
+                                </div>
+
+                                <!-- 2. Lokasi Penempatan & No. Telefon -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-700 mb-1">
+                                            Lokasi Penempatan Pejabat <span class="text-rose-500">*</span>
+                                        </label>
+                                        <input type="text" name="hardware_location" id="hardware_location" 
+                                               placeholder="Cth: Pejabat BKP Aras 2, Meja Pegawai" 
+                                               class="w-full px-3 py-2 bg-slate-50/70 border border-slate-200 focus:bg-white focus:border-[#1d3d75] rounded-xl text-xs outline-none placeholder:text-slate-400">
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-700 mb-1">
+                                            No. Telefon / Sambungan VoIP <span class="text-rose-500">*</span>
+                                        </label>
+                                        <input type="text" name="hardware_phone" id="hardware_phone" value="<?= e($isLoggedIn ? ($user['phone'] ?? '') : '') ?>" 
+                                               placeholder="01X-XXXXXXX atau VoIP" 
+                                               class="w-full px-3 py-2 bg-slate-50/70 border border-slate-200 focus:bg-white focus:border-[#1d3d75] rounded-xl text-xs font-bold text-slate-900 outline-none placeholder:text-slate-400">
+                                    </div>
+                                </div>
+
+                                <!-- 3. Tarikh Diperlukan -->
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">
+                                        Tarikh Diperlukan <span class="text-rose-500">*</span>
+                                    </label>
+                                    <input type="date" name="hardware_date" id="hardware_date" value="<?= $today ?>" min="<?= $today ?>"
+                                           class="w-full px-3 py-2 bg-slate-50/70 border border-slate-200 focus:bg-white focus:border-[#1d3d75] rounded-xl text-xs font-bold text-slate-900 outline-none">
+                                </div>
+
+                                <?php if (!$isLoggedIn): ?>
+                                <!-- 4. Maklumat Pegawai Pemohon (Untuk Tetamu) -->
+                                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                                    <span class="text-[10px] font-bold text-slate-700 uppercase block">Maklumat Pegawai Pemohon (BKP)</span>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div>
+                                            <select name="hardware_unit" class="w-full px-2.5 py-1.5 bg-white border border-slate-200 focus:border-[#1d3d75] rounded-lg text-[11px] outline-none font-bold text-slate-900">
+                                                <?php foreach ($unitsList as $uKey => $u): ?>
+                                                <option value="<?= $uKey ?>"><?= e($u['name']) ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <input type="text" name="hardware_applicant_name" placeholder="Nama Penuh Pegawai" class="w-full px-2.5 py-1.5 bg-white border border-slate-200 focus:border-[#1d3d75] rounded-lg text-[11px] outline-none">
+                                        </div>
+                                        <div>
+                                            <input type="email" name="hardware_applicant_email" placeholder="emel@johor.gov.my" class="w-full px-2.5 py-1.5 bg-white border border-slate-200 focus:border-[#1d3d75] rounded-lg text-[11px] outline-none">
+                                        </div>
+                                        <div>
+                                            <input type="text" name="hardware_applicant_position" placeholder="Jawatan &amp; Gred" class="w-full px-2.5 py-1.5 bg-white border border-slate-200 focus:border-[#1d3d75] rounded-lg text-[11px] outline-none">
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
                         <!-- 1. Langkah 3: Peminjaman Aset (Format Rasmi KEW.PA-9) -->
                         <div id="step3-asset-loan" class="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-white space-y-3.5 shadow-2xs <?= ($selectedCategory === 'PEMINJAMAN_ASET') ? '' : 'hidden' ?>">
                             <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
@@ -902,6 +1031,7 @@ function switchCategoryView(cat) {
     }
 
     // Left Column Sections (Langkah 2)
+    const hwSec = document.getElementById('section-hardware');
     const eqSec = document.getElementById('section-equipment');
     const meetSec = document.getElementById('section-meeting');
     const mediaSec = document.getElementById('section-media');
@@ -909,11 +1039,18 @@ function switchCategoryView(cat) {
     const kuartersSec = document.getElementById('section-kuarters');
 
     // Right Column Sections (Langkah 3)
+    const step3Hw = document.getElementById('step3-hardware');
     const step3Loan = document.getElementById('step3-asset-loan');
     const step3Meeting = document.getElementById('step3-meeting');
     const step3Media = document.getElementById('step3-media');
     const step3Tech = document.getElementById('step3-technical');
     const step3Kuarters = document.getElementById('step3-kuarters');
+
+    // 0. Inputs for Hardware
+    const hwJust = document.getElementById('hardware_justification');
+    const hwLoc = document.getElementById('hardware_location');
+    const hwPhone = document.getElementById('hardware_phone');
+    const hwDate = document.getElementById('hardware_date');
 
     // 1. Inputs for Loan (KEW.PA-9)
     const purposeLoan = document.getElementById('purpose_loan');
@@ -952,6 +1089,7 @@ function switchCategoryView(cat) {
     const kuartersDate = document.getElementById('kuarters_date');
 
     // Reset visibility (Langkah 2)
+    if (hwSec) hwSec.classList.add('hidden');
     if (eqSec) eqSec.classList.add('hidden');
     if (meetSec) meetSec.classList.add('hidden');
     if (mediaSec) mediaSec.classList.add('hidden');
@@ -959,6 +1097,7 @@ function switchCategoryView(cat) {
     if (kuartersSec) kuartersSec.classList.add('hidden');
 
     // Reset visibility (Langkah 3)
+    if (step3Hw) step3Hw.classList.add('hidden');
     if (step3Loan) step3Loan.classList.add('hidden');
     if (step3Meeting) step3Meeting.classList.add('hidden');
     if (step3Media) step3Media.classList.add('hidden');
@@ -966,6 +1105,11 @@ function switchCategoryView(cat) {
     if (step3Kuarters) step3Kuarters.classList.add('hidden');
 
     // Disable all required first
+    if (hwJust) hwJust.required = false;
+    if (hwLoc) hwLoc.required = false;
+    if (hwPhone) hwPhone.required = false;
+    if (hwDate) hwDate.required = false;
+
     if (purposeLoan) purposeLoan.required = false;
     if (locationLoan) locationLoan.required = false;
     if (startLoan) startLoan.required = false;
@@ -998,7 +1142,15 @@ function switchCategoryView(cat) {
     if (kuartersDate) kuartersDate.required = false;
 
     // Activate specific category
-    if (cat === 'PEMINJAMAN_ASET') {
+    if (cat === 'PERMOHONAN_PERKAKASAN') {
+        if (hwSec) hwSec.classList.remove('hidden');
+        if (step3Hw) step3Hw.classList.remove('hidden');
+
+        if (hwJust) hwJust.required = true;
+        if (hwLoc) hwLoc.required = true;
+        if (hwPhone) hwPhone.required = true;
+        if (hwDate) hwDate.required = true;
+    } else if (cat === 'PEMINJAMAN_ASET') {
         if (eqSec) eqSec.classList.remove('hidden');
         if (step3Loan) step3Loan.classList.remove('hidden');
 

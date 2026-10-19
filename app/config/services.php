@@ -7,7 +7,7 @@ declare(strict_types=1);
  */
 
 return [
-    // 4 Kategori Utama Permohonan
+    // Kategori Utama Permohonan
     'categories' => [
         'PEMINJAMAN_ASET' => [
             'id' => 'PEMINJAMAN_ASET',
@@ -16,6 +16,14 @@ return [
             'icon' => 'device-laptop',
             'badge' => 'blue',
             'lead_time_days' => 1,
+        ],
+        'PERMOHONAN_PERKAKASAN' => [
+            'id' => 'PERMOHONAN_PERKAKASAN',
+            'name' => 'Permohonan Perkakasan ICT',
+            'description' => 'Permohonan peruntukan / pembekalan perkakasan pejabat rasmi (Komputer Desktop, Komputer Riba, Pencetak, Telefon VOIP & DLL).',
+            'icon' => 'device-desktop',
+            'badge' => 'teal',
+            'lead_time_days' => 2,
         ],
         'SOKONGAN_MESYUARAT' => [
             'id' => 'SOKONGAN_MESYUARAT',
@@ -59,6 +67,45 @@ return [
             'lead_time_days' => 1,
         ],
         */
+    ],
+
+    // Senarai Pilihan Perkakasan ICT untuk Permohonan Pembekalan / Penempatan
+    'hardware_request_types' => [
+        'KOMPUTER_DESKTOP' => [
+            'id' => 'KOMPUTER_DESKTOP',
+            'name' => 'Komputer Desktop (PC / CPU & Monitor)',
+            'type_label' => 'Komputer Meja & Monitor',
+            'icon' => '🖥️',
+            'description' => 'Set unit CPU Intel Core i5/i7, Monitor 24", Papan Kekunci & Tetikus USB, Windows 11',
+        ],
+        'KOMPUTER_RIBA' => [
+            'id' => 'KOMPUTER_RIBA',
+            'name' => 'Komputer Riba (Laptop)',
+            'type_label' => 'Komputer Riba / Laptop',
+            'icon' => '💻',
+            'description' => 'Laptop kerja mudah alih untuk penempatan kerja pegawai / unit',
+        ],
+        'PENCETAK' => [
+            'id' => 'PENCETAK',
+            'name' => 'Pencetak (Printer)',
+            'type_label' => 'Pencetak Laser / Inkjet (Multifunction)',
+            'icon' => '🖨️',
+            'description' => 'Pencetak dokumen hitam putih / warna atau pengimbas (Cetak, Imbas, Salin)',
+        ],
+        'TELEFON_VOIP' => [
+            'id' => 'TELEFON_VOIP',
+            'name' => 'Telefon VOIP',
+            'type_label' => 'Telefon IP Pejabat',
+            'icon' => '☎️',
+            'description' => 'Set telefon sambungan IP talian rasmi pejabat berserta kabel sambungan LAN',
+        ],
+        'LAIN_LAIN' => [
+            'id' => 'LAIN_LAIN',
+            'name' => 'Lain-lain Perkakasan (DLL)',
+            'type_label' => 'Aksesori & Perkakasan Tambahan',
+            'icon' => '📦',
+            'description' => 'Aksesori tambahan seperti sambungan port LAN, monitor tambahan, webcam, dsb.',
+        ],
     ],
 
     // Senarai Rasmi Peralatan ICT untuk Peminjaman (Lengkap Jenis, No. Siri & Gambar)

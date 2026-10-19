@@ -92,6 +92,7 @@ class TicketController extends BaseController
             'pageTitle' => 'Borang Permohonan Perkhidmatan ICT - ' . app_config('app.short_name'),
             'categories' => app_config('services.categories', []),
             'equipmentTypes' => app_config('services.equipment_types', []),
+            'hardwareRequestTypes' => app_config('services.hardware_request_types', []),
             'meetingTypes' => app_config('services.meeting_support_types', []),
             'meetingPlatforms' => app_config('services.meeting_platforms', []),
             'meetingVenues' => app_config('services.meeting_venues', []),
@@ -139,6 +140,44 @@ class TicketController extends BaseController
             }
             if (!empty($data['applicant_position_loan'])) {
                 $data['applicant_position'] = $data['applicant_position_loan'];
+            }
+        }
+
+        // Merge hardware request specific fields if provided
+        if (($data['category'] ?? '') === 'PERMOHONAN_PERKAKASAN') {
+            if (!empty($data['requested_hardware_types'])) {
+                $data['requested_equipment_types'] = (array)$data['requested_hardware_types'];
+            }
+            if (!empty($data['hardware_justification'])) {
+                $data['purpose'] = $data['hardware_justification'];
+            }
+            if (!empty($data['hardware_location'])) {
+                $data['location'] = $data['hardware_location'];
+            }
+            if (!empty($data['hardware_other_notes'])) {
+                $data['purpose'] = trim(($data['purpose'] ?? '') . "\n\n[Spesifikasi / Catatan Tambahan: " . trim((string)$data['hardware_other_notes']) . "]");
+            }
+            if (!empty($data['hardware_phone'])) {
+                $data['applicant_phone'] = $data['hardware_phone'];
+            }
+            if (!empty($data['hardware_date'])) {
+                $data['start_date'] = $data['hardware_date'];
+                $data['end_date'] = $data['hardware_date'];
+            } else {
+                $data['start_date'] = date('Y-m-d');
+                $data['end_date'] = date('Y-m-d');
+            }
+            if (!empty($data['hardware_unit'])) {
+                $data['unit'] = $data['hardware_unit'];
+            }
+            if (!empty($data['hardware_applicant_name'])) {
+                $data['applicant_name'] = $data['hardware_applicant_name'];
+            }
+            if (!empty($data['hardware_applicant_email'])) {
+                $data['applicant_email'] = $data['hardware_applicant_email'];
+            }
+            if (!empty($data['hardware_applicant_position'])) {
+                $data['applicant_position'] = $data['hardware_applicant_position'];
             }
         }
 
@@ -344,6 +383,22 @@ class TicketController extends BaseController
                     $data['title'] = 'Pinjaman Aset: ' . implode(', ', array_slice($names, 0, 2)) . (count($names) > 2 ? ' & lain-lain' : '');
                 } else {
                     $data['title'] = 'Permohonan Pinjaman Aset ICT (KEW.PA-9)';
+                }
+            } elseif (($data['category'] ?? '') === 'PERMOHONAN_PERKAKASAN') {
+                $hwList = (array)($data['requested_equipment_types'] ?? $data['requested_hardware_types'] ?? []);
+                $hwConfigs = app_config('services.hardware_request_types', []);
+                $names = [];
+                foreach ($hwList as $k) {
+                    if (isset($hwConfigs[$k]['name'])) {
+                        $names[] = $hwConfigs[$k]['name'];
+                    }
+                }
+                if (!empty($names)) {
+                    $data['title'] = 'Permohonan Perkakasan: ' . implode(', ', array_slice($names, 0, 2)) . (count($names) > 2 ? ' & lain-lain' : '');
+                } elseif (!empty($data['hardware_other_notes'])) {
+                    $data['title'] = 'Permohonan Perkakasan: ' . trim((string)$data['hardware_other_notes']);
+                } else {
+                    $data['title'] = 'Permohonan Pembekalan Perkakasan ICT';
                 }
             } elseif (($data['category'] ?? '') === 'MEDIA_JURUKAMERA') {
                 $data['title'] = 'Liputan Khidmat Media & Dokumentasi';

@@ -1,17 +1,17 @@
 <!-- Official Printable Slip: Helpdesk ICT BKP -->
-<?php if ($ticket['category'] === 'PEMINJAMAN_ASET'): ?>
+<?php if ($ticket['category'] === 'PEMINJAMAN_ASET' || $ticket['category'] === 'PERMOHONAN_PERKAKASAN'): ?>
 <!-- ========================================================================= -->
-<!-- FORMAT RASMI KEW.PA-9 (Pekeliling Perbendaharaan Malaysia AM 2.4 Lampiran A) -->
+<!-- FORMAT RASMI KEW.PA-9 & PERAKUAN PERKAKASAN ICT -->
 <!-- ========================================================================= -->
 <div class="text-slate-900 space-y-4 font-sans text-xs">
     <!-- Header Kew.PA-9 -->
     <div class="flex justify-between items-start text-[11px]">
         <div class="font-normal text-slate-700">
-            Pekeliling Perbendaharaan Malaysia
+            <?= ($ticket['category'] === 'PERMOHONAN_PERKAKASAN') ? 'Bahagian Khidmat Pengurusan (Seksyen ICT)' : 'Pekeliling Perbendaharaan Malaysia' ?>
         </div>
         <div class="text-right">
-            <span>AM 2.4 Lampiran A</span>
-            <strong class="text-sm font-bold block mt-0.5 text-slate-900">KEW.PA-9</strong>
+            <span><?= ($ticket['category'] === 'PERMOHONAN_PERKAKASAN') ? 'BKP ICT-HW-01' : 'AM 2.4 Lampiran A' ?></span>
+            <strong class="text-sm font-bold block mt-0.5 text-slate-900"><?= ($ticket['category'] === 'PERMOHONAN_PERKAKASAN') ? 'BORANG PERKAKASAN' : 'KEW.PA-9' ?></strong>
         </div>
     </div>
 
@@ -21,7 +21,7 @@
 
     <!-- Title -->
     <div class="text-center py-1">
-        <h1 class="text-sm font-black uppercase tracking-wide text-slate-900">BORANG PERMOHONAN PERGERAKAN/ PINJAMAN ASET ALIH</h1>
+        <h1 class="text-sm font-black uppercase tracking-wide text-slate-900"><?= ($ticket['category'] === 'PERMOHONAN_PERKAKASAN') ? 'BORANG PERMOHONAN PERUNTUKAN / PEMBEKALAN PERKAKASAN ICT' : 'BORANG PERMOHONAN PERGERAKAN/ PINJAMAN ASET ALIH' ?></h1>
     </div>
 
     <!-- Header Table: Nama Pemohon, Tujuan, Tempat Digunakan, dsb. -->
