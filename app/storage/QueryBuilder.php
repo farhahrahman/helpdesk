@@ -154,13 +154,8 @@ class QueryBuilder
                 $valA = $a[$this->orderKey] ?? null;
                 $valB = $b[$this->orderKey] ?? null;
 
-                if ($valA === $valB) return 0;
-
-                if ($this->orderDirection === 'ASC') {
-                    return ($valA < $valB) ? -1 : 1;
-                } else {
-                    return ($valA > $valB) ? -1 : 1;
-                }
+                $cmp = $valA <=> $valB;
+                return ($this->orderDirection === 'ASC') ? $cmp : -$cmp;
             });
         }
 
