@@ -13,8 +13,13 @@ class Response
      */
     public static function redirect(string $url, int $statusCode = 302): void
     {
-        if (!filter_var($url, FILTER_VALIDATE_URL) && !str_starts_with($url, '/')) {
-            $url = url($url);
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+            $baseUrl = function_exists('app_base_url') ? app_base_url() : '';
+            if ($baseUrl !== '' && !str_starts_with($url, $baseUrl)) {
+                $url = url($url);
+            } elseif ($baseUrl === '' && !str_starts_with($url, '/')) {
+                $url = url($url);
+            }
         }
         http_response_code($statusCode);
         header('Location: ' . $url);
