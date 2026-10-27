@@ -109,6 +109,13 @@ $router->get('/settings/positions/{id}/update', function () { Response::redirect
 $router->post('/settings/positions/{id}/update', 'UnitController@updatePosition', ['auth', 'admin', 'csrf']);
 $router->post('/settings/positions/{id}/delete', 'UnitController@deletePosition', ['auth', 'admin', 'csrf']);
 
+// Backup & Data Recovery Management (Admin Only)
+$router->get('/backups', 'BackupController@index', ['auth', 'admin']);
+$router->post('/backups/create', 'BackupController@create', ['auth', 'admin', 'csrf']);
+$router->get('/backups/download/{filename}', 'BackupController@download', ['auth', 'admin']);
+$router->post('/backups/restore', 'BackupController@restore', ['auth', 'admin', 'csrf']);
+$router->post('/backups/delete/{filename}', 'BackupController@delete', ['auth', 'admin', 'csrf']);
+
 $router->get('/profile', 'UserController@profile', ['auth']);
 $router->post('/profile', 'UserController@updateProfile', ['auth', 'csrf']);
 

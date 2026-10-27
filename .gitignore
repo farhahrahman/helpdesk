@@ -26,3 +26,11 @@ import_assets.php
 !/public/uploads/kuarters/
 /public/uploads/kuarters/*
 !/public/uploads/kuarters/.gitkeep
+
+# Secure Backup Storage
+/storage/backups/*
+!/storage/backups/.htaccess
+!/storage/backups/.gitkeep
+*.zip
+*.tar.gz
+

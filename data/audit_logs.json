@@ -46,5 +46,66 @@
         "metadata": [],
         "created_at": "2026-09-13T16:49:54+08:00",
         "updated_at": "2026-09-13T16:49:54+08:00"
+    },
+    {
+        "id": "45f4e3cc-d98b-46f2-997f-bf5adf0d2f8c",
+        "action": "AUTH_LOGOUT",
+        "description": "Log keluar oleh Farhah Binti Abd Rahman",
+        "ticket_id": null,
+        "user_id": "USR-ADMIN-01",
+        "user_name": "Farhah Binti Abd Rahman",
+        "user_email": "farhah@johor.gov.my",
+        "user_role": "ADMIN",
+        "user_unit": "ICT_BKP",
+        "ip_address": "127.0.0.1",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+        "metadata": [],
+        "created_at": "2026-10-27T13:09:42+08:00",
+        "updated_at": "2026-10-27T13:09:42+08:00"
+    },
+    {
+        "id": "41ab9e9a-2a00-4e5c-a137-9a7ad2b4e069",
+        "action": "AUTH_LOGIN",
+        "description": "Log masuk berjaya oleh Farhah Binti Abd Rahman (farhah@johor.gov.my)",
+        "ticket_id": null,
+        "user_id": "USR-ADMIN-01",
+        "user_name": "Farhah Binti Abd Rahman",
+        "user_email": "farhah@johor.gov.my",
+        "user_role": "ADMIN",
+        "user_unit": "ICT_BKP",
+        "ip_address": "127.0.0.1",
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+        "metadata": [],
+        "created_at": "2026-10-27T18:52:52+08:00",
+        "updated_at": "2026-10-27T18:52:52+08:00"
+    },
+    {
+        "id": "6c769e9a-9aaa-4379-b750-0603a1a4fedc",
+        "action": "BACKUP_CREATED",
+        "description": "Sandaran data (AUTO_DAILY) berjaya dicipta: backup_helpdesk_AUTO_DAILY_2026-10-27_185755_54f868.zip (22.66 KB)",
+        "ticket_id": null,
+        "user_id": "SYSTEM",
+        "user_name": "Sistem Automatik",
+        "user_email": "system@bkp.gov.my",
+        "user_role": "SYSTEM",
+        "user_unit": "SYSTEM",
+        "ip_address": "127.0.0.1",
+        "user_agent": "CLI",
+        "metadata": {
+            "filename": "backup_helpdesk_AUTO_DAILY_2026-10-27_185755_54f868.zip",
+            "type": "AUTO_DAILY",
+            "size": 23205,
+            "counts": {
+                "tickets": 54,
+                "counters": 3,
+                "users": 103,
+                "assets": 249,
+                "units": 9,
+                "positions": 27,
+                "audit_logs": 6
+            }
+        },
+        "created_at": "2026-10-27T18:57:55+08:00",
+        "updated_at": "2026-10-27T18:57:55+08:00"
     }
 ]
