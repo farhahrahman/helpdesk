@@ -191,7 +191,7 @@ class TicketService
      */
     public function deleteTicket(string $id, array $user): bool
     {
-        if (($user['role'] ?? '') !== 'ADMIN' && ($user['email'] ?? '') !== 'farhah@johor.gov.my') {
+        if (($user['role'] ?? '') !== 'ADMIN' && !in_array($user['email'] ?? '', ['farhah@johor.gov.my', 'farhahrahman@gmail.com'])) {
             return false;
         }
 

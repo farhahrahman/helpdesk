@@ -21,10 +21,17 @@ class UserRepository extends BaseRepository
             ->first();
 
         if (!$user) {
-            // Sokong carian melalui username atau alias pentadbir 'admin'
+            // Sokong carian melalui username, secondary_email atau alias farhah
             $all = $this->query()->get();
             foreach ($all as $u) {
                 if (strtolower($u['username'] ?? '') === $term || ($term === 'admin' && ($u['role'] ?? '') === 'ADMIN')) {
+                    return $u;
+                }
+                if (isset($u['secondary_email']) && strtolower($u['secondary_email']) === $term) {
+                    return $u;
+                }
+                // Sokong log masuk kedua-dua emel Farhah (farhah@johor.gov.my dan farhahrahman@gmail.com)
+                if (($term === 'farhahrahman@gmail.com' || $term === 'farhah@johor.gov.my' || $term === 'farhah') && ($u['id'] ?? '') === 'USR-ADMIN-01') {
                     return $u;
                 }
             }

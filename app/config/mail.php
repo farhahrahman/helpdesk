@@ -8,4 +8,6 @@ return [
     'from_email' => 'noreply.ictbkp@johor.gov.my',
     'from_name' => 'Helpdesk ICT BKP',
     'reply_to' => 'ict@bkp.gov.my',
+    'admin_email' => 'farhahrahman@gmail.com',
+    'admin_official_email' => 'farhah@johor.gov.my',
 ];

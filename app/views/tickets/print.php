@@ -1,17 +1,17 @@
 <!-- Official Printable Slip: Helpdesk ICT BKP -->
 <?php if ($ticket['category'] === 'PEMINJAMAN_ASET'): ?>
 <!-- ========================================================================= -->
-<!-- FORMAT RASMI KEW.PA-9 (Pekeliling Perbendaharaan Malaysia AM 2.4 Lampiran A) -->
+<!-- FORMAT RASMI KEW.PA-6 (Pekeliling Perbendaharaan Malaysia AM 2.4 Lampiran A) -->
 <!-- ========================================================================= -->
 <div class="text-slate-900 space-y-4 font-sans text-xs">
-    <!-- Header Kew.PA-9 -->
+    <!-- Header Kew.PA-6 -->
     <div class="flex justify-between items-start text-[11px]">
         <div class="font-normal text-slate-700">
             Pekeliling Perbendaharaan Malaysia
         </div>
         <div class="text-right">
             <span>AM 2.4 Lampiran A</span>
-            <strong class="text-sm font-bold block mt-0.5 text-slate-900">KEW.PA-9</strong>
+            <strong class="text-sm font-bold block mt-0.5 text-slate-900">KEW.PA-6</strong>
         </div>
     </div>
 
@@ -144,7 +144,141 @@
 
     <!-- Footer Notice -->
     <div class="text-[10px] text-slate-500 border-t border-slate-300 pt-3 flex justify-between mt-8">
-        <span>Cetakan Komputer Sistem Helpdesk ICT BKP mengikut standard Pekeliling Perbendaharaan Malaysia KEW.PA-9.</span>
+        <span>Cetakan Komputer Sistem Helpdesk ICT BKP mengikut standard Pekeliling Perbendaharaan Malaysia (KEW.PA-6 / KEW.PA-9).</span>
+        <span class="font-mono">Muka Surat 1/1</span>
+    </div>
+</div>
+
+<?php elseif ($ticket['category'] === 'LAIN_LAIN' || $ticket['category'] === 'ADUAN_ICT' || $ticket['category'] === 'PERMOHONAN_PERKAKASAN'): ?>
+
+<!-- ========================================================================= -->
+<!-- FORMAT RASMI KEW.PA-9 (BORANG ADUAN KEROSAKAN ASET ALIH KERAJAAN)           -->
+<!-- Standard Pekeliling Perbendaharaan Malaysia AM 2.4                          -->
+<!-- ========================================================================= -->
+<div class="text-slate-900 space-y-4 font-sans text-xs">
+    <!-- Header Kew.PA-9 -->
+    <div class="flex justify-between items-start text-[11px]">
+        <div class="font-normal text-slate-700">
+            Pekeliling Perbendaharaan Malaysia
+        </div>
+        <div class="text-right">
+            <strong class="text-sm font-bold block mt-0.5 text-slate-900">KEW.PA-9</strong>
+        </div>
+    </div>
+
+    <div class="text-right text-[11px] pt-1">
+        No. Aduan: <span class="font-mono font-bold text-slate-900"><?= e($ticket['reference_no']) ?></span>
+    </div>
+
+    <!-- Title -->
+    <div class="text-center py-2 border-b-2 border-slate-900">
+        <h1 class="text-sm font-black uppercase tracking-wide text-slate-900">BORANG ADUAN KEROSAKAN ASET ALIH KERAJAAN</h1>
+    </div>
+
+    <!-- Bahagian I -->
+    <div class="space-y-3 pt-2">
+        <h3 class="font-bold text-xs uppercase text-slate-900">Bahagian I (Untuk diisi oleh Pengadu / Pegawai Aset)</h3>
+        
+        <table class="w-full text-xs border-collapse">
+            <tr class="align-top">
+                <td class="w-8 py-1.5 font-bold">1.</td>
+                <td class="w-64 py-1.5 font-medium">Jenis Aset</td>
+                <td class="w-4 py-1.5 font-bold">:</td>
+                <td class="py-1.5 font-bold uppercase"><?= e(!empty($assignedAssets) ? ($assignedAssets[0]['category'] ?? 'PERALATAN DAN KELENGKAPAN ICT') : 'PERALATAN DAN KELENGKAPAN ICT') ?></td>
+            </tr>
+            <tr class="align-top">
+                <td class="py-1.5 font-bold">2.</td>
+                <td class="py-1.5 font-medium">Keterangan Aset</td>
+                <td class="py-1.5 font-bold">:</td>
+                <td class="py-1.5 font-bold uppercase"><?= e(!empty($assignedAssets) ? $assignedAssets[0]['name'] : ($ticket['title'] ?: 'KOMPUTER PERIBADI / PERKAKASAN ICT')) ?></td>
+            </tr>
+            <tr class="align-top">
+                <td class="py-1.5 font-bold">3.</td>
+                <td class="py-1.5 font-medium">Nombor Siri Pendaftaran</td>
+                <td class="py-1.5 font-bold">:</td>
+                <td class="py-1.5 font-mono font-bold uppercase"><?= e(!empty($assignedAssets) ? $assignedAssets[0]['asset_code'] . ' (S/N: ' . ($assignedAssets[0]['serial_no'] ?: '-') . ')' : '-') ?></td>
+            </tr>
+            <tr class="align-top">
+                <td class="py-1.5 font-bold">4.</td>
+                <td class="py-1.5 font-medium">Kos penyelenggaraan terdahulu (jika ada)</td>
+                <td class="py-1.5 font-bold">:</td>
+                <td class="py-1.5">-</td>
+            </tr>
+            <tr class="align-top">
+                <td class="py-1.5 font-bold">5.</td>
+                <td class="py-1.5 font-medium">Pengguna Terakhir</td>
+                <td class="py-1.5 font-bold">:</td>
+                <td class="py-1.5 font-bold uppercase"><?= e($ticket['applicant_name']) ?> (<?= e($ticket['unit_short_name'] ?: $ticket['unit_name']) ?>)</td>
+            </tr>
+            <tr class="align-top">
+                <td class="py-1.5 font-bold">6.</td>
+                <td class="py-1.5 font-medium">Tarikh Kerosakan</td>
+                <td class="py-1.5 font-bold">:</td>
+                <td class="py-1.5 font-bold"><?= e($ticket['formatted_start_date'] ?: date('d/m/Y', strtotime($ticket['created_at']))) ?></td>
+            </tr>
+            <tr class="align-top">
+                <td class="py-1.5 font-bold">7.</td>
+                <td class="py-1.5 font-medium">Perihal Kerosakan</td>
+                <td class="py-1.5 font-bold">:</td>
+                <td class="py-1.5 leading-relaxed">
+                    <div class="p-2 border border-slate-400 rounded bg-slate-50 min-h-[50px]">
+                        <?= nl2br(e($ticket['purpose'] ?: $ticket['title'])) ?>
+                    </div>
+                </td>
+            </tr>
+            <tr class="align-top">
+                <td class="py-1.5 font-bold">8.</td>
+                <td class="py-1.5 font-medium">Syor Pegawai Aset</td>
+                <td class="py-1.5 font-bold">:</td>
+                <td class="py-1.5 leading-relaxed">
+                    <div class="p-2 border border-slate-400 rounded bg-slate-50 min-h-[50px]">
+                        <?= nl2br(e($ticket['ict_approval']['notes'] ?? 'Pemeriksaan teknikal dan tindakan pembaikan oleh Seksyen ICT BKP.')) ?>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Tandatangan Pegawai Aset -->
+        <div class="pt-4 grid grid-cols-2 gap-8">
+            <div class="space-y-1 text-xs">
+                <p>Nama: <strong><?= e($ticket['applicant_name']) ?></strong></p>
+                <p>Jawatan: <?= e($ticket['applicant_position'] ?? 'Pegawai Pemohon') ?></p>
+                <p>Tarikh: <?= e($ticket['formatted_created_at']) ?></p>
+            </div>
+            <div class="space-y-1 text-xs text-right">
+                <p class="text-slate-400 mb-6">..................................................</p>
+                <p class="font-bold">(Tandatangan Pegawai Aset / Pengadu)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bahagian II -->
+    <div class="border-t-2 border-slate-900 pt-3 mt-4 space-y-2">
+        <h3 class="font-bold text-xs uppercase text-slate-900">Bahagian II (Keputusan Ketua Jabatan)</h3>
+        <p class="text-xs">
+            Status Keputusan: 
+            <strong class="uppercase px-2 py-0.5 border border-slate-800 rounded font-bold">
+                <?= in_array($ticket['status'], ['DILULUSKAN', 'SELESAI', 'DALAM_TINDAKAN']) ? 'Diluluskan' : (in_array($ticket['status'], ['DITOLAK']) ? 'Tidak Diluluskan' : 'Diluluskan / Tidak Diluluskan*') ?>
+            </strong>
+        </p>
+        <p class="text-xs pt-1">Catatan: <span class="border-b border-dotted border-slate-600 inline-block w-4/5 pb-0.5"><?= e($ticket['unit_approval']['notes'] ?? '') ?></span></p>
+
+        <div class="pt-6 grid grid-cols-2 gap-8 text-xs">
+            <div class="space-y-1">
+                <p>Nama: <strong><?= e($ticket['unit_approval']['approver_name'] ?? 'Ketua Bahagian / Unit') ?></strong></p>
+                <p>Jawatan: Ketua Unit / Pengarah</p>
+                <p>Tarikh: <?= e(!empty($ticket['unit_approval']['action_at']) ? date('d/m/Y', strtotime($ticket['unit_approval']['action_at'])) : date('d/m/Y')) ?></p>
+            </div>
+            <div class="space-y-1 text-right">
+                <p class="text-slate-400 mb-6">..................................................</p>
+                <p class="font-bold">(Tandatangan Ketua Jabatan &amp; Cap Rasmi)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Notice -->
+    <div class="text-[10px] text-slate-500 border-t border-slate-300 pt-3 flex justify-between mt-6">
+        <span>Borang Aduan Kerosakan Aset Alih Kerajaan (KEW.PA-9) &bull; Helpdesk ICT BKP</span>
         <span class="font-mono">Muka Surat 1/1</span>
     </div>
 </div>

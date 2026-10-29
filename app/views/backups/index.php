@@ -109,8 +109,8 @@ $success = Session::getFlash('success');
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         </div>
                         <input type="email" id="email_notification" name="email_notification" 
-                               value="<?= e($user['email'] ?? '') ?>"
-                               placeholder="nama@gmail.com atau emel rasmi"
+                               value="<?= e(!empty($user['secondary_email']) ? $user['secondary_email'] : ($user['email'] === 'farhah@johor.gov.my' ? 'farhahrahman@gmail.com' : ($user['email'] ?? 'farhahrahman@gmail.com'))) ?>"
+                               placeholder="farhahrahman@gmail.com atau emel pilihan"
                                class="w-full pl-9 pr-3 py-2 bg-slate-800/90 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-slate-800">
                     </div>
                     <span class="text-[10px] text-slate-400 mt-1 block">

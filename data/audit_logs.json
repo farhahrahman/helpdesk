@@ -107,5 +107,37 @@
         },
         "created_at": "2026-10-27T18:57:55+08:00",
         "updated_at": "2026-10-27T18:57:55+08:00"
+    },
+    {
+        "id": "c941b54e-0a71-4cb3-b36e-1c2c29e3c515",
+        "action": "AUTH_LOGIN",
+        "description": "Log masuk berjaya oleh Farhah Binti Abd Rahman (farhah@johor.gov.my)",
+        "ticket_id": null,
+        "user_id": "USR-ADMIN-01",
+        "user_name": "Farhah Binti Abd Rahman",
+        "user_email": "farhah@johor.gov.my",
+        "user_role": "ADMIN",
+        "user_unit": "ICT_BKP",
+        "ip_address": "127.0.0.1",
+        "user_agent": "CLI",
+        "metadata": [],
+        "created_at": "2026-10-29T10:04:48+08:00",
+        "updated_at": "2026-10-29T10:04:48+08:00"
+    },
+    {
+        "id": "b1cc8fdb-cc94-46fe-8f34-297b918e3b60",
+        "action": "AUTH_LOGIN",
+        "description": "Log masuk berjaya oleh Farhah Binti Abd Rahman (farhah@johor.gov.my)",
+        "ticket_id": null,
+        "user_id": "USR-ADMIN-01",
+        "user_name": "Farhah Binti Abd Rahman",
+        "user_email": "farhah@johor.gov.my",
+        "user_role": "ADMIN",
+        "user_unit": "ICT_BKP",
+        "ip_address": "127.0.0.1",
+        "user_agent": "CLI",
+        "metadata": [],
+        "created_at": "2026-10-29T10:04:48+08:00",
+        "updated_at": "2026-10-29T10:04:48+08:00"
     }
 ]

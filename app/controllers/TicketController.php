@@ -520,7 +520,7 @@ class TicketController extends BaseController
     {
         $user = Auth::user();
 
-        if (($user['role'] ?? '') !== 'ADMIN' && ($user['email'] ?? '') !== 'farhah@johor.gov.my') {
+        if (($user['role'] ?? '') !== 'ADMIN' && !in_array($user['email'] ?? '', ['farhah@johor.gov.my', 'farhahrahman@gmail.com'])) {
             $this->abort(403, 'Akses dinafikan. Hanya Pentadbir dibenarkan memadam rekod permohonan.');
         }
 
@@ -546,7 +546,7 @@ class TicketController extends BaseController
     {
         $user = Auth::user();
 
-        if (($user['role'] ?? '') !== 'ADMIN' && ($user['email'] ?? '') !== 'farhah@johor.gov.my') {
+        if (($user['role'] ?? '') !== 'ADMIN' && !in_array($user['email'] ?? '', ['farhah@johor.gov.my', 'farhahrahman@gmail.com'])) {
             $this->abort(403, 'Akses dinafikan. Hanya Pentadbir ICTBKP dibenarkan mencatat nota.');
         }
 
@@ -595,7 +595,7 @@ class TicketController extends BaseController
     {
         $user = Auth::user();
 
-        if (($user['role'] ?? '') !== 'ADMIN' && ($user['email'] ?? '') !== 'farhah@johor.gov.my') {
+        if (($user['role'] ?? '') !== 'ADMIN' && !in_array($user['email'] ?? '', ['farhah@johor.gov.my', 'farhahrahman@gmail.com'])) {
             $this->abort(403, 'Akses dinafikan.');
         }
 

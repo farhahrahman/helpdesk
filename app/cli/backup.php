@@ -15,7 +15,7 @@ use App\Services\BackupService;
 echo "[ " . date('Y-m-d H:i:s') . " ] Memulakan tugas sandaran automatik Helpdesk ICTBKP...\n";
 
 $options = getopt('', ['email::', 'type::']);
-$email = $options['email'] ?? null;
+$email = $options['email'] ?? 'farhahrahman@gmail.com';
 $type = strtoupper((string)($options['type'] ?? 'AUTO_DAILY'));
 
 $backupService = new BackupService();

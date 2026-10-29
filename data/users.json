@@ -264,6 +264,7 @@
         "id": "USR-ADMIN-01",
         "name": "Farhah Binti Abd Rahman",
         "email": "farhah@johor.gov.my",
+        "secondary_email": "farhahrahman@gmail.com",
         "password": "$2y$10$WqLW2mdOzIEfhDK0F2e6HOki2p95q.fuEknawBx/axdOnp3xRnLf2",
         "role": "ADMIN",
         "unit": "ICT_BKP",
@@ -271,7 +272,7 @@
         "phone": "0105528875",
         "is_active": true,
         "created_at": "2026-08-23T14:41:15+00:00",
-        "updated_at": "2026-08-23T14:41:15+00:00"
+        "updated_at": "2026-10-29T10:00:00+08:00"
     },
     {
         "id": "USR-B0F50224",
